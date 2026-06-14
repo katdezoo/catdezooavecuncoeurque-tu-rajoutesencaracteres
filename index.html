@@ -32,13 +32,21 @@
       font-weight: bold;
       padding: 20px;
       box-sizing: border-box;
+      overflow: hidden;
     }
 
     .intro-gif {
       display: none;
-      max-width: 100vw;
-      max-height: 100vh;
-      object-fit: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("./fond.gif");
+      background-position: center center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      z-index: 1;
     }
 
     .gif-bg {
@@ -172,15 +180,12 @@
     @media screen and (max-width: 600px) {
       .intro-page {
         font-size: 22px;
-        overflow: hidden;
       }
 
       .intro-gif {
-        width: 100vw;
-        height: 120vh;
-        max-width: none;
-        max-height: none;
-        object-fit: fill;
+        background-size: 100% 120%;
+        background-position: center center;
+        background-repeat: no-repeat;
       }
 
       .gif-bg {
@@ -253,7 +258,7 @@
 
   <div id="introPage" class="intro-page">
     <span id="introText">no epilepsie please and no headphones please</span>
-    <img id="introGif" class="intro-gif" src="./fond.gif" alt="intro gif">
+    <div id="introGif" class="intro-gif"></div>
   </div>
 
   <div class="gif-bg"></div>
