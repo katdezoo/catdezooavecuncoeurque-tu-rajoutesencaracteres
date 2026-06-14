@@ -217,7 +217,7 @@
   <div class="overlay">
 
     <nav>
-      <button onclick="afficherSection('accueil')">starthere</button>
+      <button onclick="lancerMusique()">starthere</button>
       <button onclick="afficherSection('apropos')">RULES</button>
       <button onclick="afficherSection('contact')">SEND A WAV / MP3</button>
     </nav>
@@ -249,7 +249,7 @@
   </div>
 
   <div class="audio-box">
-    <audio controls>
+    <audio id="lecteurAudio" controls>
       <source src="./musique.wav" type="audio/wav">
     </audio>
   </div>
@@ -263,6 +263,13 @@
       });
 
       document.getElementById(id).classList.add("active");
+    }
+
+    function lancerMusique() {
+      afficherSection('accueil');
+
+      const lecteur = document.getElementById("lecteurAudio");
+      lecteur.play();
     }
   </script>
 
