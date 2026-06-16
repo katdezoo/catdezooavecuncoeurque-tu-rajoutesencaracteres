@@ -384,6 +384,7 @@
       width: clamp(260px, 38vw, 420px);
       left: 50%;
       transform: translateX(-50%);
+      cursor: default;
     }
 
     .volume-slider-wrap::after {
@@ -396,6 +397,8 @@
       background: #ff0000;
       transform: translate(-50%, -50%);
       pointer-events: none;
+      user-select: none;
+      -webkit-user-select: none;
       z-index: 2;
       box-shadow:
         0 0 4px #ff0000,
