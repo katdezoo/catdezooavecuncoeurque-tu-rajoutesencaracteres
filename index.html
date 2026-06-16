@@ -379,7 +379,29 @@
       margin-bottom: 3px;
     }
 
+    .volume-slider-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    .volume-slider-wrap::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 2px;
+      height: 18px;
+      background: #ff0000;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 2;
+      box-shadow:
+        0 0 4px #ff0000,
+        0 0 8px #ff0000;
+    }
+
     #volumeBoost {
+      display: block;
       width: 100%;
       cursor: pointer;
       accent-color: #ff0000;
@@ -528,6 +550,10 @@
         height: 12px;
       }
 
+      .volume-slider-wrap::after {
+        height: 14px;
+      }
+
       .volume-warning {
         margin-top: 4px;
         font-size: 12px;
@@ -609,6 +635,10 @@
         font-size: 10px;
       }
 
+      .volume-slider-wrap::after {
+        height: 12px;
+      }
+
       .audio-footer p {
         font-size: 7px;
       }
@@ -671,17 +701,17 @@
       <source src="./musique432.mp3?v=50" type="audio/mpeg">
     </audio>
 
-```
 <div class="volume-boost-box">
   <label for="volumeBoost">volume <span id="volumeValue">100%</span></label>
-  <input id="volumeBoost" type="range" min="0" max="200" value="100" step="1">
+  <div class="volume-slider-wrap">
+    <input id="volumeBoost" type="range" min="0" max="200" value="100" step="1">
+  </div>
   <div id="volumeWarning" class="volume-warning">⚠ au-dessus de 100%, le son peut être très fort.</div>
 </div>
 
 <div class="audio-footer">
   <p>© 2026 catdezoo&lt;3. all rights reserved.</p>
 </div>
-```
 
   </div>
 
@@ -747,7 +777,7 @@
       function mettreAJourVolume() {
         let valeur = Number(volumeBoost.value);
 
-        if (valeur >= 95 && valeur <= 105) {
+        if (valeur >= 90 && valeur <= 110) {
           valeur = 100;
           volumeBoost.value = 100;
         }
