@@ -44,29 +44,6 @@
       overflow: hidden;
     }
 
-    .intro-footer {
-      text-align: center;
-      padding: 20px;
-      background: transparent;
-      color: black;
-      position: fixed;
-      bottom: 55px;
-      width: 100%;
-      text-shadow: 2px 2px 6px black;
-      box-sizing: border-box;
-      z-index: 10000;
-      pointer-events: none;
-      left: 0;
-      font-weight: normal;
-    }
-
-    .intro-footer p {
-      font-size: 10px;
-      color: black;
-      text-shadow: 1px 1px 3px black;
-      margin: 0;
-    }
-
     .intro-gif {
       display: none;
       position: absolute;
@@ -281,11 +258,11 @@
 
     @media screen and (min-width: 601px) {
       #apropos {
-        top: calc(38vh + 20px);
+        top: calc(50vh + 10px);
       }
 
       #apropos h1 {
-        font-size: 34px;
+        font-size: 24px;
         margin-bottom: 12px;
       }
 
@@ -496,15 +473,6 @@
       .audio-footer p {
         font-size: 6px;
       }
-
-      .intro-footer {
-        bottom: 80px;
-        padding: 10px;
-      }
-
-      .intro-footer p {
-        font-size: 6px;
-      }
     }
 
     @media screen and (max-width: 900px) and (orientation: landscape) {
@@ -592,11 +560,6 @@
     <span id="introText">⚠. -no epilepsie please, <br>
       and headphones please/</span>
     <div id="introGif" class="intro-gif"></div>
-
-<div class="intro-footer">
-  <p>© 2026 catdezoo&lt;3. all rights reserved.</p>
-</div>
-
   </div>
 
   <div class="gif-bg"></div>
@@ -650,7 +613,6 @@
 <div class="audio-footer">
   <p>© 2026 catdezoo&lt;3. all rights reserved.</p>
 </div>
-
   </div>
 
   <script>
