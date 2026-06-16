@@ -316,6 +316,39 @@
       filter: drop-shadow(2px 2px 8px black);
     }
 
+    .volume-boost-box {
+      margin-top: 6px;
+      font-family: Arial, sans-serif;
+      color: black;
+      text-align: center;
+      font-size: 11px;
+      font-weight: bold;
+      text-shadow:
+        0 0 5px #00ff00,
+        0 0 12px #00ff00;
+    }
+
+    .volume-boost-box label {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    #volumeBoost {
+      width: 100%;
+      cursor: pointer;
+      accent-color: #ff0000;
+    }
+
+    .volume-warning {
+      display: none;
+      margin-top: 3px;
+      font-size: 9px;
+      color: black;
+      text-shadow:
+        0 0 5px #ff0000,
+        0 0 10px #ff0000;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -558,9 +591,22 @@
       <source src="./musique432.wav?v=50" type="audio/wav">
       <source src="./musique432.mp3?v=50" type="audio/mpeg">
     </audio>
+
+```
+<div class="volume-boost-box">
+  <label for="volumeBoost">volume <span id="volumeValue">100%</span></label>
+  <input id="volumeBoost" type="range" min="0" max="200" value="100" step="1">
+  <div id="volumeWarning" class="volume-warning">⚠ au-dessus de 100%, le son peut être très fort.</div>
+</div>
+```
+
   </div>
 
   <script>
+    let audioContext = null;
+    let sourceNode = null;
+    let gainNode = null;
+
     setTimeout(function() {
       document.getElementById("introText").textContent = "<3";
     }, 3500);
@@ -610,10 +656,65 @@
       document.getElementById(id).classList.add("active");
     }
 
+    function initialiserVolumeBoost() {
+      const volumeBoost = document.getElementById("volumeBoost");
+      const volumeValue = document.getElementById("volumeValue");
+      const volumeWarning = document.getElementById("volumeWarning");
+
+      function mettreAJourVolume() {
+        const valeur = Number(volumeBoost.value);
+
+        volumeValue.textContent = valeur + "%";
+
+        if (gainNode) {
+          gainNode.gain.value = valeur / 100;
+        }
+
+        if (valeur > 100) {
+          volumeWarning.style.display = "block";
+        } else {
+          volumeWarning.style.display = "none";
+        }
+      }
+
+      volumeBoost.addEventListener("input", function() {
+        activerAudioBoost();
+        mettreAJourVolume();
+      });
+
+      mettreAJourVolume();
+    }
+
+    function activerAudioBoost() {
+      const lecteur = document.getElementById("lecteurAudio");
+      const volumeBoost = document.getElementById("volumeBoost");
+
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      if (!sourceNode) {
+        sourceNode = audioContext.createMediaElementSource(lecteur);
+        gainNode = audioContext.createGain();
+        sourceNode.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+      }
+
+      if (audioContext.state === "suspended") {
+        audioContext.resume();
+      }
+
+      if (gainNode) {
+        gainNode.gain.value = Number(volumeBoost.value) / 100;
+      }
+    }
+
     function lancerMusique() {
       afficherSection('accueil');
 
       const lecteur = document.getElementById("lecteurAudio");
+
+      activerAudioBoost();
 
       lecteur.play().catch(function() {
         document.querySelector(".audio-box").style.display = "block";
@@ -648,6 +749,7 @@
       document.getElementById("timerPeriod").textContent = periode;
     }
 
+    initialiserVolumeBoost();
     afficherHeureParis();
     setInterval(afficherHeureParis, 1000);
   </script>
