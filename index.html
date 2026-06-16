@@ -372,11 +372,22 @@
       text-shadow:
         0 0 5px #00ff00,
         0 0 12px #00ff00;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .volume-boost-box label {
       display: block;
       margin-bottom: 3px;
+      cursor: default;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    #volumeValue {
+      cursor: default;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .volume-slider-wrap {
@@ -414,6 +425,8 @@
       accent-color: #ff0000;
       touch-action: pan-x;
       background: transparent;
+      user-select: auto;
+      -webkit-user-select: auto;
     }
 
     .volume-warning {
