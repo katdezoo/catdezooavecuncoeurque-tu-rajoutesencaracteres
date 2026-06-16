@@ -1109,53 +1109,21 @@
       const lecteur = document.getElementById("lecteurAudio");
       const audioWordDisplay = document.getElementById("audioWordDisplay");
 
-      const texte12 = "imabarbigxrlinabarbiwxrld";
-      const texte15 = "lifeinplastixitsfantastix";
-      const texte17 = "?";
-      const texte21 = "??";
-      const texte24 = "imabarbigxrlinabarbiwxrld";
-      const texte27 = "lifeinplastixitsfantastix";
-      const texte29 = "?";
-      const texte31 = "?";
-      const texte33 = "???";
-      const texte36 = "imabarbigxrlinabarbiwxrld";
-      const texte39 = "lifeinplastixitsfantastix";
-      const texte46 = "?!?!?!?!?!?!?!?><";
-
-      const sousTitresAudio = [
-        { debut: 12, fin: 13, texte: texte12 },
-        { debut: 15, fin: 16, texte: texte15 },
-        { debut: 17, fin: 18, texte: texte17 },
-        { debut: 21, fin: 22, texte: texte21 },
-        { debut: 24, fin: 25, texte: texte24 },
-        { debut: 27, fin: 28, texte: texte27 },
-        { debut: 29, fin: 30, texte: texte29 },
-        { debut: 31, fin: 32, texte: texte31 },
-        { debut: 33, fin: 34, texte: texte33 },
-        { debut: 36, fin: 37, texte: texte36 },
-        { debut: 39, fin: 40, texte: texte39 },
-        { debut: 46, fin: 47, texte: texte46 }
-      ];
-
-      let animationSousTitres = null;
-
-      function mettreAJourSousTitreAudio() {
-        let texteActuel = "";
+      function mettreAJourMotAudio() {
+        let mot = "";
 
         if (!lecteur.paused && !lecteur.ended) {
           const temps = lecteur.currentTime;
 
-          const sousTitreActuel = sousTitresAudio.find(function(sousTitre) {
-            return temps >= sousTitre.debut && temps < sousTitre.fin;
-          });
-
-          if (sousTitreActuel) {
-            texteActuel = sousTitreActuel.texte;
+          if (temps >= 10 && temps < 10.75) {
+            mot = "choqué";
+          } else if (temps >= 10.75 && temps <= 11.5) {
+            mot = "turbine";
           }
         }
 
-        if (texteActuel) {
-          audioWordDisplay.textContent = texteActuel;
+        if (mot) {
+          audioWordDisplay.textContent = mot;
           audioWordDisplay.classList.add("active");
         } else {
           audioWordDisplay.textContent = "";
@@ -1163,30 +1131,14 @@
         }
       }
 
-      function boucleSousTitres() {
-        mettreAJourSousTitreAudio();
+      lecteur.addEventListener("timeupdate", mettreAJourMotAudio);
+      lecteur.addEventListener("seeked", mettreAJourMotAudio);
+      lecteur.addEventListener("seeking", mettreAJourMotAudio);
+      lecteur.addEventListener("play", mettreAJourMotAudio);
+      lecteur.addEventListener("pause", mettreAJourMotAudio);
+      lecteur.addEventListener("ended", mettreAJourMotAudio);
 
-        if (!lecteur.paused && !lecteur.ended) {
-          animationSousTitres = requestAnimationFrame(boucleSousTitres);
-        } else {
-          animationSousTitres = null;
-        }
-      }
-
-      function demarrerBoucleSousTitres() {
-        if (!animationSousTitres) {
-          boucleSousTitres();
-        }
-      }
-
-      lecteur.addEventListener("play", demarrerBoucleSousTitres);
-      lecteur.addEventListener("pause", mettreAJourSousTitreAudio);
-      lecteur.addEventListener("ended", mettreAJourSousTitreAudio);
-      lecteur.addEventListener("seeked", mettreAJourSousTitreAudio);
-      lecteur.addEventListener("seeking", mettreAJourSousTitreAudio);
-      lecteur.addEventListener("timeupdate", mettreAJourSousTitreAudio);
-
-      mettreAJourSousTitreAudio();
+      mettreAJourMotAudio();
     }
 
     function activerAudioBoost() {
