@@ -390,7 +390,9 @@
       -webkit-user-select: none;
     }
 
-    .volume-slider-wrap {
+    .volume-slider-wrap,
+    .audio-progress-wrap,
+    .audio-time-row {
       position: relative;
       width: clamp(260px, 38vw, 420px);
       left: 50%;
@@ -417,6 +419,44 @@
     }
 
     #volumeBoost {
+      display: block;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      cursor: pointer;
+      accent-color: #ff0000;
+      touch-action: pan-x;
+      background: transparent;
+      user-select: auto;
+      -webkit-user-select: auto;
+    }
+
+    .audio-progress-box {
+      margin-top: 5px;
+      font-family: Arial, sans-serif;
+      color: black;
+      text-align: center;
+      font-size: 10px;
+      font-weight: bold;
+      text-shadow:
+        0 0 5px #00ff00,
+        0 0 12px #00ff00;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .audio-time-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3px;
+      margin-bottom: 0;
+      font-size: 10px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    #audioProgress {
       display: block;
       position: relative;
       z-index: 2;
@@ -568,16 +608,28 @@
         margin-bottom: 2px;
       }
 
-      .volume-slider-wrap {
+      .volume-slider-wrap,
+      .audio-progress-wrap,
+      .audio-time-row {
         width: min(84vw, 300px);
       }
 
-      #volumeBoost {
+      #volumeBoost,
+      #audioProgress {
         height: 12px;
       }
 
       .volume-slider-wrap::after {
         height: 14px;
+      }
+
+      .audio-progress-box {
+        margin-top: 4px;
+        font-size: 8px;
+      }
+
+      .audio-time-row {
+        font-size: 8px;
       }
 
       .volume-warning {
@@ -661,7 +713,9 @@
         font-size: 10px;
       }
 
-      .volume-slider-wrap {
+      .volume-slider-wrap,
+      .audio-progress-wrap,
+      .audio-time-row {
         width: min(72vw, 280px);
       }
 
@@ -669,11 +723,21 @@
         height: 12px;
       }
 
+      .audio-progress-box {
+        margin-top: 3px;
+        font-size: 7px;
+      }
+
+      .audio-time-row {
+        font-size: 7px;
+      }
+
       .audio-footer p {
         font-size: 7px;
       }
 
-      #volumeBoost {
+      #volumeBoost,
+      #audioProgress {
         height: 10px;
       }
     }
@@ -736,6 +800,17 @@
   <div class="volume-slider-wrap">
     <input id="volumeBoost" type="range" min="0" max="200" value="100" step="1">
   </div>
+
+  <div class="audio-progress-box">
+    <div class="audio-time-row">
+      <span id="audioCurrentTime">0:00</span>
+      <span id="audioDuration">0:00</span>
+    </div>
+    <div class="audio-progress-wrap">
+      <input id="audioProgress" type="range" min="0" max="1000" value="0" step="1">
+    </div>
+  </div>
+
   <div id="volumeWarning" class="volume-warning">⚠ au-dessus de 100%, le son peut être très fort.</div>
 </div>
 
@@ -913,6 +988,81 @@
       mettreAJourVolume(true, false);
     }
 
+    function initialiserAudioProgression() {
+      const lecteur = document.getElementById("lecteurAudio");
+      const audioProgress = document.getElementById("audioProgress");
+      const audioCurrentTime = document.getElementById("audioCurrentTime");
+      const audioDuration = document.getElementById("audioDuration");
+
+      let progressionEnDeplacement = false;
+
+      function formaterTemps(secondes) {
+        if (!Number.isFinite(secondes) || secondes < 0) {
+          return "0:00";
+        }
+
+        const minutes = Math.floor(secondes / 60);
+        const secondesRestantes = Math.floor(secondes % 60).toString().padStart(2, "0");
+
+        return minutes + ":" + secondesRestantes;
+      }
+
+      function mettreAJourTexteTemps() {
+        audioCurrentTime.textContent = formaterTemps(lecteur.currentTime);
+        audioDuration.textContent = formaterTemps(lecteur.duration);
+      }
+
+      function mettreAJourProgressionDepuisAudio() {
+        mettreAJourTexteTemps();
+
+        if (!progressionEnDeplacement && Number.isFinite(lecteur.duration) && lecteur.duration > 0) {
+          audioProgress.value = Math.round((lecteur.currentTime / lecteur.duration) * 1000);
+        }
+      }
+
+      function chercherDansAudio() {
+        if (!Number.isFinite(lecteur.duration) || lecteur.duration <= 0) {
+          audioProgress.value = 0;
+          return;
+        }
+
+        const nouvellePosition = (Number(audioProgress.value) / 1000) * lecteur.duration;
+        lecteur.currentTime = nouvellePosition;
+        mettreAJourTexteTemps();
+      }
+
+      lecteur.addEventListener("loadedmetadata", mettreAJourProgressionDepuisAudio);
+      lecteur.addEventListener("durationchange", mettreAJourProgressionDepuisAudio);
+      lecteur.addEventListener("timeupdate", mettreAJourProgressionDepuisAudio);
+      lecteur.addEventListener("ended", function() {
+        audioProgress.value = 0;
+        mettreAJourProgressionDepuisAudio();
+      });
+
+      audioProgress.addEventListener("input", function() {
+        progressionEnDeplacement = true;
+        chercherDansAudio();
+      });
+
+      audioProgress.addEventListener("change", function() {
+        chercherDansAudio();
+        progressionEnDeplacement = false;
+        mettreAJourProgressionDepuisAudio();
+      });
+
+      audioProgress.addEventListener("pointerup", function() {
+        progressionEnDeplacement = false;
+        mettreAJourProgressionDepuisAudio();
+      });
+
+      audioProgress.addEventListener("touchend", function() {
+        progressionEnDeplacement = false;
+        mettreAJourProgressionDepuisAudio();
+      });
+
+      mettreAJourProgressionDepuisAudio();
+    }
+
     function activerAudioBoost() {
       const lecteur = document.getElementById("lecteurAudio");
       const volumeBoost = document.getElementById("volumeBoost");
@@ -978,6 +1128,7 @@
     }
 
     initialiserVolumeBoost();
+    initialiserAudioProgression();
     afficherHeureParis();
     setInterval(afficherHeureParis, 1000);
   </script>
