@@ -279,6 +279,23 @@
       z-index: 45;
     }
 
+    .rules-footer {
+      position: static;
+      width: 100%;
+      padding: 8px 0 0 0;
+      margin: 0;
+      text-align: center;
+      background: transparent;
+      color: black;
+      text-shadow: 2px 2px 6px black;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+
+    .rules-footer p {
+      margin: 0;
+    }
+
     @media screen and (min-width: 601px) {
       #apropos {
         top: calc(48vh + 40px);
@@ -286,6 +303,7 @@
 
       #apropos h1 {
         font-size: 34px;
+        margin-bottom: 12px;
       }
 
       #apropos .card {
@@ -349,24 +367,6 @@
       text-shadow:
         0 0 5px #ff0000,
         0 0 10px #ff0000;
-    }
-
-    footer {
-      text-align: center;
-      padding: 8px 20px;
-      background: transparent;
-      color: black;
-      position: fixed;
-      bottom: 175px;
-      width: 100%;
-      text-shadow: 2px 2px 6px black;
-      box-sizing: border-box;
-      z-index: 10000;
-      pointer-events: none;
-    }
-
-    footer p {
-      margin: 0;
     }
 
     @media screen and (max-width: 600px) {
@@ -443,6 +443,7 @@
 
       #apropos h1 {
         font-size: 20px;
+        margin-bottom: 12px;
       }
 
       .card {
@@ -481,15 +482,6 @@
       .volume-warning {
         margin-top: 4px;
         font-size: 12px;
-      }
-
-      footer {
-        bottom: 160px;
-        padding: 6px 10px;
-      }
-
-      footer p {
-        font-size: 6px;
       }
 
       .intro-footer {
@@ -542,14 +534,7 @@
 
       #apropos h1 {
         font-size: 18px;
-      }
-
-      footer {
-        position: relative;
-        bottom: auto;
-        padding: 6px 10px;
-        margin: 0 auto 12px auto;
-        z-index: 10000;
+        margin-bottom: 12px;
       }
 
       .audio-box {
@@ -622,6 +607,13 @@
       N4-NO ai AT ALL/<br>
       N5-ELECTRONIC ART ONLY/
     </h1>
+
+```
+<footer class="rules-footer">
+  <p>© 2026 catdezoo&lt;3. all rights reserved.</p>
+</footer>
+```
+
   </div>
 </section>
 
@@ -631,10 +623,6 @@
   </div>
 </section>
 
-<footer>
-  <p>© 2026 catdezoo&lt;3. all rights reserved.</p>
-</footer>
-
   </div>
 
   <div class="audio-box">
@@ -643,11 +631,13 @@
       <source src="./musique432.mp3?v=50" type="audio/mpeg">
     </audio>
 
+```
 <div class="volume-boost-box">
   <label for="volumeBoost">volume <span id="volumeValue">100%</span></label>
   <input id="volumeBoost" type="range" min="0" max="200" value="100" step="1">
   <div id="volumeWarning" class="volume-warning">⚠ au-dessus de 100%, le son peut être très fort.</div>
 </div>
+```
 
   </div>
 
