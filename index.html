@@ -540,9 +540,13 @@
     }, 9000);
 
     setTimeout(function() {
+      document.getElementById("introPage").style.background = "#00ff00";
+    }, 9500);
+
+    setTimeout(function() {
       document.getElementById("introPage").style.display = "none";
       document.getElementById("menuPrincipal").style.display = "";
-    }, 9500);
+    }, 9750);
 
     function afficherSection(id) {
       const sections = document.querySelectorAll(".page-section");
