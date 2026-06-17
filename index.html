@@ -412,6 +412,28 @@
         0 0 12px #00ff00;
       user-select: none;
       -webkit-user-select: none;
+          position: relative;
+      isolation: isolate;
+      overflow: visible;
+      --volume-position: 50%;
+    }
+
+    .volume-boost-box::before {
+      content: "";
+      position: absolute;
+      left: var(--volume-position);
+      top: clamp(16px, 2.2vw, 25px);
+      width: clamp(92px, 10vw, 156px);
+      height: clamp(58px, 6vw, 92px);
+      transform: translate(-50%, -38%);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.70);
+      filter: blur(16px);
+      box-shadow:
+        0 0 22px 10px rgba(255, 255, 255, 0.72),
+        0 0 48px 22px rgba(255, 255, 255, 0.42);
+      pointer-events: none;
+      z-index: 0;
     }
 
     .volume-boost-box label {
@@ -424,31 +446,31 @@
       user-select: none;
       -webkit-user-select: none;
           position: relative;
-      z-index: 6;
+      z-index: 10;
       isolation: isolate;
     }
     .volume-boost-box label::before {
       content: "";
       position: absolute;
       left: 50%;
-      top: calc(100% - 2px);
-      width: clamp(100px, 11vw, 156px);
-      height: clamp(16px, 2.1vw, 28px);
+      top: 50%;
+      width: clamp(128px, 13vw, 190px);
+      height: clamp(24px, 3vw, 42px);
       transform: translate(-50%, -50%);
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.72);
-      filter: blur(10px);
+      filter: blur(12px);
       box-shadow:
-        0 0 18px 8px rgba(255, 255, 255, 0.70),
-        0 0 38px 18px rgba(255, 255, 255, 0.42);
+        0 0 20px 10px rgba(255, 255, 255, 0.72),
+        0 0 44px 20px rgba(255, 255, 255, 0.42);
       pointer-events: none;
-      z-index: 0;
+      z-index: -1;
     }
 
     #volumeValue {
       display: inline-block;
       position: relative;
-      z-index: 7;
+      z-index: 11;
       color: #ff0000;
       cursor: default;
       user-select: none;
@@ -476,7 +498,7 @@
       left: 50%;
       transform: translateX(-50%);
       cursor: default;
-      z-index: 8;
+          z-index: 8;
     }
 
     .volume-slider-wrap::after {
@@ -747,15 +769,27 @@
         padding: 0 9px;
       }
 
-      .volume-boost-box label::before {
-        top: calc(100% - 2px);
-        width: clamp(96px, 13vw, 148px);
-        height: clamp(15px, 2vw, 25px);
-        filter: blur(9px);
+      .volume-boost-box::before {
+        top: clamp(15px, 2.4vw, 24px);
+        width: clamp(88px, 12vw, 148px);
+        height: clamp(54px, 7vw, 86px);
+        filter: blur(15px);
         box-shadow:
-          0 0 16px 7px rgba(255, 255, 255, 0.70),
-          0 0 34px 16px rgba(255, 255, 255, 0.42);
+          0 0 20px 9px rgba(255, 255, 255, 0.72),
+          0 0 44px 20px rgba(255, 255, 255, 0.42);
       }
+
+      .volume-boost-box label::before {
+        top: 50%;
+        width: clamp(120px, 16vw, 178px);
+        height: clamp(22px, 3vw, 38px);
+        filter: blur(11px);
+        box-shadow:
+          0 0 18px 9px rgba(255, 255, 255, 0.72),
+          0 0 40px 18px rgba(255, 255, 255, 0.42);
+      }
+
+
 
 
       #volumeBoost::-webkit-slider-thumb,
@@ -932,15 +966,27 @@
         font-size: clamp(11px, 3.2vw, 14px);
       }
 
-      .volume-boost-box label::before {
-        top: calc(100% - 1px);
-        width: clamp(78px, 30vw, 118px);
-        height: clamp(13px, 4.8vw, 20px);
-        filter: blur(8px);
+      .volume-boost-box::before {
+        top: clamp(13px, 4.2vw, 19px);
+        width: clamp(72px, 30vw, 118px);
+        height: clamp(44px, 14vw, 66px);
+        filter: blur(12px);
         box-shadow:
-          0 0 13px 6px rgba(255, 255, 255, 0.70),
-          0 0 26px 13px rgba(255, 255, 255, 0.40);
+          0 0 17px 8px rgba(255, 255, 255, 0.72),
+          0 0 34px 16px rgba(255, 255, 255, 0.40);
       }
+
+      .volume-boost-box label::before {
+        top: 50%;
+        width: clamp(98px, 38vw, 140px);
+        height: clamp(19px, 6.2vw, 28px);
+        filter: blur(9px);
+        box-shadow:
+          0 0 15px 7px rgba(255, 255, 255, 0.72),
+          0 0 30px 14px rgba(255, 255, 255, 0.40);
+      }
+
+
 
 
       #volumeValue {
@@ -1130,15 +1176,27 @@
         font-size: clamp(10px, 2.2vw, 13px);
       }
 
-      .volume-boost-box label::before {
-        top: calc(100% - 1px);
-        width: clamp(74px, 20vw, 110px);
-        height: clamp(11px, 3vw, 18px);
-        filter: blur(7px);
+      .volume-boost-box::before {
+        top: clamp(11px, 3vw, 17px);
+        width: clamp(66px, 20vw, 106px);
+        height: clamp(38px, 10vw, 58px);
+        filter: blur(10px);
         box-shadow:
-          0 0 12px 5px rgba(255, 255, 255, 0.70),
-          0 0 24px 11px rgba(255, 255, 255, 0.38);
+          0 0 15px 7px rgba(255, 255, 255, 0.72),
+          0 0 30px 13px rgba(255, 255, 255, 0.38);
       }
+
+      .volume-boost-box label::before {
+        top: 50%;
+        width: clamp(92px, 24vw, 132px);
+        height: clamp(17px, 4vw, 25px);
+        filter: blur(8px);
+        box-shadow:
+          0 0 13px 6px rgba(255, 255, 255, 0.72),
+          0 0 26px 12px rgba(255, 255, 255, 0.38);
+      }
+
+
 
 
       .volume-warning {
@@ -1359,6 +1417,7 @@
       const volumeBoost = document.getElementById("volumeBoost");
       const volumeValue = document.getElementById("volumeValue");
       const volumeWarning = document.getElementById("volumeWarning");
+      const volumeBoostBox = document.querySelector(".volume-boost-box");
 
       let animationVolume = null;
       let dernierRelachementVolume = 0;
@@ -1381,6 +1440,14 @@
 
       function appliquerVolume(valeur) {
         volumeValue.textContent = Math.round(valeur) + "%";
+        const volumeMin = Number(volumeBoost.min);
+        const volumeMax = Number(volumeBoost.max);
+        const positionVolume = Math.min(100, Math.max(0, ((valeur - volumeMin) / (volumeMax - volumeMin)) * 100));
+
+        if (volumeBoostBox) {
+          volumeBoostBox.style.setProperty("--volume-position", positionVolume + "%");
+        }
+
 
         if (gainNode) {
           gainNode.gain.value = valeur / 100;
