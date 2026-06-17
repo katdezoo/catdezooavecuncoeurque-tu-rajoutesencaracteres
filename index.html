@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>-website type shit<3</title>
+  <title>-web site stype shit <3</title>
 
   <style>
     @font-face {
@@ -3693,6 +3693,79 @@
       }
     }
 
+  
+    /* Smartphone : exemple box vraiment verrouillée, taille fixe, ne bouge pas au scroll */
+    @media screen and (max-width: 768px) {
+      #apropos {
+        position: fixed !important;
+        left: 50% !important;
+        top: var(--exemple-box-top, 60svh) !important;
+        bottom: auto !important;
+        transform: translateX(-50%) !important;
+        width: calc(100vw - 24px) !important;
+        max-width: calc(100vw - 24px) !important;
+        height: var(--exemple-box-height, 150px) !important;
+        min-height: var(--exemple-box-height, 150px) !important;
+        max-height: var(--exemple-box-height, 150px) !important;
+        padding: 30px 12px 30px 12px !important;
+        box-sizing: border-box !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        overscroll-behavior: contain !important;
+        z-index: 16000 !important;
+      }
+
+      #apropos.active {
+        display: block !important;
+        pointer-events: auto !important;
+      }
+
+      #apropos .card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      #contact {
+        position: fixed !important;
+        left: 50% !important;
+        top: calc(var(--exemple-box-top, 60svh) + (var(--exemple-box-height, 150px) / 2)) !important;
+        bottom: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 12px !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+        pointer-events: none !important;
+        z-index: 16500 !important;
+      }
+
+      #contact.active {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #apropos {
+        top: var(--exemple-box-top, 50svh) !important;
+        height: var(--exemple-box-height, 112px) !important;
+        min-height: var(--exemple-box-height, 112px) !important;
+        max-height: var(--exemple-box-height, 112px) !important;
+        padding: 24px 10px 24px 10px !important;
+      }
+
+      #contact {
+        top: calc(var(--exemple-box-top, 50svh) + (var(--exemple-box-height, 112px) / 2)) !important;
+      }
+    }
+
   </style>
 
 </head>
@@ -4327,6 +4400,33 @@
     afficherHeureParis();
     setInterval(afficherHeureParis, 1000);
   </script>
+
+
+<script>
+  function verrouillerExempleBoxMobile() {
+    if (window.innerWidth > 768) {
+      return;
+    }
+
+    const hauteurFenetre = window.innerHeight;
+    const paysage = window.matchMedia("(orientation: landscape)").matches && window.innerHeight <= 500;
+
+    const topBox = paysage
+      ? Math.round(hauteurFenetre * 0.50)
+      : Math.round(hauteurFenetre * 0.60);
+
+    const hauteurBox = paysage ? 112 : 150;
+
+    document.documentElement.style.setProperty("--exemple-box-top", topBox + "px");
+    document.documentElement.style.setProperty("--exemple-box-height", hauteurBox + "px");
+  }
+
+  verrouillerExempleBoxMobile();
+  window.addEventListener("DOMContentLoaded", verrouillerExempleBoxMobile);
+  window.addEventListener("orientationchange", function() {
+    setTimeout(verrouillerExempleBoxMobile, 250);
+  });
+</script>
 
 </body>
 </html>
