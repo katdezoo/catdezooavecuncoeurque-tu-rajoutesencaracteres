@@ -420,12 +420,44 @@
       cursor: default;
       user-select: none;
       -webkit-user-select: none;
+      font-size: clamp(14px, 1vw, 18px);
+    }
+
+    .volume-label-word {
+      color: #00ff00;
+      -webkit-text-stroke: 0.35px #000000;
+      paint-order: stroke fill;
+      text-shadow:
+        -1px -1px 0 #000000,
+        0 -1px 0 #000000,
+        1px -1px 0 #000000,
+        -1px 0 0 #000000,
+        1px 0 0 #000000,
+        -1px 1px 0 #000000,
+        0 1px 0 #000000,
+        1px 1px 0 #000000,
+        0 0 5px #00ff00,
+        0 0 12px #00ff00;
     }
 
     #volumeValue {
+      color: #000000;
       cursor: default;
       user-select: none;
       -webkit-user-select: none;
+      -webkit-text-stroke: 0.35px #000000;
+      paint-order: stroke fill;
+      text-shadow:
+        -1px -1px 0 #000000,
+        0 -1px 0 #000000,
+        1px -1px 0 #000000,
+        -1px 0 0 #000000,
+        1px 0 0 #000000,
+        -1px 1px 0 #000000,
+        0 1px 0 #000000,
+        1px 1px 0 #000000,
+        0 0 5px #00ff00,
+        0 0 12px #00ff00;
     }
 
     .volume-slider-wrap,
@@ -510,7 +542,7 @@
     .volume-warning {
       display: none;
       margin-top: 5px;
-      font-size: 14px;
+      font-size: clamp(15px, 1.15vw, 20px);
       font-weight: bold;
       color: black;
       text-shadow:
@@ -519,7 +551,7 @@
     }
 
     .volume-warning.fort {
-      font-size: 17px;
+      font-size: clamp(18px, 1.45vw, 25px);
       text-shadow:
         0 0 6px #ff0000,
         0 0 14px #ff0000,
@@ -546,6 +578,55 @@
       text-shadow:
         0 0 4px #00ff00,
         1px 1px 3px black;
+    }
+
+    @media screen and (min-width: 601px) and (max-width: 1024px) {
+      nav {
+        gap: clamp(18px, 3vw, 30px);
+        padding: 16px 12px 6px 12px;
+      }
+
+      nav button {
+        font-size: clamp(16px, 2.1vw, 19px);
+      }
+
+      .paris-timer {
+        top: 18vh;
+        font-size: clamp(58px, 7.2vw, 78px);
+      }
+
+      .page-section {
+        top: 58vh;
+        max-width: 860px;
+        padding: 18px;
+      }
+
+      #apropos {
+        top: calc(54vh + 10px);
+      }
+
+      #apropos h1 {
+        font-size: clamp(21px, 2.5vw, 26px);
+      }
+
+      #contact h1 {
+        font-size: clamp(38px, 5vw, 50px);
+      }
+
+      .audio-box {
+        width: clamp(200px, 26vw, 230px);
+        bottom: 45px;
+      }
+
+      .volume-slider-wrap,
+      .audio-progress-wrap,
+      .audio-time-row {
+        width: clamp(260px, 46vw, 420px);
+      }
+
+      .volume-boost-box label {
+        font-size: clamp(13px, 1.6vw, 17px);
+      }
     }
 
     @media screen and (max-width: 600px) {
@@ -605,6 +686,14 @@
 
       #apropos {
         top: 56vh;
+      }
+
+      #contact {
+        top: 54vh;
+      }
+
+      #contact h1 {
+        margin-top: 0;
       }
 
       .active {
@@ -673,6 +762,23 @@
 
       .volume-boost-box label {
         margin-bottom: 2px;
+        font-size: clamp(11px, 3.2vw, 14px);
+      }
+
+      .volume-label-word,
+      #volumeValue {
+        -webkit-text-stroke: 0.25px #000000;
+        text-shadow:
+          -1px -1px 0 #000000,
+          0 -1px 0 #000000,
+          1px -1px 0 #000000,
+          -1px 0 0 #000000,
+          1px 0 0 #000000,
+          -1px 1px 0 #000000,
+          0 1px 0 #000000,
+          1px 1px 0 #000000,
+          0 0 4px #00ff00,
+          0 0 10px #00ff00;
       }
 
       .volume-slider-wrap,
@@ -701,11 +807,11 @@
 
       .volume-warning {
         margin-top: 4px;
-        font-size: 12px;
+        font-size: clamp(13px, 3.6vw, 17px);
       }
 
       .volume-warning.fort {
-        font-size: 14px;
+        font-size: clamp(15px, 4.2vw, 20px);
       }
 
       .audio-footer {
@@ -717,7 +823,7 @@
       }
     }
 
-    @media screen and (max-width: 900px) and (orientation: landscape) {
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
       body {
         overflow-y: auto;
       }
@@ -800,13 +906,17 @@
         font-size: 9px;
       }
 
+      .volume-boost-box label {
+        font-size: clamp(10px, 2.2vw, 13px);
+      }
+
       .volume-warning {
         margin-top: 3px;
-        font-size: 10px;
+        font-size: clamp(11px, 2.5vw, 16px);
       }
 
       .volume-warning.fort {
-        font-size: 12px;
+        font-size: clamp(13px, 3vw, 19px);
       }
 
       .volume-slider-wrap,
@@ -894,7 +1004,7 @@
 </audio>
 
 <div class="volume-boost-box">
-  <label for="volumeBoost">volume <span id="volumeValue">100%</span></label>
+  <label for="volumeBoost"><span class="volume-label-word">volume</span> <span id="volumeValue">100%</span></label>
   <div class="volume-slider-wrap">
     <input id="volumeBoost" type="range" min="0" max="200" value="100" step="1">
   </div>
