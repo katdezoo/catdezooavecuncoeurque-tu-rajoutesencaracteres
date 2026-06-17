@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>-website/</title>
+  <title>PRODUCERSWORLDCUP</title>
 
   <style>
     @font-face {
@@ -3875,6 +3875,36 @@
       }
     }
 
+  
+    /* Smartphone : exemple box attachée au GIF avec changement de taille fluide */
+    @media screen and (max-width: 768px) {
+      #apropos {
+        top: var(--exemple-box-smooth-top, 60dvh) !important;
+        bottom: calc(var(--exemple-box-smooth-bottom, 205px) + env(safe-area-inset-bottom)) !important;
+        will-change: top, bottom, box-shadow !important;
+        transition:
+          box-shadow 0.35s ease,
+          border-color 0.35s ease,
+          background 0.35s ease !important;
+      }
+
+      #contact {
+        top: var(--contact-smooth-top, calc((60dvh + (100dvh - 205px - env(safe-area-inset-bottom))) / 2)) !important;
+        will-change: top !important;
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #apropos {
+        top: var(--exemple-box-smooth-top, 50vh) !important;
+        bottom: calc(var(--exemple-box-smooth-bottom, 120px) + env(safe-area-inset-bottom)) !important;
+      }
+
+      #contact {
+        top: var(--contact-smooth-top, calc((50vh + (100vh - 120px - env(safe-area-inset-bottom))) / 2)) !important;
+      }
+    }
+
   </style>
 
 </head>
@@ -4515,6 +4545,105 @@
   /* Stoppe l'ancien verrouillage pixel : la box garde maintenant la taille d'avant et suit la zone du GIF */
   document.documentElement.style.removeProperty("--exemple-box-top");
   document.documentElement.style.removeProperty("--exemple-box-height");
+</script>
+
+
+<script>
+  (function() {
+    let cibleTop = 0;
+    let cibleBottom = 205;
+    let cibleContact = 0;
+
+    let topActuel = null;
+    let contactActuel = null;
+    let animation = null;
+
+    const racine = document.documentElement;
+
+    function estSmartphone() {
+      return window.innerWidth <= 768;
+    }
+
+    function hauteurVisible() {
+      if (window.visualViewport && window.visualViewport.height) {
+        return window.visualViewport.height;
+      }
+
+      return window.innerHeight;
+    }
+
+    function calculerCibles() {
+      const h = hauteurVisible();
+      const paysage = window.innerWidth <= 900 && window.innerHeight <= 500 && window.matchMedia("(orientation: landscape)").matches;
+      const grandSmartphone = window.innerWidth <= 430 && window.innerHeight >= 760 && !paysage;
+
+      const ratioTop = paysage ? 0.50 : grandSmartphone ? 0.62 : 0.60;
+      const bottom = paysage ? 120 : 205;
+
+      cibleTop = Math.round(h * ratioTop);
+      cibleBottom = bottom;
+      cibleContact = Math.round((cibleTop + (h - bottom)) / 2);
+
+      if (topActuel === null) {
+        topActuel = cibleTop;
+      }
+
+      if (contactActuel === null) {
+        contactActuel = cibleContact;
+      }
+    }
+
+    function appliquer() {
+      if (!estSmartphone()) {
+        racine.style.removeProperty("--exemple-box-smooth-top");
+        racine.style.removeProperty("--exemple-box-smooth-bottom");
+        racine.style.removeProperty("--contact-smooth-top");
+        animation = null;
+        return;
+      }
+
+      topActuel += (cibleTop - topActuel) * 0.12;
+      contactActuel += (cibleContact - contactActuel) * 0.12;
+
+      if (Math.abs(cibleTop - topActuel) < 0.25) {
+        topActuel = cibleTop;
+      }
+
+      if (Math.abs(cibleContact - contactActuel) < 0.25) {
+        contactActuel = cibleContact;
+      }
+
+      racine.style.setProperty("--exemple-box-smooth-top", topActuel.toFixed(2) + "px");
+      racine.style.setProperty("--exemple-box-smooth-bottom", cibleBottom + "px");
+      racine.style.setProperty("--contact-smooth-top", contactActuel.toFixed(2) + "px");
+
+      if (topActuel !== cibleTop || contactActuel !== cibleContact) {
+        animation = requestAnimationFrame(appliquer);
+      } else {
+        animation = null;
+      }
+    }
+
+    function demanderMaj() {
+      calculerCibles();
+
+      if (!animation) {
+        animation = requestAnimationFrame(appliquer);
+      }
+    }
+
+    demanderMaj();
+    window.addEventListener("DOMContentLoaded", demanderMaj);
+    window.addEventListener("resize", demanderMaj);
+    window.addEventListener("orientationchange", function() {
+      setTimeout(demanderMaj, 250);
+    });
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", demanderMaj);
+      window.visualViewport.addEventListener("scroll", demanderMaj);
+    }
+  })();
 </script>
 
 </body>
