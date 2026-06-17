@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>-websitetypeshit<3</title>
+  <title>-website type shit<3</title>
 
   <style>
     @font-face {
@@ -3550,6 +3550,146 @@
 
       #apropos .card::after {
         margin-top: 8px !important;
+      }
+    }
+
+  
+    /* Smartphone : @gmail fixé au niveau du centre de l'exemple box RULES */
+    @media screen and (max-width: 768px) {
+      #contact {
+        position: fixed !important;
+        left: 50% !important;
+        top: calc(80vh - 103px) !important;
+        bottom: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 12px !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+        pointer-events: none !important;
+        z-index: 16500 !important;
+      }
+
+      @supports (height: 100dvh) {
+        #contact {
+          top: calc(80dvh - 103px) !important;
+        }
+      }
+
+      #contact.active {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+
+      #contact .card {
+        margin: 0 auto !important;
+        padding: 6px 8px !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      #contact h1 {
+        font-size: clamp(25px, 8.4vw, 36px) !important;
+        line-height: 1.05 !important;
+        margin: 0 !important;
+      }
+    }
+
+    @media screen and (max-width: 430px) and (min-height: 760px) {
+      #contact {
+        top: calc(81vh - 103px) !important;
+      }
+
+      @supports (height: 100dvh) {
+        #contact {
+          top: calc(81dvh - 103px) !important;
+        }
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #contact {
+        top: calc(75vh - 60px) !important;
+      }
+    }
+
+  
+    /* Smartphone : exemple box avec taille fixe dès son apparition */
+    @media screen and (max-width: 768px) {
+      #apropos {
+        top: 60vh !important;
+        bottom: auto !important;
+        height: clamp(118px, 16vh, 160px) !important;
+        max-height: clamp(118px, 16vh, 160px) !important;
+        min-height: clamp(118px, 16vh, 160px) !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+      }
+
+      @supports (height: 100dvh) {
+        #apropos {
+          top: 60dvh !important;
+          height: clamp(118px, 16dvh, 160px) !important;
+          max-height: clamp(118px, 16dvh, 160px) !important;
+          min-height: clamp(118px, 16dvh, 160px) !important;
+        }
+      }
+
+      #contact {
+        top: calc(60vh + (clamp(118px, 16vh, 160px) / 2)) !important;
+      }
+
+      @supports (height: 100dvh) {
+        #contact {
+          top: calc(60dvh + (clamp(118px, 16dvh, 160px) / 2)) !important;
+        }
+      }
+    }
+
+    @media screen and (max-width: 430px) and (min-height: 760px) {
+      #apropos {
+        top: 62vh !important;
+        height: clamp(122px, 16vh, 165px) !important;
+        max-height: clamp(122px, 16vh, 165px) !important;
+        min-height: clamp(122px, 16vh, 165px) !important;
+      }
+
+      @supports (height: 100dvh) {
+        #apropos {
+          top: 62dvh !important;
+          height: clamp(122px, 16dvh, 165px) !important;
+          max-height: clamp(122px, 16dvh, 165px) !important;
+          min-height: clamp(122px, 16dvh, 165px) !important;
+        }
+      }
+
+      #contact {
+        top: calc(62vh + (clamp(122px, 16vh, 165px) / 2)) !important;
+      }
+
+      @supports (height: 100dvh) {
+        #contact {
+          top: calc(62dvh + (clamp(122px, 16dvh, 165px) / 2)) !important;
+        }
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #apropos {
+        top: 50vh !important;
+        bottom: auto !important;
+        height: clamp(78px, 26vh, 118px) !important;
+        max-height: clamp(78px, 26vh, 118px) !important;
+        min-height: clamp(78px, 26vh, 118px) !important;
+      }
+
+      #contact {
+        top: calc(50vh + (clamp(78px, 26vh, 118px) / 2)) !important;
       }
     }
 
