@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>-ok un site quoi/</title>
+  <title>PRODUCERSWORLDCUP</title>
 
   <style>
     @font-face {
@@ -2419,6 +2419,416 @@
       }
     }
 
+  
+    /* Smartphones : textes des onglets plus bas et visibles au scroll */
+    @media screen and (max-width: 768px) {
+      html,
+      body {
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .overlay {
+        position: relative !important;
+        display: block !important;
+        min-height: 210vh !important;
+        padding-top: calc(120px + env(safe-area-inset-top)) !important;
+        padding-bottom: calc(360px + env(safe-area-inset-bottom)) !important;
+        overflow: visible !important;
+      }
+
+      @supports (height: 100dvh) {
+        .overlay {
+          min-height: 210dvh !important;
+        }
+      }
+
+      .page-section {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 0 12px 30px 12px !important;
+        box-sizing: border-box !important;
+        pointer-events: auto !important;
+        z-index: 16000 !important;
+      }
+
+      .page-section.active {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+      }
+
+      #accueil.page-section.active {
+        min-height: 78vh !important;
+      }
+
+      @supports (height: 100dvh) {
+        #accueil.page-section.active {
+          min-height: 78dvh !important;
+        }
+      }
+
+      #apropos,
+      #contact {
+        top: auto !important;
+        margin-top: 76vh !important;
+      }
+
+      @supports (height: 100dvh) {
+        #apropos,
+        #contact {
+          margin-top: 76dvh !important;
+        }
+      }
+
+      #apropos h1 {
+        font-size: clamp(15px, 4.7vw, 21px) !important;
+        line-height: 1.22 !important;
+        margin: 0 !important;
+      }
+
+      #contact h1 {
+        font-size: clamp(25px, 8.4vw, 36px) !important;
+        line-height: 1.05 !important;
+        margin: 0 !important;
+      }
+
+      #apropos .card,
+      #contact .card {
+        margin: 0 !important;
+        padding: 8px 8px !important;
+      }
+
+      .audio-box {
+        position: fixed !important;
+        bottom: calc(34px + env(safe-area-inset-bottom)) !important;
+        z-index: 20000 !important;
+      }
+
+      nav {
+        z-index: 30000 !important;
+      }
+    }
+
+    @media screen and (max-width: 430px) and (min-height: 760px) {
+      .overlay {
+        min-height: 225vh !important;
+      }
+
+      @supports (height: 100dvh) {
+        .overlay {
+          min-height: 225dvh !important;
+        }
+      }
+
+      #apropos,
+      #contact {
+        margin-top: 80vh !important;
+      }
+
+      @supports (height: 100dvh) {
+        #apropos,
+        #contact {
+          margin-top: 80dvh !important;
+        }
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      .overlay {
+        min-height: 180vh !important;
+      }
+
+      #accueil.page-section.active {
+        min-height: 58vh !important;
+      }
+
+      #apropos,
+      #contact {
+        margin-top: 58vh !important;
+      }
+
+      #apropos h1 {
+        font-size: clamp(12px, 2.6vw, 16px) !important;
+        line-height: 1.15 !important;
+      }
+
+      #contact h1 {
+        font-size: clamp(18px, 5vw, 28px) !important;
+      }
+    }
+
+  
+    /* SMARTPHONE SIMPLE ET FLUIDE : une seule logique mobile */
+    @media screen and (max-width: 768px) {
+      html,
+      body {
+        width: 100%;
+        min-height: 100vh;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      @supports (height: 100dvh) {
+        html,
+        body {
+          min-height: 100dvh;
+        }
+      }
+
+      body {
+        background: #ff00ff;
+        position: relative;
+      }
+
+      .intro-page {
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
+        overflow: hidden !important;
+      }
+
+      .intro-gif,
+      .gif-bg {
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
+        background-size: 100% 120% !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        background-color: #ff00ff !important;
+        transform: none !important;
+        will-change: auto !important;
+      }
+
+      @supports (height: 100dvh) {
+        .intro-page,
+        .intro-gif,
+        .gif-bg {
+          height: 100dvh !important;
+          min-height: 100dvh !important;
+        }
+      }
+
+      .overlay {
+        position: relative !important;
+        z-index: 2 !important;
+        display: block !important;
+        min-height: 205vh !important;
+        padding-top: calc(112px + env(safe-area-inset-top)) !important;
+        padding-bottom: calc(310px + env(safe-area-inset-bottom)) !important;
+        overflow: visible !important;
+        pointer-events: auto !important;
+      }
+
+      @supports (height: 100dvh) {
+        .overlay {
+          min-height: 205dvh !important;
+        }
+      }
+
+      nav {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 9px !important;
+        padding: calc(10px + env(safe-area-inset-top)) 10px 7px 10px !important;
+        box-sizing: border-box !important;
+        z-index: 30000 !important;
+        pointer-events: auto !important;
+      }
+
+      nav button {
+        margin: 0 !important;
+        min-height: 28px !important;
+        font-size: clamp(15px, 4.4vw, 20px) !important;
+        line-height: 1.05 !important;
+      }
+
+      .paris-timer {
+        position: fixed !important;
+        top: 27vh !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        font-size: clamp(42px, 13vw, 58px) !important;
+        z-index: 20 !important;
+        pointer-events: none !important;
+      }
+
+      @supports (height: 100dvh) {
+        .paris-timer {
+          top: 27dvh !important;
+        }
+      }
+
+      .page-section {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: auto !important;
+        margin: 0 auto !important;
+        padding: 0 12px 28px 12px !important;
+        box-sizing: border-box !important;
+        pointer-events: auto !important;
+        z-index: 30 !important;
+      }
+
+      .page-section.active {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+      }
+
+      #accueil.page-section.active {
+        min-height: 76vh !important;
+      }
+
+      #apropos,
+      #contact {
+        margin-top: 76vh !important;
+      }
+
+      @supports (height: 100dvh) {
+        #accueil.page-section.active {
+          min-height: 76dvh !important;
+        }
+
+        #apropos,
+        #contact {
+          margin-top: 76dvh !important;
+        }
+      }
+
+      #apropos h1 {
+        font-size: clamp(15px, 4.7vw, 21px) !important;
+        line-height: 1.22 !important;
+        margin: 0 !important;
+      }
+
+      #contact h1 {
+        font-size: clamp(25px, 8.4vw, 36px) !important;
+        line-height: 1.05 !important;
+        margin: 0 !important;
+      }
+
+      .card,
+      #apropos .card,
+      #contact .card {
+        margin: 0 !important;
+        padding: 8px !important;
+      }
+
+      .audio-box {
+        position: fixed !important;
+        left: 50% !important;
+        bottom: calc(34px + env(safe-area-inset-bottom)) !important;
+        transform: translateX(-50%) !important;
+        width: min(82vw, 245px) !important;
+        max-width: 82vw !important;
+        z-index: 20000 !important;
+      }
+
+      .audio-word-display {
+        font-size: clamp(20px, 5.6vw, 34px) !important;
+        min-height: clamp(28px, 8vw, 42px) !important;
+        margin-bottom: 5px !important;
+      }
+
+      audio {
+        height: 28px !important;
+      }
+
+      .volume-slider-wrap,
+      .audio-progress-wrap,
+      .audio-time-row {
+        width: min(88vw, 330px) !important;
+      }
+
+      .volume-boost-box label {
+        font-size: clamp(13px, 3.8vw, 16px) !important;
+        transform: translateY(-4px) !important;
+      }
+
+      /* Allège les effets blancs sur smartphone pour plus de fluidité */
+      .volume-white-glow-layer,
+      .volume-boost-box::before {
+        display: none !important;
+      }
+
+      .volume-boost-box label::before {
+        filter: blur(7px) !important;
+        box-shadow:
+          0 0 10px 5px rgba(255, 255, 255, 0.58),
+          0 0 20px 10px rgba(255, 255, 255, 0.28) !important;
+      }
+    }
+
+    @media screen and (max-width: 430px) and (min-height: 760px) {
+      .overlay {
+        min-height: 218vh !important;
+      }
+
+      #apropos,
+      #contact {
+        margin-top: 80vh !important;
+      }
+
+      @supports (height: 100dvh) {
+        .overlay {
+          min-height: 218dvh !important;
+        }
+
+        #apropos,
+        #contact {
+          margin-top: 80dvh !important;
+        }
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      .overlay {
+        min-height: 170vh !important;
+      }
+
+      #accueil.page-section.active {
+        min-height: 55vh !important;
+      }
+
+      #apropos,
+      #contact {
+        margin-top: 55vh !important;
+      }
+
+      #apropos h1 {
+        font-size: clamp(12px, 2.6vw, 16px) !important;
+        line-height: 1.15 !important;
+      }
+
+      #contact h1 {
+        font-size: clamp(18px, 5vw, 28px) !important;
+      }
+    }
+
   </style>
 
 </head>
@@ -3021,6 +3431,20 @@
 
 
     /* Patch final : les effets blancs sont attachés aux objets, donc plus besoin de recalcul au scroll mobile */
+    function demanderMajEffetsBlancsVolume() {
+      return;
+    }
+
+    function lancerBoucleEffetsBlancsMobile() {
+      return;
+    }
+
+    function arreterBoucleEffetsBlancsMobile() {
+      return;
+    }
+
+
+    /* Smartphone fluide : pas de boucle de recalcul au scroll */
     function demanderMajEffetsBlancsVolume() {
       return;
     }
