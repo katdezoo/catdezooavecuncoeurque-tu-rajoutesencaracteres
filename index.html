@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>-websitesypeshit/</title>
+  <title>-websitetypeshit<3</title>
 
   <style>
     @font-face {
@@ -3284,6 +3284,149 @@
         right: calc(16px + env(safe-area-inset-right)) !important;
         top: calc(50vh + 7px) !important;
         transform: rotate(45deg) !important;
+      }
+    }
+
+  
+    /* Smartphone : RULES box glow + flèche haut bas + flèche bas haut + contact fixé */
+    @media screen and (max-width: 768px) {
+      #apropos {
+        border: 2px solid #000000 !important;
+        border-radius: 10px !important;
+        box-shadow:
+          0 0 0 1px rgba(0, 0, 0, 0.75),
+          0 0 10px 5px rgba(255, 255, 255, 0.62),
+          0 0 22px 12px rgba(255, 255, 255, 0.34),
+          0 0 34px 18px rgba(255, 255, 255, 0.18) !important;
+        background: rgba(255, 0, 255, 0.05) !important;
+      }
+
+      #apropos::before,
+      #apropos::after {
+        content: "";
+        position: fixed !important;
+        display: block !important;
+        width: 10px !important;
+        height: 10px !important;
+        border-right: 2px solid #000000 !important;
+        border-bottom: 2px solid #000000 !important;
+        filter:
+          drop-shadow(0 0 3px rgba(255, 255, 255, 0.95))
+          drop-shadow(0 0 7px rgba(255, 255, 255, 0.72)) !important;
+        pointer-events: none !important;
+        z-index: 17000 !important;
+        margin: 0 !important;
+      }
+
+      /* Flèche du haut : affichée dès l'ouverture de la box, en haut à droite, vers le bas */
+      #apropos::before {
+        left: auto !important;
+        right: calc(18px + env(safe-area-inset-right)) !important;
+        top: calc(60vh + 8px) !important;
+        transform: rotate(45deg) !important;
+      }
+
+      /* Flèche du bas : placée en bas du bloc, elle pointe vers le haut */
+      #apropos::after {
+        left: 50% !important;
+        right: auto !important;
+        bottom: calc(205px + env(safe-area-inset-bottom) + 8px) !important;
+        transform: translateX(-50%) rotate(-135deg) !important;
+      }
+
+      @supports (height: 100dvh) {
+        #apropos::before {
+          top: calc(60dvh + 8px) !important;
+        }
+      }
+
+      #contact {
+        position: fixed !important;
+        left: 50% !important;
+        top: 52vh !important;
+        bottom: auto !important;
+        transform: translateX(-50%) !important;
+        margin-top: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        z-index: 16500 !important;
+        pointer-events: none !important;
+        overflow: visible !important;
+      }
+
+      @supports (height: 100dvh) {
+        #contact {
+          top: 52dvh !important;
+        }
+      }
+
+      #contact.active {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+      }
+
+      #contact .card {
+        margin: 0 auto !important;
+        padding: 6px 8px !important;
+      }
+
+      #contact h1 {
+        font-size: clamp(25px, 8.4vw, 36px) !important;
+        line-height: 1.05 !important;
+        margin: 0 !important;
+      }
+    }
+
+    @media screen and (max-width: 430px) and (min-height: 760px) {
+      #apropos::before {
+        right: calc(16px + env(safe-area-inset-right)) !important;
+        top: calc(62vh + 8px) !important;
+      }
+
+      #apropos::after {
+        bottom: calc(205px + env(safe-area-inset-bottom) + 8px) !important;
+      }
+
+      @supports (height: 100dvh) {
+        #apropos::before {
+          top: calc(62dvh + 8px) !important;
+        }
+      }
+
+      #contact {
+        top: 54vh !important;
+      }
+
+      @supports (height: 100dvh) {
+        #contact {
+          top: 54dvh !important;
+        }
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #apropos::before,
+      #apropos::after {
+        width: 8px !important;
+        height: 8px !important;
+        border-right-width: 1.5px !important;
+        border-bottom-width: 1.5px !important;
+      }
+
+      #apropos::before {
+        right: calc(16px + env(safe-area-inset-right)) !important;
+        top: calc(50vh + 7px) !important;
+        transform: rotate(45deg) !important;
+      }
+
+      #apropos::after {
+        bottom: calc(120px + env(safe-area-inset-bottom) + 6px) !important;
+        transform: translateX(-50%) rotate(-135deg) !important;
+      }
+
+      #contact {
+        top: 42vh !important;
       }
     }
 
