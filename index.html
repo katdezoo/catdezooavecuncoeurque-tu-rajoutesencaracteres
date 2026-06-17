@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>-websitetypeshit<3</title>
+  <title>PRODUCERSWORLDCUP</title>
 
   <style>
     @font-face {
@@ -3427,6 +3427,80 @@
 
       #contact {
         top: 42vh !important;
+      }
+    }
+
+  
+    /* Smartphone : flèches RULES au début et à la fin du texte */
+    @media screen and (max-width: 768px) {
+      /* On enlève les flèches fixes sur la box */
+      #apropos::before,
+      #apropos::after {
+        display: none !important;
+      }
+
+      /* On remet les flèches dans le contenu du texte RULES */
+      #apropos .card::before,
+      #apropos .card::after {
+        content: "";
+        display: block !important;
+        position: relative !important;
+        left: 50% !important;
+        width: 10px !important;
+        height: 10px !important;
+        border-right: 2px solid #000000 !important;
+        border-bottom: 2px solid #000000 !important;
+        filter:
+          drop-shadow(0 0 3px rgba(255, 255, 255, 0.95))
+          drop-shadow(0 0 7px rgba(255, 255, 255, 0.72)) !important;
+        pointer-events: none !important;
+        z-index: 4 !important;
+      }
+
+      /* Flèche visible dès le début du texte : elle pointe vers le bas */
+      #apropos .card::before {
+        margin: 0 auto 12px auto !important;
+        transform: translateX(-50%) rotate(45deg) !important;
+      }
+
+      /* Flèche visible à la fin du texte : elle pointe vers le haut */
+      #apropos .card::after {
+        margin: 12px auto 0 auto !important;
+        transform: translateX(-50%) rotate(-135deg) !important;
+      }
+    }
+
+    @media screen and (max-width: 430px) and (min-height: 760px) {
+      #apropos .card::before,
+      #apropos .card::after {
+        width: 9px !important;
+        height: 9px !important;
+      }
+
+      #apropos .card::before {
+        margin-bottom: 11px !important;
+      }
+
+      #apropos .card::after {
+        margin-top: 11px !important;
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #apropos .card::before,
+      #apropos .card::after {
+        width: 8px !important;
+        height: 8px !important;
+        border-right-width: 1.5px !important;
+        border-bottom-width: 1.5px !important;
+      }
+
+      #apropos .card::before {
+        margin-bottom: 8px !important;
+      }
+
+      #apropos .card::after {
+        margin-top: 8px !important;
       }
     }
 
