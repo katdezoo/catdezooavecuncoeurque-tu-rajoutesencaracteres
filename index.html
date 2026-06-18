@@ -6506,8 +6506,8 @@ body {
       const margeBas = paysage ? 120 : 205;
       const hauteurMin = paysage ? 78 : grandSmartphone ? 100 : 96;
 
-      /* Point d'ancrage corrigé : juste sous le bandeau vidéo, presque entièrement visible, sans changer la taille de la box. */
-      const descente = paysage ? 18 : Math.max(38, Math.min(Math.round(hauteur * 0.065), 62));
+      /* Point d'ancrage à la position actuelle la plus basse, sans changer la taille de la box. */
+      const descente = paysage ? 18 : 62;
 
       const topBase = Math.round(hauteur * ratioTop);
       topCible = topBase + descente;
@@ -7296,6 +7296,184 @@ body {
         setTimeout(function() { demander(false, false); }, 180);
       }
     }, { passive: true });
+  })();
+</script>
+
+<style id="rules-page-free-scroll-final">
+  /* RULES : scroll libre avec barre fine, ancrage bas conservé */
+  @media screen and (max-width: 768px) {
+    html.rules-page-scroll-mode,
+    html.rules-page-scroll-mode body {
+      min-height: calc(100vh + var(--rules-page-scroll-extra, 220px)) !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      scrollbar-width: thin !important;
+      scrollbar-color: rgba(255, 255, 255, 0.58) transparent !important;
+    }
+
+    html.rules-page-scroll-mode::-webkit-scrollbar,
+    html.rules-page-scroll-mode body::-webkit-scrollbar {
+      width: 4px !important;
+      display: block !important;
+    }
+
+    html.rules-page-scroll-mode::-webkit-scrollbar-track,
+    html.rules-page-scroll-mode body::-webkit-scrollbar-track {
+      background: transparent !important;
+    }
+
+    html.rules-page-scroll-mode::-webkit-scrollbar-thumb,
+    html.rules-page-scroll-mode body::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.58) !important;
+      border-radius: 999px !important;
+      box-shadow: 0 0 7px rgba(255, 255, 255, 0.45) !important;
+    }
+
+    #apropos {
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      scrollbar-width: thin !important;
+      scrollbar-color: rgba(255, 255, 255, 0.52) transparent !important;
+      overscroll-behavior-y: auto !important;
+      touch-action: pan-y pinch-zoom !important;
+      padding-right: 14px !important;
+    }
+
+    #apropos::-webkit-scrollbar {
+      width: 3px !important;
+      display: block !important;
+    }
+
+    #apropos::-webkit-scrollbar-track {
+      background: transparent !important;
+    }
+
+    #apropos::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.52) !important;
+      border-radius: 999px !important;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.42) !important;
+    }
+
+    #apropos::-webkit-scrollbar-corner {
+      background: transparent !important;
+    }
+  }
+</style>
+
+<script id="rules-page-free-scroll-script">
+  (function() {
+    const racine = document.documentElement;
+    let syncEnCours = false;
+    let raf = null;
+    let dernierEtatActif = false;
+
+    function mobile() {
+      return window.innerWidth <= 768;
+    }
+
+    function boxRules() {
+      return document.getElementById("apropos");
+    }
+
+    function rulesActive() {
+      const box = boxRules();
+      return !!(box && box.classList.contains("active"));
+    }
+
+    function maxPageScroll() {
+      return Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    }
+
+    function maxBoxScroll(box) {
+      return Math.max(1, box.scrollHeight - box.clientHeight);
+    }
+
+    function appliquerModeScrollLibre() {
+      const box = boxRules();
+      const actif = mobile() && rulesActive() && box;
+
+      racine.classList.toggle("rules-page-scroll-mode", !!actif);
+
+      if (!actif) {
+        racine.style.removeProperty("--rules-page-scroll-extra");
+        dernierEtatActif = false;
+        return;
+      }
+
+      const extra = Math.max(180, Math.min(420, maxBoxScroll(box) + 96));
+      racine.style.setProperty("--rules-page-scroll-extra", extra + "px");
+
+      if (!dernierEtatActif) {
+        /* Ouverture de RULES : on repart proprement en haut, puis on peut descendre avec la barre fine. */
+        syncEnCours = true;
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        box.scrollTop = 0;
+        syncEnCours = false;
+      }
+
+      dernierEtatActif = true;
+    }
+
+    function synchroniserBoxDepuisPage() {
+      const box = boxRules();
+      if (!mobile() || !rulesActive() || !box || syncEnCours) return;
+
+      syncEnCours = true;
+      const progress = Math.max(0, Math.min(1, (window.scrollY || 0) / maxPageScroll()));
+      box.scrollTop = progress * maxBoxScroll(box);
+      syncEnCours = false;
+    }
+
+    function synchroniserPageDepuisBox() {
+      const box = boxRules();
+      if (!mobile() || !rulesActive() || !box || syncEnCours) return;
+
+      syncEnCours = true;
+      const progress = Math.max(0, Math.min(1, box.scrollTop / maxBoxScroll(box)));
+      window.scrollTo({ top: progress * maxPageScroll(), left: 0, behavior: "auto" });
+      syncEnCours = false;
+    }
+
+    function demanderMaj() {
+      if (raf) return;
+      raf = requestAnimationFrame(function() {
+        raf = null;
+        appliquerModeScrollLibre();
+        synchroniserBoxDepuisPage();
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", demanderMaj);
+    window.addEventListener("load", demanderMaj);
+    window.addEventListener("pageshow", demanderMaj);
+    window.addEventListener("resize", demanderMaj, { passive: true });
+    window.addEventListener("orientationchange", function() {
+      setTimeout(demanderMaj, 260);
+    }, { passive: true });
+
+    window.addEventListener("scroll", function() {
+      demanderMaj();
+    }, { passive: true });
+
+    document.addEventListener("click", function(event) {
+      const texte = event.target && event.target.textContent ? event.target.textContent.trim() : "";
+      if (texte === "RULES" || texte === "starthere" || texte === "SEND A WAV / MP3") {
+        setTimeout(demanderMaj, 40);
+        setTimeout(demanderMaj, 180);
+      }
+    }, { passive: true });
+
+    function brancherBox() {
+      const box = boxRules();
+      if (!box || box.dataset.rulesPageFreeScrollOk) return;
+      box.dataset.rulesPageFreeScrollOk = "1";
+      box.addEventListener("scroll", function() {
+        if (rulesActive()) synchroniserPageDepuisBox();
+      }, { passive: true });
+    }
+
+    brancherBox();
+    setTimeout(brancherBox, 600);
   })();
 </script>
 </body>
