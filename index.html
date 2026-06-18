@@ -4667,7 +4667,7 @@
     }
 
   
-    /* GLOBAL PRODUCERS CUP : fond.mp4 ajusté comme l'ancien GIF */
+    /* GLOBAL PRODUCERS CUP : blobal.mp4 ajusté comme l'ancien GIF */
     :root {
       --fond-video-bg: #ff00ff;
       --fond-video-position: center center;
@@ -4750,7 +4750,7 @@
     }
 
   
-    /* GLOBAL PRODUCERS CUP FINAL : fond.mp4 rose/vert visible + loop, comme le GIF */
+    /* GLOBAL PRODUCERS CUP FINAL : blobal.mp4 rose/vert visible + loop, comme le GIF */
     :root {
       --fond-video-bg: #ff00ff;
     }
@@ -4860,6 +4860,103 @@
       transition: none !important;
     }
 
+  
+    /* GLOBAL PRODUCERS CUP : blobal.mp4 plein écran 100%, sans crop, loop partout */
+    :root {
+      --fond-video-bg: #ff00ff;
+    }
+
+    html,
+    body {
+      background: var(--fond-video-bg) !important;
+    }
+
+    .gif-bg,
+    .intro-gif {
+      background-image: none !important;
+      background-color: var(--fond-video-bg) !important;
+      z-index: 0 !important;
+    }
+
+    #fondVideo.video-bg,
+    #introVideo.intro-video {
+      position: fixed !important;
+      inset: 0 !important;
+      left: 0 !important;
+      top: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      min-width: 100vw !important;
+      min-height: 100vh !important;
+      object-fit: fill !important;
+      object-position: center center !important;
+      background: var(--fond-video-bg) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: block !important;
+      pointer-events: none !important;
+      z-index: 1 !important;
+      transform: translate3d(0, 0, 0) !important;
+      transform-origin: center center !important;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
+      will-change: transform !important;
+    }
+
+    #introVideo.intro-video {
+      display: none !important;
+      z-index: 1 !important;
+    }
+
+    .overlay {
+      position: relative !important;
+      z-index: 2 !important;
+      background: transparent !important;
+    }
+
+    @media screen and (max-width: 768px) {
+      #fondVideo.video-bg,
+      #introVideo.intro-video {
+        width: 100vw !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
+        object-fit: fill !important;
+        object-position: center center !important;
+        transform: translate3d(0, 0, 0) !important;
+      }
+    }
+
+    @supports (height: 100svh) {
+      @media screen and (max-width: 768px) {
+        #fondVideo.video-bg,
+        #introVideo.intro-video {
+          height: 100svh !important;
+          min-height: 100svh !important;
+        }
+      }
+    }
+
+    @supports (height: 100dvh) {
+      @media screen and (max-width: 768px) {
+        #fondVideo.video-bg,
+        #introVideo.intro-video {
+          height: 100dvh !important;
+          min-height: 100dvh !important;
+        }
+      }
+    }
+
+    @supports (-webkit-touch-callout: none) {
+      @media screen and (max-width: 768px) {
+        #fondVideo.video-bg,
+        #introVideo.intro-video {
+          height: -webkit-fill-available !important;
+          min-height: 100vh !important;
+          object-fit: fill !important;
+        }
+      }
+    }
+
   </style>
 
 </head>
@@ -4871,13 +4968,13 @@
       and headphones please/</span>
     <div id="introGif" class="intro-gif"></div>
 <video id="introVideo" class="intro-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
-  <source src="./fond432.mp4" type="video/mp4">
+  <source src="./blobal.mp4" type="video/mp4">
 </video>
 </div>
 
   <div class="gif-bg"></div>
 <video id="fondVideo" class="video-bg" autoplay muted loop playsinline webkit-playsinline preload="auto">
-  <source src="./fond432.mp4" type="video/mp4">
+  <source src="./blobal.mp4" type="video/mp4">
 </video>
 
   <div id="volumeTextWhiteGlow" class="volume-white-glow-layer"></div>
@@ -5720,7 +5817,7 @@
 
 
 <script>
-  function boucleFondVideoEternelle() {
+  function lancerBlobalMp4EnBoucle() {
     const video = document.getElementById("fondVideo");
     if (!video) return;
 
@@ -5748,14 +5845,14 @@
     }
   }
 
-  function installerFondVideoEternel() {
+  function installerBlobalLoopInfini() {
     const video = document.getElementById("fondVideo");
     if (!video) return;
 
-    boucleFondVideoEternelle();
+    lancerBlobalMp4EnBoucle();
 
-    if (!video.dataset.loopEternelInstalle) {
-      video.dataset.loopEternelInstalle = "1";
+    if (!video.dataset.blobalLoopInstalle) {
+      video.dataset.blobalLoopInstalle = "1";
 
       video.addEventListener("timeupdate", function() {
         if (video.duration && video.currentTime > video.duration - 0.06) {
@@ -5775,28 +5872,28 @@
 
       video.addEventListener("pause", function() {
         if (!document.hidden) {
-          boucleFondVideoEternelle();
+          lancerBlobalMp4EnBoucle();
         }
       });
 
       setInterval(function() {
         if (!document.hidden && (video.paused || video.ended || video.readyState < 2)) {
-          boucleFondVideoEternelle();
+          lancerBlobalMp4EnBoucle();
         }
       }, 700);
     }
   }
 
-  window.addEventListener("DOMContentLoaded", installerFondVideoEternel);
-  window.addEventListener("load", installerFondVideoEternel);
-  window.addEventListener("pageshow", boucleFondVideoEternelle);
+  window.addEventListener("DOMContentLoaded", installerBlobalLoopInfini);
+  window.addEventListener("load", installerBlobalLoopInfini);
+  window.addEventListener("pageshow", lancerBlobalMp4EnBoucle);
   document.addEventListener("visibilitychange", function() {
     if (!document.hidden) {
-      boucleFondVideoEternelle();
+      lancerBlobalMp4EnBoucle();
     }
   });
-  document.addEventListener("click", boucleFondVideoEternelle, { once: true });
-  document.addEventListener("touchstart", boucleFondVideoEternelle, { once: true });
+  document.addEventListener("click", lancerBlobalMp4EnBoucle, { once: true });
+  document.addEventListener("touchstart", lancerBlobalMp4EnBoucle, { once: true });
 </script>
 
 </body>
