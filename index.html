@@ -6453,232 +6453,6 @@ body {
     }
   }
 </style>
-<script id="rules-scroll-restore-script">
-  (function() {
-    let topActuel = null;
-    let hauteurActuelle = null;
-    let topCible = null;
-    let hauteurCible = null;
-    let raf = null;
-    let syncScroll = false;
-
-    function estSmartphone() {
-      return window.innerWidth <= 768;
-    }
-
-    function boxRules() {
-      return document.getElementById("apropos");
-    }
-
-    function rulesActive() {
-      const box = boxRules();
-      return !!(box && box.classList.contains("active"));
-    }
-
-    function hauteurViewportStable() {
-      return window.innerHeight || document.documentElement.clientHeight || 760;
-    }
-
-    function largeurViewportStable() {
-      return window.innerWidth || document.documentElement.clientWidth || 390;
-    }
-
-    function clamp(v, min, max) {
-      return Math.max(min, Math.min(max, v));
-    }
-
-    function maxPageScroll() {
-      return Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    }
-
-    function progressionPage() {
-      if (!rulesActive()) return 0;
-      return clamp((window.scrollY || document.documentElement.scrollTop || 0) / maxPageScroll(), 0, 1);
-    }
-
-    function maxBoxScroll(box) {
-      return Math.max(1, box.scrollHeight - box.clientHeight);
-    }
-
-    function topLecteur() {
-      const hauteur = hauteurViewportStable();
-      const lecteur = document.querySelector(".audio-box");
-
-      if (lecteur) {
-        const rect = lecteur.getBoundingClientRect();
-        if (rect && rect.top > 0 && rect.top < hauteur) {
-          return rect.top;
-        }
-      }
-
-      /* Fallback proche de l'emplacement réel du lecteur sur smartphone */
-      return hauteur - 170;
-    }
-
-    function appliquerStylesFixes(box, paysage) {
-      box.style.setProperty("width", "calc(100vw - 24px)", "important");
-      box.style.setProperty("max-width", "calc(100vw - 24px)", "important");
-      box.style.setProperty("padding", paysage ? "22px 10px" : "26px 13px", "important");
-      box.style.setProperty("overflow-y", "auto", "important");
-      box.style.setProperty("overflow-x", "hidden", "important");
-      box.style.setProperty("-webkit-overflow-scrolling", "touch", "important");
-      box.style.setProperty("touch-action", "pan-y pinch-zoom", "important");
-      box.style.setProperty("pointer-events", "auto", "important");
-      box.style.setProperty("transform", "translate3d(-50%, 0, 0)", "important");
-      box.style.setProperty("scrollbar-width", "thin", "important");
-    }
-
-    function calculerCiblesMagicboxFluide() {
-      const box = boxRules();
-      if (!box) return;
-
-      if (!estSmartphone()) {
-        box.style.removeProperty("top");
-        box.style.removeProperty("height");
-        box.style.removeProperty("overflow-y");
-        box.style.removeProperty("touch-action");
-        topActuel = null;
-        hauteurActuelle = null;
-        topCible = null;
-        hauteurCible = null;
-        raf = null;
-        return;
-      }
-
-      const largeur = largeurViewportStable();
-      const hauteur = hauteurViewportStable();
-      const paysage = largeur <= 900 && hauteur <= 500 && window.matchMedia("(orientation: landscape)").matches;
-      const p = progressionPage();
-
-      /* Bas ancré juste au-dessus du lecteur : la box ne touche pas le player. */
-      const margeLecteur = paysage ? 8 : 14;
-      const basFixe = Math.round(topLecteur() - margeLecteur);
-
-      /* Limite haute : la box reste sous la barre/bandeau de la vidéo. */
-      const hautSousBandeau = Math.round(hauteur * (paysage ? 0.42 : 0.545));
-
-      /* Petite au début, puis croissance au scroll. */
-      const hauteurPetite = Math.round(clamp(hauteur * (paysage ? 0.18 : 0.135), paysage ? 60 : 86, paysage ? 108 : 118));
-      const hauteurGrandeVoulue = Math.round(clamp(hauteur * (paysage ? 0.34 : 0.255), paysage ? 110 : 168, paysage ? 178 : 228));
-
-      /* Elle grandit vers le haut, mais ne remonte jamais dans le bandeau vidéo. */
-      const hauteurMaxSansToucherBandeau = Math.max(hauteurPetite, basFixe - hautSousBandeau);
-      const hauteurGrande = Math.max(hauteurPetite, Math.min(hauteurGrandeVoulue, hauteurMaxSansToucherBandeau));
-
-      hauteurCible = Math.round(hauteurPetite + (hauteurGrande - hauteurPetite) * p);
-      topCible = Math.round(basFixe - hauteurCible);
-
-      appliquerStylesFixes(box, paysage);
-
-      /* Le scroll de page donne l'agrandissement, et le scroll interne suit doucement le contenu. */
-      if (!syncScroll && rulesActive()) {
-        syncScroll = true;
-        box.scrollTop = p * maxBoxScroll(box);
-        syncScroll = false;
-      }
-
-      if (topActuel === null) {
-        topActuel = topCible;
-        hauteurActuelle = hauteurCible;
-        box.style.setProperty("top", topActuel + "px", "important");
-        box.style.setProperty("height", hauteurActuelle + "px", "important");
-        return;
-      }
-
-      if (!raf) {
-        raf = requestAnimationFrame(animerMagicboxFluide);
-      }
-    }
-
-    function animerMagicboxFluide() {
-      const box = boxRules();
-
-      if (!box || !estSmartphone() || topCible === null || hauteurCible === null) {
-        raf = null;
-        return;
-      }
-
-      /* Même signature smooth que les versions validées. */
-      const douceur = 0.045;
-      const stop = 0.12;
-
-      const deltaTop = topCible - topActuel;
-      const deltaHauteur = hauteurCible - hauteurActuelle;
-
-      if (Math.abs(deltaTop) < stop) {
-        topActuel = topCible;
-      } else {
-        topActuel += deltaTop * douceur;
-      }
-
-      if (Math.abs(deltaHauteur) < stop) {
-        hauteurActuelle = hauteurCible;
-      } else {
-        hauteurActuelle += deltaHauteur * douceur;
-      }
-
-      box.style.setProperty("top", topActuel.toFixed(2) + "px", "important");
-      box.style.setProperty("height", hauteurActuelle.toFixed(2) + "px", "important");
-
-      if (topActuel !== topCible || hauteurActuelle !== hauteurCible) {
-        raf = requestAnimationFrame(animerMagicboxFluide);
-      } else {
-        raf = null;
-      }
-    }
-
-    function synchroniserPageDepuisBox() {
-      const box = boxRules();
-      if (!estSmartphone() || !rulesActive() || !box || syncScroll) return;
-
-      syncScroll = true;
-      const progress = clamp(box.scrollTop / maxBoxScroll(box), 0, 1);
-      window.scrollTo({ top: progress * maxPageScroll(), left: 0, behavior: "auto" });
-      syncScroll = false;
-
-      calculerCiblesMagicboxFluide();
-    }
-
-    function brancherRulesSansBloquerGestes() {
-      const box = boxRules();
-      if (!box || box.dataset.rulesGrowStableOk) return;
-      box.dataset.rulesGrowStableOk = "1";
-
-      box.addEventListener("scroll", synchroniserPageDepuisBox, { passive: true });
-      box.addEventListener("touchstart", function() {}, { passive: true });
-      box.addEventListener("touchmove", function() {}, { passive: true });
-      box.addEventListener("wheel", function() {}, { passive: true });
-    }
-
-    function demanderMagicboxFluide() {
-      requestAnimationFrame(function() {
-        calculerCiblesMagicboxFluide();
-        brancherRulesSansBloquerGestes();
-      });
-    }
-
-    window.addEventListener("DOMContentLoaded", demanderMagicboxFluide);
-    window.addEventListener("load", demanderMagicboxFluide);
-    window.addEventListener("pageshow", demanderMagicboxFluide);
-    window.addEventListener("resize", demanderMagicboxFluide, { passive: true });
-    window.addEventListener("scroll", demanderMagicboxFluide, { passive: true });
-    window.addEventListener("orientationchange", function() {
-      setTimeout(demanderMagicboxFluide, 250);
-    }, { passive: true });
-
-    document.addEventListener("click", function(event) {
-      if (event.target && event.target.textContent && event.target.textContent.trim() === "RULES") {
-        setTimeout(function() {
-          window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-          demanderMagicboxFluide();
-        }, 50);
-        setTimeout(demanderMagicboxFluide, 220);
-      }
-    }, { passive: true });
-
-    setTimeout(demanderMagicboxFluide, 800);
-  })();
-</script>
 
 <style id="gpc-final-device-safety">
   /* Vérification finale appareils : garde la vidéo lisible et la box scrollable sans bloquer le navigateur */
@@ -7381,11 +7155,11 @@ body {
 </script>
 
 <style id="rules-page-free-scroll-final">
-  /* RULES : scroll libre avec barre fine, sans modifier la vidéo */
+  /* RULES : box basse, moins haute, barre fine, vidéo inchangée */
   @media screen and (max-width: 768px) {
     html.rules-page-scroll-mode,
     html.rules-page-scroll-mode body {
-      min-height: calc(100vh + var(--rules-page-scroll-extra, 520px)) !important;
+      min-height: calc(100vh + var(--rules-page-scroll-extra, 260px)) !important;
       overflow-y: auto !important;
       overflow-x: hidden !important;
       scrollbar-width: thin !important;
@@ -7434,13 +7208,15 @@ body {
   }
 </style>
 
-<script id="rules-page-free-scroll-script">
+<script id="rules-scroll-restore-script">
   (function() {
-    const racine = document.documentElement;
+    let topActuel = null;
+    let hauteurActuelle = null;
+    let topCible = null;
+    let hauteurCible = null;
     let raf = null;
-    let dernierEtatActif = false;
 
-    function mobile() {
+    function estSmartphone() {
       return window.innerWidth <= 768;
     }
 
@@ -7453,56 +7229,184 @@ body {
       return !!(box && box.classList.contains("active"));
     }
 
-    function appliquerModeScrollLibre() {
+    function hauteurViewportStable() {
+      return window.innerHeight || document.documentElement.clientHeight || 760;
+    }
+
+    function largeurViewportStable() {
+      return window.innerWidth || document.documentElement.clientWidth || 390;
+    }
+
+    function clamp(v, min, max) {
+      return Math.max(min, Math.min(max, v));
+    }
+
+    function topLecteur() {
+      const hauteur = hauteurViewportStable();
+      const lecteur = document.querySelector(".audio-box");
+
+      if (lecteur) {
+        const rect = lecteur.getBoundingClientRect();
+        if (rect && rect.top > 0 && rect.top < hauteur) {
+          return rect.top;
+        }
+      }
+
+      return hauteur - 170;
+    }
+
+    function appliquerStylesFixes(box, paysage) {
+      box.style.setProperty("width", "calc(100vw - 24px)", "important");
+      box.style.setProperty("max-width", "calc(100vw - 24px)", "important");
+      box.style.setProperty("padding", paysage ? "20px 10px" : "24px 13px", "important");
+      box.style.setProperty("overflow-y", "auto", "important");
+      box.style.setProperty("overflow-x", "hidden", "important");
+      box.style.setProperty("-webkit-overflow-scrolling", "touch", "important");
+      box.style.setProperty("touch-action", "pan-y pinch-zoom", "important");
+      box.style.setProperty("pointer-events", "auto", "important");
+      box.style.setProperty("transform", "translate3d(-50%, 0, 0)", "important");
+      box.style.setProperty("scrollbar-width", "thin", "important");
+    }
+
+    function calculerCiblesMagicboxFluide() {
       const box = boxRules();
-      const actif = mobile() && rulesActive() && box;
+      if (!box) return;
 
-      racine.classList.toggle("rules-page-scroll-mode", !!actif);
-
-      if (!actif) {
-        racine.style.removeProperty("--rules-page-scroll-extra");
-        dernierEtatActif = false;
+      if (!estSmartphone()) {
+        box.style.removeProperty("top");
+        box.style.removeProperty("height");
+        box.style.removeProperty("overflow-y");
+        box.style.removeProperty("touch-action");
+        topActuel = null;
+        hauteurActuelle = null;
+        topCible = null;
+        hauteurCible = null;
+        raf = null;
         return;
       }
 
-      const extra = Math.max(460, Math.min(760, (box.scrollHeight || 260) + 390));
-      racine.style.setProperty("--rules-page-scroll-extra", extra + "px");
+      const largeur = largeurViewportStable();
+      const hauteur = hauteurViewportStable();
+      const paysage = largeur <= 900 && hauteur <= 500 && window.matchMedia("(orientation: landscape)").matches;
 
-      if (!dernierEtatActif) {
-        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-        box.scrollTop = 0;
+      /* Point d'ancrage simple : le bas frôle le lecteur MP3, sans le toucher. */
+      const margeLecteur = paysage ? 7 : 10;
+      const basAncre = Math.round(topLecteur() - margeLecteur);
+
+      /* Box moins haute : elle descend, mais elle ne devient pas immense. */
+      const hauteurVoulue = Math.round(clamp(
+        hauteur * (paysage ? 0.22 : 0.175),
+        paysage ? 78 : 112,
+        paysage ? 132 : 150
+      ));
+
+      /* Elle reste sous le bandeau vidéo, mais le bas est prioritaire près du lecteur. */
+      const hautMinimum = Math.round(hauteur * (paysage ? 0.42 : 0.50));
+      hauteurCible = Math.min(hauteurVoulue, Math.max(80, basAncre - hautMinimum));
+      hauteurCible = Math.max(paysage ? 72 : 104, hauteurCible);
+      topCible = Math.round(basAncre - hauteurCible);
+
+      appliquerStylesFixes(box, paysage);
+
+      if (topActuel === null) {
+        topActuel = topCible;
+        hauteurActuelle = hauteurCible;
+        box.style.setProperty("top", topActuel + "px", "important");
+        box.style.setProperty("height", hauteurActuelle + "px", "important");
+        return;
       }
 
-      dernierEtatActif = true;
+      if (!raf) {
+        raf = requestAnimationFrame(animerMagicboxFluide);
+      }
     }
 
-    function demanderMaj() {
-      if (raf) return;
-      raf = requestAnimationFrame(function() {
+    function animerMagicboxFluide() {
+      const box = boxRules();
+
+      if (!box || !estSmartphone() || topCible === null || hauteurCible === null) {
         raf = null;
-        appliquerModeScrollLibre();
+        return;
+      }
+
+      /* Même smooth que la magicbox validée. */
+      const douceur = 0.045;
+      const stop = 0.12;
+
+      const deltaTop = topCible - topActuel;
+      const deltaHauteur = hauteurCible - hauteurActuelle;
+
+      if (Math.abs(deltaTop) < stop) {
+        topActuel = topCible;
+      } else {
+        topActuel += deltaTop * douceur;
+      }
+
+      if (Math.abs(deltaHauteur) < stop) {
+        hauteurActuelle = hauteurCible;
+      } else {
+        hauteurActuelle += deltaHauteur * douceur;
+      }
+
+      box.style.setProperty("top", topActuel.toFixed(2) + "px", "important");
+      box.style.setProperty("height", hauteurActuelle.toFixed(2) + "px", "important");
+
+      if (topActuel !== topCible || hauteurActuelle !== hauteurCible) {
+        raf = requestAnimationFrame(animerMagicboxFluide);
+      } else {
+        raf = null;
+      }
+    }
+
+    function brancherRulesSansBloquerGestes() {
+      const box = boxRules();
+      if (!box || box.dataset.rulesLowSmallOk) return;
+      box.dataset.rulesLowSmallOk = "1";
+
+      box.addEventListener("touchstart", function() {}, { passive: true });
+      box.addEventListener("touchmove", function() {}, { passive: true });
+      box.addEventListener("wheel", function() {}, { passive: true });
+    }
+
+    function reglerScrollPage() {
+      const actif = estSmartphone() && rulesActive();
+      document.documentElement.classList.toggle("rules-page-scroll-mode", !!actif);
+
+      if (actif) {
+        document.documentElement.style.setProperty("--rules-page-scroll-extra", "260px");
+      } else {
+        document.documentElement.style.removeProperty("--rules-page-scroll-extra");
+      }
+    }
+
+    function demanderMagicboxFluide() {
+      requestAnimationFrame(function() {
+        reglerScrollPage();
+        calculerCiblesMagicboxFluide();
+        brancherRulesSansBloquerGestes();
       });
     }
 
-    window.addEventListener("DOMContentLoaded", demanderMaj);
-    window.addEventListener("load", demanderMaj);
-    window.addEventListener("pageshow", demanderMaj);
-    window.addEventListener("resize", demanderMaj, { passive: true });
-    window.addEventListener("scroll", demanderMaj, { passive: true });
+    window.addEventListener("DOMContentLoaded", demanderMagicboxFluide);
+    window.addEventListener("load", demanderMagicboxFluide);
+    window.addEventListener("pageshow", demanderMagicboxFluide);
+    window.addEventListener("resize", demanderMagicboxFluide, { passive: true });
+    window.addEventListener("scroll", demanderMagicboxFluide, { passive: true });
     window.addEventListener("orientationchange", function() {
-      setTimeout(demanderMaj, 260);
+      setTimeout(demanderMagicboxFluide, 250);
     }, { passive: true });
 
     document.addEventListener("click", function(event) {
       const texte = event.target && event.target.textContent ? event.target.textContent.trim() : "";
       if (texte === "RULES" || texte === "starthere" || texte === "SEND A WAV / MP3") {
-        setTimeout(demanderMaj, 40);
-        setTimeout(demanderMaj, 180);
+        setTimeout(demanderMagicboxFluide, 45);
+        setTimeout(demanderMagicboxFluide, 220);
       }
     }, { passive: true });
+
+    setTimeout(demanderMagicboxFluide, 800);
   })();
 </script>
-
 <script id="video-anti-freeze-pro-final">
   (function() {
     const SRC = "./regardepasmalnon.mp4";
