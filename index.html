@@ -4667,7 +4667,7 @@
     }
 
   
-    /* GLOBAL PRODUCERS CUP : ./latbien.mp4 ajusté comme l'ancien GIF */
+    /* GLOBAL PRODUCERS CUP : ./lookatdat.mp4 ajusté comme l'ancien GIF */
     :root {
       --fond-video-bg: #ff00ff;
       --fond-video-position: center center;
@@ -4750,7 +4750,7 @@
     }
 
   
-    /* GLOBAL PRODUCERS CUP FINAL : ./latbien.mp4 rose/vert visible + loop, comme le GIF */
+    /* GLOBAL PRODUCERS CUP FINAL : ./lookatdat.mp4 rose/vert visible + loop, comme le GIF */
     :root {
       --fond-video-bg: #ff00ff;
     }
@@ -4861,7 +4861,7 @@
     }
 
   
-    /* GLOBAL PRODUCERS CUP : ./latbien.mp4 plein écran 100%, sans crop, loop partout */
+    /* GLOBAL PRODUCERS CUP : ./lookatdat.mp4 plein écran 100%, sans crop, loop partout */
     :root {
       --fond-video-bg: #ff00ff;
     }
@@ -4958,7 +4958,7 @@
     }
 
   
-/* GLOBAL PRODUCERS CUP : audit responsive final RULES + ./latbien.mp4 */
+/* GLOBAL PRODUCERS CUP : audit responsive final RULES + ./lookatdat.mp4 */
 :root {
   --fond-video-bg: #ff00ff;
   --rules-desktop-font: clamp(16px, 1.42vw, 21px);
@@ -5353,13 +5353,13 @@ body {
       and headphones please/</span>
     <div id="introGif" class="intro-gif"></div>
 <video id="introVideo" class="intro-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
-  <source src="./latbien.mp4" type="video/mp4">
+  <source src="./lookatdat.mp4" type="video/mp4">
 </video>
 </div>
 
   <div class="gif-bg"></div>
 <video id="fondVideo" class="video-bg" autoplay muted loop playsinline webkit-playsinline preload="auto">
-  <source src="./latbien.mp4" type="video/mp4">
+  <source src="./lookatdat.mp4" type="video/mp4">
 </video>
 
   <div id="volumeTextWhiteGlow" class="volume-white-glow-layer"></div>
@@ -5869,17 +5869,10 @@ body {
 
 
     window.addEventListener("resize", demanderMajEffetsBlancsVolume, { passive: true });
-    window.addEventListener("scroll", demanderMajEffetsBlancsVolume, { passive: true });
-    window.addEventListener("touchmove", demanderMajEffetsBlancsVolume, { passive: true });
 
     window.addEventListener("orientationchange", function() {
       setTimeout(demanderMajEffetsBlancsVolume, 150);
     }, { passive: true });
-
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", demanderMajEffetsBlancsVolume, { passive: true });
-      window.visualViewport.addEventListener("scroll", demanderMajEffetsBlancsVolume, { passive: true });
-    }
 
     setTimeout(function() {
       mettreAJourEffetsBlancsVolumeGlobal();
@@ -5913,19 +5906,7 @@ body {
       demanderMajEffetsBlancsVolume();
     }
 
-    window.addEventListener("touchstart", lancerBoucleEffetsBlancsMobile, { passive: true });
-    window.addEventListener("touchmove", lancerBoucleEffetsBlancsMobile, { passive: true });
-    window.addEventListener("touchend", arreterBoucleEffetsBlancsMobile, { passive: true });
-    window.addEventListener("touchcancel", arreterBoucleEffetsBlancsMobile, { passive: true });
-
     let timerScrollEffetsBlancsMobile = null;
-
-    window.addEventListener("scroll", function() {
-      lancerBoucleEffetsBlancsMobile();
-
-      clearTimeout(timerScrollEffetsBlancsMobile);
-      timerScrollEffetsBlancsMobile = setTimeout(arreterBoucleEffetsBlancsMobile, 180);
-    }, { passive: true });
 
 
     /* Patch final : les effets blancs sont attachés aux objets, donc plus besoin de recalcul au scroll mobile */
@@ -6078,7 +6059,6 @@ body {
 
     if (window.visualViewport) {
       window.visualViewport.addEventListener("resize", demanderMagicbox, { passive: true });
-      window.visualViewport.addEventListener("scroll", demanderMagicbox, { passive: true });
     }
   })();
 </script>
@@ -6657,197 +6637,9 @@ body {
 </style>
 
 
-<style id="timer-rules-effect-final">
-  /* TIMER : police originale, couleur/contour RULES, glow rouge plus flashy et beaucoup plus large */
-  :root {
-    --timer-rules-fill: #ff4fd8;
-    --timer-rules-stroke: #00ff00;
-    --timer-rules-black: #000000;
-    --timer-rules-red-core: rgba(255, 0, 0, 1);
-    --timer-rules-red-strong: rgba(255, 0, 0, 0.96);
-    --timer-rules-red-mid: rgba(255, 0, 0, 0.72);
-    --timer-rules-red-soft: rgba(255, 0, 0, 0.48);
-    --timer-rules-red-far: rgba(255, 0, 0, 0.30);
-    --timer-rules-red-ultra: rgba(255, 0, 0, 0.18);
-  }
-
-  .paris-timer,
-  #timerTime {
-    font-family: "DSEG7 Classic", "Courier New", monospace !important;
-    font-weight: 400 !important;
-    color: var(--timer-rules-fill) !important;
-    -webkit-text-stroke: clamp(0.55px, 0.075vw, 0.95px) var(--timer-rules-stroke) !important;
-    paint-order: stroke fill !important;
-    text-shadow:
-      -2px -2px 0 var(--timer-rules-black),
-      0 -2px 0 var(--timer-rules-black),
-      2px -2px 0 var(--timer-rules-black),
-      -2px 0 0 var(--timer-rules-black),
-      2px 0 0 var(--timer-rules-black),
-      -2px 2px 0 var(--timer-rules-black),
-      0 2px 0 var(--timer-rules-black),
-      2px 2px 0 var(--timer-rules-black),
-      0 0 4px var(--timer-rules-black),
-      0 0 clamp(18px, 2vw, 38px) var(--timer-rules-red-core),
-      0 0 clamp(42px, 4.2vw, 82px) var(--timer-rules-red-strong),
-      0 0 clamp(88px, 8.4vw, 170px) var(--timer-rules-red-mid),
-      0 0 clamp(160px, 14vw, 300px) var(--timer-rules-red-soft),
-      0 0 clamp(260px, 22vw, 460px) var(--timer-rules-red-far),
-      0 0 clamp(380px, 32vw, 680px) var(--timer-rules-red-ultra) !important;
-  }
-
-  .paris-timer {
-    font-size: clamp(46px, 6.1vw, 80px) !important;
-    letter-spacing: clamp(0.5px, 0.14vw, 1.6px) !important;
-    line-height: 1 !important;
-    align-items: center !important;
-    gap: 0.14em !important;
-  }
-
-  #timerTime {
-    width: 8ch !important;
-    font-size: 1em !important;
-    line-height: 1 !important;
-    text-align: center !important;
-    font-variant-numeric: tabular-nums !important;
-  }
-
-  #timerPeriod,
-  .timer-period {
-    font-family: Arial, Helvetica, sans-serif !important;
-    font-weight: 700 !important;
-    color: var(--timer-rules-fill) !important;
-    width: 2.2em !important;
-    flex: 0 0 2.2em !important;
-    font-size: 0.35em !important;
-    line-height: 1 !important;
-    letter-spacing: 0.01em !important;
-    text-align: left !important;
-    transform: translateY(0.03em) !important;
-    -webkit-text-stroke: clamp(0.36px, 0.052vw, 0.68px) var(--timer-rules-stroke) !important;
-    paint-order: stroke fill !important;
-    text-shadow:
-      -2px -2px 0 var(--timer-rules-black),
-      0 -2px 0 var(--timer-rules-black),
-      2px -2px 0 var(--timer-rules-black),
-      -2px 0 0 var(--timer-rules-black),
-      2px 0 0 var(--timer-rules-black),
-      -2px 2px 0 var(--timer-rules-black),
-      0 2px 0 var(--timer-rules-black),
-      2px 2px 0 var(--timer-rules-black),
-      0 0 4px var(--timer-rules-black),
-      0 0 clamp(18px, 2vw, 38px) var(--timer-rules-red-core),
-      0 0 clamp(42px, 4.2vw, 82px) var(--timer-rules-red-strong),
-      0 0 clamp(88px, 8.4vw, 170px) var(--timer-rules-red-mid),
-      0 0 clamp(160px, 14vw, 300px) var(--timer-rules-red-soft),
-      0 0 clamp(260px, 22vw, 460px) var(--timer-rules-red-far),
-      0 0 clamp(380px, 32vw, 680px) var(--timer-rules-red-ultra) !important;
-  }
-
-  @media screen and (max-width: 768px) {
-    .paris-timer {
-      font-size: clamp(37px, 12vw, 58px) !important;
-      letter-spacing: clamp(0px, 0.22vw, 1px) !important;
-      gap: 0.1em !important;
-    }
-
-    .paris-timer,
-    #timerTime,
-    #timerPeriod,
-    .timer-period {
-      text-shadow:
-        -1.5px -1.5px 0 var(--timer-rules-black),
-        0 -1.5px 0 var(--timer-rules-black),
-        1.5px -1.5px 0 var(--timer-rules-black),
-        -1.5px 0 0 var(--timer-rules-black),
-        1.5px 0 0 var(--timer-rules-black),
-        -1.5px 1.5px 0 var(--timer-rules-black),
-        0 1.5px 0 var(--timer-rules-black),
-        1.5px 1.5px 0 var(--timer-rules-black),
-        0 0 4px var(--timer-rules-black),
-        0 0 44px rgba(255, 0, 0, 1),
-        0 0 92px rgba(255, 0, 0, 0.78),
-        0 0 170px rgba(255, 0, 0, 0.50),
-        0 0 260px rgba(255, 0, 0, 0.30),
-        0 0 380px rgba(255, 0, 0, 0.18) !important;
-    }
-
-    .paris-timer,
-    #timerTime {
-      -webkit-text-stroke: clamp(0.42px, 0.15vw, 0.75px) var(--timer-rules-stroke) !important;
-    }
-
-    #timerPeriod,
-    .timer-period {
-      font-size: 0.34em !important;
-      -webkit-text-stroke: clamp(0.3px, 0.12vw, 0.52px) var(--timer-rules-stroke) !important;
-    }
-  }
-
-  @media screen and (max-width: 390px) {
-    .paris-timer {
-      font-size: clamp(32px, 10.8vw, 46px) !important;
-      gap: 0.08em !important;
-      letter-spacing: 0 !important;
-    }
-
-    #timerPeriod,
-    .timer-period {
-      font-size: 0.31em !important;
-      width: 1.95em !important;
-      flex-basis: 1.95em !important;
-    }
-  }
-
-  @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
-    .paris-timer {
-      font-size: clamp(30px, 7vh, 45px) !important;
-      letter-spacing: 0 !important;
-      gap: 0.09em !important;
-    }
-
-    .paris-timer,
-    #timerTime,
-    #timerPeriod,
-    .timer-period {
-      text-shadow:
-        -1.5px -1.5px 0 var(--timer-rules-black),
-        0 -1.5px 0 var(--timer-rules-black),
-        1.5px -1.5px 0 var(--timer-rules-black),
-        -1.5px 0 0 var(--timer-rules-black),
-        1.5px 0 0 var(--timer-rules-black),
-        -1.5px 1.5px 0 var(--timer-rules-black),
-        0 1.5px 0 var(--timer-rules-black),
-        1.5px 1.5px 0 var(--timer-rules-black),
-        0 0 4px var(--timer-rules-black),
-        0 0 36px rgba(255, 0, 0, 1),
-        0 0 78px rgba(255, 0, 0, 0.78),
-        0 0 145px rgba(255, 0, 0, 0.48),
-        0 0 220px rgba(255, 0, 0, 0.26) !important;
-    }
-
-    #timerPeriod,
-    .timer-period {
-      font-size: 0.31em !important;
-    }
-  }
-
-  @media screen and (min-width: 1600px) {
-    .paris-timer {
-      font-size: clamp(64px, 4.5vw, 94px) !important;
-    }
-
-    #timerPeriod,
-    .timer-period {
-      font-size: 0.34em !important;
-    }
-  }
-</style>
-
-
 <script id="video-smartphone-wake-lock-fix">
   (function() {
-    const VIDEO_SRC = "./latbien.mp4";
+    const VIDEO_SRC = "./lookatdat.mp4";
     let dernierTemps = -1;
     let compteurFreeze = 0;
     let timerRelance = null;
@@ -7003,16 +6795,240 @@ body {
   })();
 </script>
 
+<style id="timer-rules-effect-final">
+  /* TIMER : flashy comme RULES, même un peu plus, police originale conservée */
+  :root {
+    --timer-rules-fill: #ff4fd8;
+    --timer-rules-stroke: #00ff00;
+    --timer-rules-black: #000000;
+    --timer-rules-red-core: rgba(255, 0, 0, 1);
+    --timer-rules-red-hot: rgba(255, 0, 0, 0.98);
+    --timer-rules-red-mid: rgba(255, 0, 0, 0.76);
+    --timer-rules-red-soft: rgba(255, 0, 0, 0.52);
+    --timer-rules-red-far: rgba(255, 0, 0, 0.34);
+    --timer-rules-red-ultra: rgba(255, 0, 0, 0.22);
+  }
 
-<style id="gmail-smooth-slide-final">
-  /* @gmail.com : glissement magicbox, lent, doux, fluide */
+  .paris-timer,
+  #timerTime {
+    font-family: "DSEG7 Classic", "Courier New", monospace !important;
+    font-weight: 400 !important;
+    color: var(--timer-rules-fill) !important;
+    -webkit-text-stroke: clamp(0.65px, 0.085vw, 1.15px) var(--timer-rules-stroke) !important;
+    paint-order: stroke fill !important;
+    text-shadow:
+      -2.4px -2.4px 0 var(--timer-rules-black),
+      0 -2.4px 0 var(--timer-rules-black),
+      2.4px -2.4px 0 var(--timer-rules-black),
+      -2.4px 0 0 var(--timer-rules-black),
+      2.4px 0 0 var(--timer-rules-black),
+      -2.4px 2.4px 0 var(--timer-rules-black),
+      0 2.4px 0 var(--timer-rules-black),
+      2.4px 2.4px 0 var(--timer-rules-black),
+      0 0 5px var(--timer-rules-black),
+      0 0 clamp(14px, 1.55vw, 28px) var(--timer-rules-red-core),
+      0 0 clamp(32px, 3.2vw, 64px) var(--timer-rules-red-hot),
+      0 0 clamp(70px, 6.8vw, 138px) var(--timer-rules-red-mid),
+      0 0 clamp(130px, 12vw, 260px) var(--timer-rules-red-soft),
+      0 0 clamp(230px, 20vw, 430px) var(--timer-rules-red-far),
+      0 0 clamp(360px, 31vw, 720px) var(--timer-rules-red-ultra) !important;
+    filter:
+      drop-shadow(0 0 clamp(10px, 1.3vw, 22px) rgba(255, 0, 0, 0.96))
+      drop-shadow(0 0 clamp(34px, 3vw, 70px) rgba(255, 0, 0, 0.56)) !important;
+  }
+
+  .paris-timer {
+    font-size: clamp(46px, 6.1vw, 80px) !important;
+    letter-spacing: clamp(0.5px, 0.14vw, 1.6px) !important;
+    line-height: 1 !important;
+    align-items: center !important;
+    gap: 0.14em !important;
+  }
+
+  #timerTime {
+    width: 8ch !important;
+    font-size: 1em !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    font-variant-numeric: tabular-nums !important;
+  }
+
+  #timerPeriod,
+  .timer-period {
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-weight: 800 !important;
+    color: var(--timer-rules-fill) !important;
+    width: 2.2em !important;
+    flex: 0 0 2.2em !important;
+    font-size: 0.35em !important;
+    line-height: 1 !important;
+    letter-spacing: 0.01em !important;
+    text-align: left !important;
+    transform: translateY(0.03em) !important;
+    -webkit-text-stroke: clamp(0.42px, 0.06vw, 0.82px) var(--timer-rules-stroke) !important;
+    paint-order: stroke fill !important;
+    text-shadow:
+      -2.1px -2.1px 0 var(--timer-rules-black),
+      0 -2.1px 0 var(--timer-rules-black),
+      2.1px -2.1px 0 var(--timer-rules-black),
+      -2.1px 0 0 var(--timer-rules-black),
+      2.1px 0 0 var(--timer-rules-black),
+      -2.1px 2.1px 0 var(--timer-rules-black),
+      0 2.1px 0 var(--timer-rules-black),
+      2.1px 2.1px 0 var(--timer-rules-black),
+      0 0 5px var(--timer-rules-black),
+      0 0 clamp(14px, 1.55vw, 28px) var(--timer-rules-red-core),
+      0 0 clamp(32px, 3.2vw, 64px) var(--timer-rules-red-hot),
+      0 0 clamp(70px, 6.8vw, 138px) var(--timer-rules-red-mid),
+      0 0 clamp(130px, 12vw, 260px) var(--timer-rules-red-soft),
+      0 0 clamp(230px, 20vw, 430px) var(--timer-rules-red-far),
+      0 0 clamp(360px, 31vw, 720px) var(--timer-rules-red-ultra) !important;
+    filter:
+      drop-shadow(0 0 clamp(8px, 1vw, 18px) rgba(255, 0, 0, 0.95))
+      drop-shadow(0 0 clamp(24px, 2.4vw, 52px) rgba(255, 0, 0, 0.55)) !important;
+  }
+
   @media screen and (max-width: 768px) {
+    .paris-timer {
+      font-size: clamp(37px, 12vw, 58px) !important;
+      letter-spacing: clamp(0px, 0.22vw, 1px) !important;
+      gap: 0.1em !important;
+    }
+
+    .paris-timer,
+    #timerTime,
+    #timerPeriod,
+    .timer-period {
+      text-shadow:
+        -1.8px -1.8px 0 var(--timer-rules-black),
+        0 -1.8px 0 var(--timer-rules-black),
+        1.8px -1.8px 0 var(--timer-rules-black),
+        -1.8px 0 0 var(--timer-rules-black),
+        1.8px 0 0 var(--timer-rules-black),
+        -1.8px 1.8px 0 var(--timer-rules-black),
+        0 1.8px 0 var(--timer-rules-black),
+        1.8px 1.8px 0 var(--timer-rules-black),
+        0 0 4px var(--timer-rules-black),
+        0 0 46px rgba(255, 0, 0, 1),
+        0 0 98px rgba(255, 0, 0, 0.84),
+        0 0 190px rgba(255, 0, 0, 0.56),
+        0 0 300px rgba(255, 0, 0, 0.34),
+        0 0 460px rgba(255, 0, 0, 0.22) !important;
+      filter:
+        drop-shadow(0 0 16px rgba(255, 0, 0, 0.96))
+        drop-shadow(0 0 44px rgba(255, 0, 0, 0.56)) !important;
+    }
+
+    .paris-timer,
+    #timerTime {
+      -webkit-text-stroke: clamp(0.48px, 0.17vw, 0.86px) var(--timer-rules-stroke) !important;
+    }
+
+    #timerPeriod,
+    .timer-period {
+      font-size: 0.34em !important;
+      -webkit-text-stroke: clamp(0.34px, 0.13vw, 0.6px) var(--timer-rules-stroke) !important;
+    }
+  }
+
+  @media screen and (max-width: 390px) {
+    .paris-timer {
+      font-size: clamp(32px, 10.8vw, 46px) !important;
+      gap: 0.08em !important;
+      letter-spacing: 0 !important;
+    }
+
+    #timerPeriod,
+    .timer-period {
+      font-size: 0.31em !important;
+      width: 1.95em !important;
+      flex-basis: 1.95em !important;
+    }
+  }
+
+  @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+    .paris-timer {
+      font-size: clamp(30px, 7vh, 45px) !important;
+      letter-spacing: 0 !important;
+      gap: 0.09em !important;
+    }
+
+    .paris-timer,
+    #timerTime,
+    #timerPeriod,
+    .timer-period {
+      text-shadow:
+        -1.6px -1.6px 0 var(--timer-rules-black),
+        0 -1.6px 0 var(--timer-rules-black),
+        1.6px -1.6px 0 var(--timer-rules-black),
+        -1.6px 0 0 var(--timer-rules-black),
+        1.6px 0 0 var(--timer-rules-black),
+        -1.6px 1.6px 0 var(--timer-rules-black),
+        0 1.6px 0 var(--timer-rules-black),
+        1.6px 1.6px 0 var(--timer-rules-black),
+        0 0 4px var(--timer-rules-black),
+        0 0 42px rgba(255, 0, 0, 1),
+        0 0 92px rgba(255, 0, 0, 0.80),
+        0 0 170px rgba(255, 0, 0, 0.52),
+        0 0 260px rgba(255, 0, 0, 0.30) !important;
+    }
+
+    #timerPeriod,
+    .timer-period {
+      font-size: 0.31em !important;
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    .paris-timer {
+      font-size: clamp(64px, 4.5vw, 94px) !important;
+    }
+
+    #timerPeriod,
+    .timer-period {
+      font-size: 0.34em !important;
+    }
+  }
+</style>
+
+<style id="gpc-scroll-video-gmail-ultra-final">
+  /* Patch performance scroll : vidéo stable + @gmail.com ultra fluide sur smartphone */
+  :root {
+    --gpc-fixed-w: 100vw;
+    --gpc-fixed-h: 100vh;
+  }
+
+  #fondVideo.video-bg {
+    position: fixed !important;
+    inset: 0 !important;
+    width: var(--gpc-fixed-w, 100vw) !important;
+    height: var(--gpc-fixed-h, 100vh) !important;
+    min-width: var(--gpc-fixed-w, 100vw) !important;
+    min-height: var(--gpc-fixed-h, 100vh) !important;
+    object-fit: fill !important;
+    object-position: center center !important;
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    contain: paint !important;
+  }
+
+  @media screen and (max-width: 768px) {
+    html,
+    body {
+      overflow-x: hidden !important;
+      overscroll-behavior-y: auto !important;
+      touch-action: auto !important;
+    }
+
     #contact {
       position: fixed !important;
       left: 50% !important;
-      top: var(--gmail-magicbox-y, var(--gmail-page-locked-top, var(--gmail-fixed-top, 76vh))) !important;
+      top: 0 !important;
       bottom: auto !important;
-      transform: translate3d(-50%, -50%, 0) !important;
+      transform: translate3d(-50%, calc(var(--gmail-super-y, 76vh) - 50% + var(--gmail-super-glide, 0px)), 0) !important;
       width: 100% !important;
       max-width: 100% !important;
       margin: 0 auto !important;
@@ -7021,7 +7037,7 @@ body {
       overflow: visible !important;
       pointer-events: none !important;
       z-index: 16500 !important;
-      will-change: top !important;
+      will-change: transform !important;
       backface-visibility: hidden !important;
       -webkit-backface-visibility: hidden !important;
       contain: none !important;
@@ -7033,13 +7049,10 @@ body {
       align-items: center !important;
     }
 
-    #contact .card {
-      margin: 0 auto !important;
-      padding: 6px 8px !important;
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
+    #contact .card,
+    #contact h1 {
       transform: translateZ(0) !important;
+      will-change: transform !important;
       backface-visibility: hidden !important;
       -webkit-backface-visibility: hidden !important;
     }
@@ -7047,27 +7060,36 @@ body {
 
   @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
     #contact {
-      top: var(--gmail-magicbox-y, var(--gmail-page-locked-top, 70vh)) !important;
+      transform: translate3d(-50%, calc(var(--gmail-super-y, 70vh) - 50% + var(--gmail-super-glide, 0px)), 0) !important;
     }
   }
 </style>
-<script id="gmail-smooth-slide-script">
-  (function() {
-    let yActuel = null;
-    let yCible = null;
-    let animationGmail = null;
-    let derniereLargeur = 0;
-    let derniereOrientation = "";
 
-    function estSmartphone() {
+<script id="gpc-scroll-video-gmail-ultra-script">
+  (function() {
+    const racine = document.documentElement;
+
+    let largeurStable = 0;
+    let hauteurStable = 0;
+    let orientationStable = "";
+
+    let gmailY = null;
+    let gmailYTarget = null;
+    let gmailGlide = 0;
+    let gmailGlideTarget = 0;
+    let raf = null;
+    let dernierScrollY = window.scrollY || 0;
+    let contactEtaitActif = false;
+
+    function mobile() {
       return window.innerWidth <= 768;
     }
 
-    function lirePxVariable(nom) {
-      const valeur = getComputedStyle(document.documentElement).getPropertyValue(nom).trim();
+    function lireVariablePx(nom) {
+      const valeur = getComputedStyle(racine).getPropertyValue(nom).trim();
       if (!valeur) return null;
 
-      const hauteur = window.innerHeight || document.documentElement.clientHeight || 760;
+      const h = hauteurStable || window.innerHeight || 760;
 
       if (valeur.endsWith("px")) {
         const n = parseFloat(valeur);
@@ -7076,125 +7098,145 @@ body {
 
       if (valeur.endsWith("vh") || valeur.endsWith("dvh") || valeur.endsWith("svh")) {
         const n = parseFloat(valeur);
-        return Number.isFinite(n) ? hauteur * n / 100 : null;
+        return Number.isFinite(n) ? h * n / 100 : null;
       }
 
       const n = parseFloat(valeur);
       return Number.isFinite(n) ? n : null;
     }
 
-    function calculerPositionGmailActuelle() {
-      const largeur = window.innerWidth || document.documentElement.clientWidth || 390;
-      const hauteur = window.innerHeight || document.documentElement.clientHeight || 760;
-      const paysage = largeur <= 900 && hauteur <= 500 && window.matchMedia("(orientation: landscape)").matches;
+    function verrouillerVideoSansMicroSauts(force) {
+      const w = Math.max(1, Math.round(window.innerWidth || document.documentElement.clientWidth || 1));
+      const h = Math.max(1, Math.round(window.innerHeight || document.documentElement.clientHeight || 1));
+      const orientation = w > h ? "landscape" : "portrait";
 
-      /* On conserve son placement actuel : priorité aux variables déjà créées par le site. */
-      const verrouille = lirePxVariable("--gmail-page-locked-top");
+      const largeurChange = Math.abs(w - largeurStable) > 24;
+      const orientationChange = orientation !== orientationStable;
+
+      /* On ne suit pas les micro-variations de hauteur de la barre navigateur pendant le scroll.
+         C'est ce qui faisait accrocher la vidéo sur smartphone. */
+      if (!force && mobile() && largeurStable && !largeurChange && !orientationChange) return;
+
+      largeurStable = w;
+      hauteurStable = h;
+      orientationStable = orientation;
+
+      racine.style.setProperty("--gpc-fixed-w", w + "px");
+      racine.style.setProperty("--gpc-fixed-h", h + "px");
+    }
+
+    function positionGmailCible() {
+      const h = hauteurStable || window.innerHeight || 760;
+      const w = largeurStable || window.innerWidth || 390;
+      const paysage = w <= 900 && h <= 500 && window.matchMedia("(orientation: landscape)").matches;
+
+      const verrouille = lireVariablePx("--gmail-page-locked-top");
       if (verrouille !== null) return verrouille;
 
-      const fixe = lirePxVariable("--gmail-fixed-top");
+      const fixe = lireVariablePx("--gmail-fixed-top");
       if (fixe !== null) return fixe;
 
-      const statique = lirePxVariable("--gmail-static-top");
+      const statique = lireVariablePx("--gmail-static-top");
       if (statique !== null) return statique;
 
-      /* Fallback identique à la logique smartphone actuelle. */
-      return Math.round(hauteur * (paysage ? 0.70 : 0.76));
+      return Math.round(h * (paysage ? 0.70 : 0.76));
     }
 
-    function mettreAJourCibleGmail(force) {
+    function contactActif() {
       const contact = document.getElementById("contact");
-      if (!contact) return;
+      return !!(contact && contact.classList.contains("active"));
+    }
 
-      if (!estSmartphone()) {
-        document.documentElement.style.removeProperty("--gmail-magicbox-y");
-        yActuel = null;
-        yCible = null;
-        animationGmail = null;
+    function recalculerGmail(force, impulsionScroll) {
+      if (!mobile()) {
+        racine.style.removeProperty("--gmail-super-y");
+        racine.style.removeProperty("--gmail-super-glide");
+        gmailY = null;
+        gmailYTarget = null;
+        gmailGlide = 0;
+        gmailGlideTarget = 0;
+        raf = null;
         return;
       }
 
-      const largeur = Math.round(window.innerWidth || document.documentElement.clientWidth || 390);
-      const hauteur = Math.round(window.innerHeight || document.documentElement.clientHeight || 760);
-      const orientation = largeur > hauteur ? "landscape" : "portrait";
+      const actif = contactActif();
+      gmailYTarget = positionGmailCible();
 
-      /* Même idée que la box : on évite les micro-sauts dus à la barre navigateur mobile,
-         mais on accepte les vrais changements de largeur/orientation. */
-      const largeurChange = Math.abs(largeur - derniereLargeur) > 24;
-      const orientationChange = orientation !== derniereOrientation;
+      if (gmailY === null) {
+        gmailY = actif ? gmailYTarget + Math.max(34, Math.min(58, (hauteurStable || window.innerHeight || 760) * 0.06)) : gmailYTarget;
+        gmailGlide = actif ? 16 : 0;
+      }
 
-      if (!force && derniereLargeur && !largeurChange && !orientationChange) {
+      if (actif && !contactEtaitActif) {
+        gmailY = gmailYTarget + Math.max(34, Math.min(58, (hauteurStable || window.innerHeight || 760) * 0.06));
+        gmailGlide = 18;
+      }
+
+      contactEtaitActif = actif;
+
+      if (impulsionScroll && actif) {
+        const scrollY = window.scrollY || 0;
+        const vitesse = Math.max(-26, Math.min(26, (scrollY - dernierScrollY) * 0.35));
+        gmailGlideTarget = vitesse;
+        dernierScrollY = scrollY;
+      } else {
+        gmailGlideTarget = 0;
+      }
+
+      if (!raf) raf = requestAnimationFrame(animer);
+    }
+
+    function animer() {
+      if (!mobile() || gmailY === null || gmailYTarget === null) {
+        raf = null;
         return;
       }
 
-      derniereLargeur = largeur;
-      derniereOrientation = orientation;
+      /* Ultra doux : transform-only, donc pas de relayout brutal pendant le scroll. */
+      const douceurY = 0.035;
+      const douceurGlide = 0.075;
+      const stop = 0.06;
 
-      yCible = calculerPositionGmailActuelle();
+      const dy = gmailYTarget - gmailY;
+      const dg = gmailGlideTarget - gmailGlide;
 
-      if (yActuel === null) {
-        yActuel = yCible;
-        document.documentElement.style.setProperty("--gmail-magicbox-y", yActuel.toFixed(2) + "px");
-        return;
-      }
+      gmailY = Math.abs(dy) < stop ? gmailYTarget : gmailY + dy * douceurY;
+      gmailGlide = Math.abs(dg) < stop ? gmailGlideTarget : gmailGlide + dg * douceurGlide;
 
-      if (!animationGmail) {
-        animationGmail = requestAnimationFrame(animerGmailCommeMagicbox);
+      racine.style.setProperty("--gmail-super-y", gmailY.toFixed(2) + "px");
+      racine.style.setProperty("--gmail-super-glide", gmailGlide.toFixed(2) + "px");
+
+      if (gmailY !== gmailYTarget || gmailGlide !== gmailGlideTarget) {
+        raf = requestAnimationFrame(animer);
+      } else {
+        raf = null;
       }
     }
 
-    function animerGmailCommeMagicbox() {
-      if (!estSmartphone() || yCible === null || yActuel === null) {
-        animationGmail = null;
-        return;
-      }
-
-      /* Le même esprit que la magicbox : lent, velouté, sans transition CSS brutale. */
-      const douceur = 0.045;
-      const stop = 0.12;
-      const delta = yCible - yActuel;
-
-      if (Math.abs(delta) < stop) {
-        yActuel = yCible;
-      } else {
-        yActuel += delta * douceur;
-      }
-
-      document.documentElement.style.setProperty("--gmail-magicbox-y", yActuel.toFixed(2) + "px");
-
-      if (yActuel !== yCible) {
-        animationGmail = requestAnimationFrame(animerGmailCommeMagicbox);
-      } else {
-        animationGmail = null;
-      }
-    }
-
-    function demanderGmailMagicbox(force) {
+    function demander(force, impulsionScroll) {
       requestAnimationFrame(function() {
-        mettreAJourCibleGmail(!!force);
+        verrouillerVideoSansMicroSauts(!!force);
+        recalculerGmail(!!force, !!impulsionScroll);
       });
     }
 
-    window.addEventListener("DOMContentLoaded", function() { demanderGmailMagicbox(true); });
-    window.addEventListener("load", function() { demanderGmailMagicbox(true); });
-    window.addEventListener("pageshow", function() { demanderGmailMagicbox(true); });
-    window.addEventListener("resize", function() { demanderGmailMagicbox(false); }, { passive: true });
+    window.addEventListener("DOMContentLoaded", function() { demander(true, false); });
+    window.addEventListener("load", function() { demander(true, false); });
+    window.addEventListener("pageshow", function() { demander(true, false); });
+    window.addEventListener("resize", function() { demander(false, false); }, { passive: true });
     window.addEventListener("orientationchange", function() {
-      setTimeout(function() { demanderGmailMagicbox(true); }, 250);
+      setTimeout(function() { demander(true, false); }, 240);
     }, { passive: true });
 
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", function() {
-        demanderGmailMagicbox(false);
-      }, { passive: true });
-      window.visualViewport.addEventListener("scroll", function() {
-        demanderGmailMagicbox(false);
-      }, { passive: true });
-    }
+    window.addEventListener("scroll", function() {
+      demander(false, true);
+    }, { passive: true });
 
     document.addEventListener("click", function(event) {
       if (event.target && event.target.textContent && event.target.textContent.trim() === "SEND A WAV / MP3") {
-        setTimeout(function() { demanderGmailMagicbox(true); }, 60);
+        contactEtaitActif = false;
+        setTimeout(function() { demander(true, false); }, 35);
+        setTimeout(function() { demander(true, false); }, 180);
       }
     }, { passive: true });
   })();
