@@ -4500,6 +4500,68 @@
       }
     }
 
+  
+    /* Intro : suppression du moment GIF/fond uniquement dans l'écran d'intro */
+    #introPage #introGif,
+    .intro-page .intro-gif {
+      display: none !important;
+    }
+
+  
+    /* Smartphone : @gmail vraiment statique, aucun suivi de scroll ou de magicbox */
+    @media screen and (max-width: 768px) {
+      #contact {
+        position: fixed !important;
+        left: 50% !important;
+        top: var(--gmail-static-top, 68vh) !important;
+        bottom: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 12px !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+        pointer-events: none !important;
+        z-index: 99998 !important;
+        will-change: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+
+      #contact.active {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+
+      #contact .card {
+        margin: 0 auto !important;
+        padding: 6px 8px !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+
+      #contact h1 {
+        margin: 0 !important;
+        font-size: clamp(25px, 8.4vw, 36px) !important;
+        line-height: 1.05 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #contact {
+        top: var(--gmail-static-top, 62vh) !important;
+      }
+    }
+
   </style>
 
 </head>
@@ -4599,7 +4661,7 @@
 
     setTimeout(function() {
       document.getElementById("introText").style.display = "none";
-      document.getElementById("introGif").style.display = "block";
+      document.getElementById("introGif").style.display = "none";
       document.querySelector(".audio-box").style.display = "block";
 
       const lecteur = document.getElementById("lecteurAudio");
@@ -4610,7 +4672,7 @@
     }, 5500);
 
     setTimeout(function() {
-      document.getElementById("introPage").style.background = "purple";
+      document.getElementById("introPage").style.background = "black";
     }, 6500);
 
     setTimeout(function() {
@@ -5308,6 +5370,35 @@
     window.addEventListener("DOMContentLoaded", fixerGmailSurPage, { passive: true });
     window.addEventListener("orientationchange", function() {
       setTimeout(fixerGmailSurPage, 250);
+    }, { passive: true });
+  })();
+</script>
+
+
+<script>
+  (function() {
+    function poserGmailStatique() {
+      if (window.innerWidth > 768) {
+        document.documentElement.style.removeProperty("--gmail-static-top");
+        return;
+      }
+
+      const paysage = window.innerWidth <= 900 && window.innerHeight <= 500 && window.matchMedia("(orientation: landscape)").matches;
+      const hauteurInitiale = window.innerHeight;
+      const position = paysage ? Math.round(hauteurInitiale * 0.62) : Math.round(hauteurInitiale * 0.68);
+
+      document.documentElement.style.setProperty("--gmail-static-top", position + "px");
+
+      /* Nettoyage des anciennes variables mobiles qui pouvaient déplacer @gmail */
+      document.documentElement.style.removeProperty("--contact-smooth-top");
+      document.documentElement.style.removeProperty("--gmail-fixed-top");
+      document.documentElement.style.removeProperty("--gmail-fixed-page-top");
+    }
+
+    poserGmailStatique();
+    window.addEventListener("DOMContentLoaded", poserGmailStatique, { passive: true });
+    window.addEventListener("orientationchange", function() {
+      setTimeout(poserGmailStatique, 250);
     }, { passive: true });
   })();
 </script>
