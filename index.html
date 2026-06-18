@@ -6506,8 +6506,8 @@ body {
       const margeBas = paysage ? 120 : 205;
       const hauteurMin = paysage ? 78 : grandSmartphone ? 100 : 96;
 
-      /* Un peu plus bas qu'avant, mais sans changer la taille de la box. */
-      const descente = paysage ? 16 : Math.max(26, Math.min(Math.round(hauteur * 0.038), 44));
+      /* Point d'ancrage beaucoup plus bas, proche de la position de fin au scroll, sans changer la taille de la box. */
+      const descente = paysage ? 34 : Math.max(86, Math.min(Math.round(hauteur * 0.145), 132));
 
       const topBase = Math.round(hauteur * ratioTop);
       topCible = topBase + descente;
