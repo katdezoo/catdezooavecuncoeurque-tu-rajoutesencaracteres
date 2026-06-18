@@ -6657,159 +6657,6 @@ body {
 </style>
 
 
-<style id="gmail-smooth-slide-final">
-  /* @gmail : même placement smartphone qu'avant, mais avec glissement lent et fluide */
-  @media screen and (max-width: 768px) {
-    #contact {
-      position: fixed !important;
-      left: 50% !important;
-      top: var(--gmail-smooth-top, var(--gmail-page-locked-top, var(--gmail-fixed-top, 76vh))) !important;
-      bottom: auto !important;
-      transform: translate3d(-50%, -50%, 0) !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      margin: 0 auto !important;
-      padding: 0 12px !important;
-      box-sizing: border-box !important;
-      overflow: visible !important;
-      pointer-events: none !important;
-      z-index: 16500 !important;
-      will-change: top !important;
-      backface-visibility: hidden !important;
-    }
-
-    #contact.active {
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-    }
-
-    #contact .card {
-      margin: 0 auto !important;
-      background: transparent !important;
-    }
-  }
-
-  @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
-    #contact {
-      top: var(--gmail-smooth-top, var(--gmail-page-locked-top, 70vh)) !important;
-    }
-  }
-</style>
-<script id="gmail-smooth-slide-script">
-  (function() {
-    let gmailTopActuel = null;
-    let gmailTopCible = null;
-    let gmailRaf = null;
-
-    function estSmartphoneGmail() {
-      return window.innerWidth <= 768;
-    }
-
-    function lireVariablePx(nom) {
-      const valeur = getComputedStyle(document.documentElement).getPropertyValue(nom).trim();
-      if (!valeur) return null;
-
-      if (valeur.endsWith("px")) {
-        const nombre = parseFloat(valeur);
-        return Number.isFinite(nombre) ? nombre : null;
-      }
-
-      if (valeur.endsWith("vh") || valeur.endsWith("dvh") || valeur.endsWith("svh")) {
-        const nombre = parseFloat(valeur);
-        return Number.isFinite(nombre) ? (window.innerHeight * nombre / 100) : null;
-      }
-
-      const nombre = parseFloat(valeur);
-      return Number.isFinite(nombre) ? nombre : null;
-    }
-
-    function calculerGmailTopCible() {
-      const hauteur = window.innerHeight || document.documentElement.clientHeight || 760;
-      const paysage = window.innerWidth <= 900 && hauteur <= 500 && window.matchMedia("(orientation: landscape)").matches;
-
-      /* Même position que maintenant : on reprend d'abord les variables existantes.
-         Si elles n'existent pas encore, fallback sur la logique actuelle : 76% portrait, 70% paysage. */
-      const variableVerrouillee = lireVariablePx("--gmail-page-locked-top");
-      if (variableVerrouillee !== null) return variableVerrouillee;
-
-      const variableFixe = lireVariablePx("--gmail-fixed-top");
-      if (variableFixe !== null) return variableFixe;
-
-      return Math.round(hauteur * (paysage ? 0.70 : 0.76));
-    }
-
-    function animerGmailFluide() {
-      if (!estSmartphoneGmail() || gmailTopCible === null || gmailTopActuel === null) {
-        gmailRaf = null;
-        return;
-      }
-
-      const douceur = 0.045;
-      const stop = 0.12;
-      const delta = gmailTopCible - gmailTopActuel;
-
-      if (Math.abs(delta) < stop) {
-        gmailTopActuel = gmailTopCible;
-      } else {
-        gmailTopActuel += delta * douceur;
-      }
-
-      document.documentElement.style.setProperty("--gmail-smooth-top", gmailTopActuel.toFixed(2) + "px");
-
-      if (gmailTopActuel !== gmailTopCible) {
-        gmailRaf = requestAnimationFrame(animerGmailFluide);
-      } else {
-        gmailRaf = null;
-      }
-    }
-
-    function demanderGmailFluide() {
-      const contact = document.getElementById("contact");
-      if (!contact) return;
-
-      if (!estSmartphoneGmail()) {
-        document.documentElement.style.removeProperty("--gmail-smooth-top");
-        gmailTopActuel = null;
-        gmailTopCible = null;
-        gmailRaf = null;
-        return;
-      }
-
-      gmailTopCible = calculerGmailTopCible();
-
-      if (gmailTopActuel === null) {
-        gmailTopActuel = gmailTopCible;
-        document.documentElement.style.setProperty("--gmail-smooth-top", gmailTopActuel + "px");
-        return;
-      }
-
-      if (!gmailRaf) {
-        gmailRaf = requestAnimationFrame(animerGmailFluide);
-      }
-    }
-
-    function rafGmail() {
-      requestAnimationFrame(demanderGmailFluide);
-    }
-
-    window.addEventListener("DOMContentLoaded", rafGmail);
-    window.addEventListener("load", rafGmail);
-    window.addEventListener("pageshow", rafGmail);
-    window.addEventListener("resize", rafGmail, { passive: true });
-    window.addEventListener("orientationchange", function() {
-      setTimeout(rafGmail, 250);
-    }, { passive: true });
-
-    document.addEventListener("click", function(event) {
-      if (event.target && event.target.textContent && event.target.textContent.trim() === "SEND A WAV / MP3") {
-        setTimeout(rafGmail, 60);
-      }
-    }, { passive: true });
-  })();
-</script>
-
-
 <style id="timer-rules-effect-final">
   /* TIMER : police originale, couleur/contour RULES, glow rouge plus flashy et beaucoup plus large */
   :root {
@@ -6997,5 +6844,360 @@ body {
   }
 </style>
 
+
+<script id="video-smartphone-wake-lock-fix">
+  (function() {
+    const VIDEO_SRC = "./latbien.mp4";
+    let dernierTemps = -1;
+    let compteurFreeze = 0;
+    let timerRelance = null;
+
+    function configurerVideo(video) {
+      if (!video) return;
+
+      video.muted = true;
+      video.defaultMuted = true;
+      video.loop = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.preload = "auto";
+
+      video.setAttribute("muted", "");
+      video.setAttribute("loop", "");
+      video.setAttribute("autoplay", "");
+      video.setAttribute("playsinline", "");
+      video.setAttribute("webkit-playsinline", "");
+      video.setAttribute("preload", "auto");
+
+      video.style.opacity = "1";
+      video.style.visibility = "visible";
+      video.style.display = "block";
+      video.style.pointerEvents = "none";
+
+      const source = video.querySelector("source");
+      if (source && source.getAttribute("src") !== VIDEO_SRC) {
+        source.setAttribute("src", VIDEO_SRC);
+        video.load();
+      }
+    }
+
+    function jouerVideo(video) {
+      if (!video || document.hidden) return;
+
+      const lecture = video.play();
+      if (lecture && typeof lecture.catch === "function") {
+        lecture.catch(function() {});
+      }
+    }
+
+    function petitCoupDeReveil(video) {
+      if (!video || document.hidden) return;
+
+      try {
+        if (Number.isFinite(video.duration) && video.duration > 0) {
+          const margeFin = Math.max(0.08, Math.min(0.25, video.duration * 0.02));
+          if (video.currentTime >= video.duration - margeFin) {
+            video.currentTime = 0.001;
+          } else {
+            video.currentTime = Math.min(video.currentTime + 0.035, Math.max(0.001, video.duration - margeFin));
+          }
+        } else {
+          video.currentTime = Math.max(0.001, video.currentTime + 0.035);
+        }
+      } catch (e) {}
+
+      jouerVideo(video);
+    }
+
+    function relancerVideoFond(force) {
+      const video = document.getElementById("fondVideo");
+      if (!video || document.hidden) return;
+
+      configurerVideo(video);
+
+      if (video.readyState < 2 || video.networkState === 3) {
+        try { video.load(); } catch (e) {}
+      }
+
+      if (video.paused || video.ended || force) {
+        jouerVideo(video);
+      }
+
+      if (force) {
+        setTimeout(function() { jouerVideo(video); }, 120);
+        setTimeout(function() { petitCoupDeReveil(video); }, 420);
+        setTimeout(function() { jouerVideo(video); }, 900);
+      }
+    }
+
+    function surveillerFreezeVideo() {
+      const video = document.getElementById("fondVideo");
+      if (!video || document.hidden) return;
+
+      configurerVideo(video);
+
+      if (video.paused || video.ended || video.readyState < 2) {
+        compteurFreeze = 0;
+        relancerVideoFond(false);
+        return;
+      }
+
+      const temps = video.currentTime || 0;
+      const presqueIdentique = Math.abs(temps - dernierTemps) < 0.015;
+
+      if (presqueIdentique) {
+        compteurFreeze += 1;
+      } else {
+        compteurFreeze = 0;
+      }
+
+      dernierTemps = temps;
+
+      /* Après verrouillage/déverrouillage mobile, certains navigateurs gardent l'image figée
+         même si la vidéo n'est pas officiellement en pause. Après 2 contrôles figés,
+         on donne un petit coup de lecture sans bloquer les gestes de l'utilisateur. */
+      if (compteurFreeze >= 2) {
+        compteurFreeze = 0;
+        petitCoupDeReveil(video);
+      }
+    }
+
+    function demarrerSurveillanceVideo() {
+      relancerVideoFond(true);
+
+      if (!timerRelance) {
+        timerRelance = setInterval(surveillerFreezeVideo, 900);
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", demarrerSurveillanceVideo);
+    window.addEventListener("load", demarrerSurveillanceVideo);
+    window.addEventListener("pageshow", function() {
+      setTimeout(function() { relancerVideoFond(true); }, 80);
+    });
+    window.addEventListener("focus", function() {
+      setTimeout(function() { relancerVideoFond(true); }, 80);
+    });
+    window.addEventListener("resize", function() {
+      setTimeout(function() { relancerVideoFond(false); }, 160);
+    }, { passive: true });
+    window.addEventListener("orientationchange", function() {
+      setTimeout(function() { relancerVideoFond(true); }, 300);
+    }, { passive: true });
+
+    document.addEventListener("visibilitychange", function() {
+      if (!document.hidden) {
+        setTimeout(function() { relancerVideoFond(true); }, 120);
+        setTimeout(function() { relancerVideoFond(true); }, 700);
+      }
+    });
+
+    ["touchstart", "pointerdown", "click"].forEach(function(type) {
+      document.addEventListener(type, function() {
+        relancerVideoFond(false);
+      }, { passive: true });
+    });
+
+    setTimeout(demarrerSurveillanceVideo, 600);
+    setTimeout(function() { relancerVideoFond(true); }, 1600);
+  })();
+</script>
+
+
+<style id="gmail-smooth-slide-final">
+  /* @gmail.com : glissement magicbox, lent, doux, fluide */
+  @media screen and (max-width: 768px) {
+    #contact {
+      position: fixed !important;
+      left: 50% !important;
+      top: var(--gmail-magicbox-y, var(--gmail-page-locked-top, var(--gmail-fixed-top, 76vh))) !important;
+      bottom: auto !important;
+      transform: translate3d(-50%, -50%, 0) !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 auto !important;
+      padding: 0 12px !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+      pointer-events: none !important;
+      z-index: 16500 !important;
+      will-change: top !important;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
+      contain: none !important;
+    }
+
+    #contact.active {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    #contact .card {
+      margin: 0 auto !important;
+      padding: 6px 8px !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      transform: translateZ(0) !important;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
+    }
+  }
+
+  @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+    #contact {
+      top: var(--gmail-magicbox-y, var(--gmail-page-locked-top, 70vh)) !important;
+    }
+  }
+</style>
+<script id="gmail-smooth-slide-script">
+  (function() {
+    let yActuel = null;
+    let yCible = null;
+    let animationGmail = null;
+    let derniereLargeur = 0;
+    let derniereOrientation = "";
+
+    function estSmartphone() {
+      return window.innerWidth <= 768;
+    }
+
+    function lirePxVariable(nom) {
+      const valeur = getComputedStyle(document.documentElement).getPropertyValue(nom).trim();
+      if (!valeur) return null;
+
+      const hauteur = window.innerHeight || document.documentElement.clientHeight || 760;
+
+      if (valeur.endsWith("px")) {
+        const n = parseFloat(valeur);
+        return Number.isFinite(n) ? n : null;
+      }
+
+      if (valeur.endsWith("vh") || valeur.endsWith("dvh") || valeur.endsWith("svh")) {
+        const n = parseFloat(valeur);
+        return Number.isFinite(n) ? hauteur * n / 100 : null;
+      }
+
+      const n = parseFloat(valeur);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function calculerPositionGmailActuelle() {
+      const largeur = window.innerWidth || document.documentElement.clientWidth || 390;
+      const hauteur = window.innerHeight || document.documentElement.clientHeight || 760;
+      const paysage = largeur <= 900 && hauteur <= 500 && window.matchMedia("(orientation: landscape)").matches;
+
+      /* On conserve son placement actuel : priorité aux variables déjà créées par le site. */
+      const verrouille = lirePxVariable("--gmail-page-locked-top");
+      if (verrouille !== null) return verrouille;
+
+      const fixe = lirePxVariable("--gmail-fixed-top");
+      if (fixe !== null) return fixe;
+
+      const statique = lirePxVariable("--gmail-static-top");
+      if (statique !== null) return statique;
+
+      /* Fallback identique à la logique smartphone actuelle. */
+      return Math.round(hauteur * (paysage ? 0.70 : 0.76));
+    }
+
+    function mettreAJourCibleGmail(force) {
+      const contact = document.getElementById("contact");
+      if (!contact) return;
+
+      if (!estSmartphone()) {
+        document.documentElement.style.removeProperty("--gmail-magicbox-y");
+        yActuel = null;
+        yCible = null;
+        animationGmail = null;
+        return;
+      }
+
+      const largeur = Math.round(window.innerWidth || document.documentElement.clientWidth || 390);
+      const hauteur = Math.round(window.innerHeight || document.documentElement.clientHeight || 760);
+      const orientation = largeur > hauteur ? "landscape" : "portrait";
+
+      /* Même idée que la box : on évite les micro-sauts dus à la barre navigateur mobile,
+         mais on accepte les vrais changements de largeur/orientation. */
+      const largeurChange = Math.abs(largeur - derniereLargeur) > 24;
+      const orientationChange = orientation !== derniereOrientation;
+
+      if (!force && derniereLargeur && !largeurChange && !orientationChange) {
+        return;
+      }
+
+      derniereLargeur = largeur;
+      derniereOrientation = orientation;
+
+      yCible = calculerPositionGmailActuelle();
+
+      if (yActuel === null) {
+        yActuel = yCible;
+        document.documentElement.style.setProperty("--gmail-magicbox-y", yActuel.toFixed(2) + "px");
+        return;
+      }
+
+      if (!animationGmail) {
+        animationGmail = requestAnimationFrame(animerGmailCommeMagicbox);
+      }
+    }
+
+    function animerGmailCommeMagicbox() {
+      if (!estSmartphone() || yCible === null || yActuel === null) {
+        animationGmail = null;
+        return;
+      }
+
+      /* Le même esprit que la magicbox : lent, velouté, sans transition CSS brutale. */
+      const douceur = 0.045;
+      const stop = 0.12;
+      const delta = yCible - yActuel;
+
+      if (Math.abs(delta) < stop) {
+        yActuel = yCible;
+      } else {
+        yActuel += delta * douceur;
+      }
+
+      document.documentElement.style.setProperty("--gmail-magicbox-y", yActuel.toFixed(2) + "px");
+
+      if (yActuel !== yCible) {
+        animationGmail = requestAnimationFrame(animerGmailCommeMagicbox);
+      } else {
+        animationGmail = null;
+      }
+    }
+
+    function demanderGmailMagicbox(force) {
+      requestAnimationFrame(function() {
+        mettreAJourCibleGmail(!!force);
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", function() { demanderGmailMagicbox(true); });
+    window.addEventListener("load", function() { demanderGmailMagicbox(true); });
+    window.addEventListener("pageshow", function() { demanderGmailMagicbox(true); });
+    window.addEventListener("resize", function() { demanderGmailMagicbox(false); }, { passive: true });
+    window.addEventListener("orientationchange", function() {
+      setTimeout(function() { demanderGmailMagicbox(true); }, 250);
+    }, { passive: true });
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", function() {
+        demanderGmailMagicbox(false);
+      }, { passive: true });
+      window.visualViewport.addEventListener("scroll", function() {
+        demanderGmailMagicbox(false);
+      }, { passive: true });
+    }
+
+    document.addEventListener("click", function(event) {
+      if (event.target && event.target.textContent && event.target.textContent.trim() === "SEND A WAV / MP3") {
+        setTimeout(function() { demanderGmailMagicbox(true); }, 60);
+      }
+    }, { passive: true });
+  })();
+</script>
 </body>
 </html>
