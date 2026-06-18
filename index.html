@@ -7213,6 +7213,7 @@ body {
     let hauteurActuelle = null;
     let topCible = null;
     let hauteurCible = null;
+    let hauteurMaxAtteinte = null;
     let raf = null;
     let syncScroll = false;
 
@@ -7294,6 +7295,7 @@ body {
         hauteurActuelle = null;
         topCible = null;
         hauteurCible = null;
+        hauteurMaxAtteinte = null;
         raf = null;
         return;
       }
@@ -7304,7 +7306,9 @@ body {
       const p = progressionPage();
 
       /* Cette fois, c'est le haut qui reste ancré : la box grandit vers le bas. */
-      const topAncre = Math.round(hauteur * (paysage ? 0.42 : 0.545));
+      /* Un tout petit peu plus bas, sans casser la position générale. */
+      const descenteLegere = paysage ? 8 : Math.max(10, Math.min(Math.round(hauteur * 0.018), 18));
+      const topAncre = Math.round(hauteur * (paysage ? 0.42 : 0.545) + descenteLegere);
 
       /* Le bas final frôle le lecteur média, sans le toucher. */
       const margeLecteur = paysage ? 5 : 6;
@@ -7321,7 +7325,14 @@ body {
         paysage ? 76 : 82
       ));
 
-      hauteurCible = Math.round(hauteurPetite + (hauteurGrande - hauteurPetite) * p);
+      const hauteurCalculee = Math.round(hauteurPetite + (hauteurGrande - hauteurPetite) * p);
+
+      /* Grandit seulement : après avoir grandi, elle ne rétrécit plus au scroll retour. */
+      if (hauteurMaxAtteinte === null || hauteurCalculee > hauteurMaxAtteinte) {
+        hauteurMaxAtteinte = hauteurCalculee;
+      }
+
+      hauteurCible = hauteurMaxAtteinte;
 
       /* Top fixe : quand elle grandit, seul le bas descend. */
       topCible = topAncre;
@@ -7439,6 +7450,9 @@ body {
       if (texte === "RULES" || texte === "starthere" || texte === "SEND A WAV / MP3") {
         setTimeout(function() {
           if (texte === "RULES") {
+            hauteurMaxAtteinte = null;
+            topActuel = null;
+            hauteurActuelle = null;
             window.scrollTo({ top: 0, left: 0, behavior: "auto" });
           }
           demanderMagicboxFluide();
