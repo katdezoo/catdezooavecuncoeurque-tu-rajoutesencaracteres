@@ -4854,6 +4854,12 @@
       }
     }
 
+  
+    /* Intro allégée : après <3, plus aucun flash rouge/noir, on arrive direct au site */
+    #introPage {
+      transition: none !important;
+    }
+
   </style>
 
 </head>
@@ -4960,6 +4966,8 @@
     setTimeout(function() {
       document.getElementById("introText").style.display = "none";
       document.getElementById("introGif").style.display = "none";
+      document.getElementById("introPage").style.display = "none";
+      document.getElementById("menuPrincipal").style.display = "";
       document.querySelector(".audio-box").style.display = "block";
 
       const lecteur = document.getElementById("lecteurAudio");
@@ -4968,32 +4976,6 @@
         mettreAJourEffetsBlancsVolumeGlobal();
       }, 80);
     }, 5500);
-
-    setTimeout(function() {
-      document.getElementById("introPage").style.background = "black";
-    }, 6500);
-
-    setTimeout(function() {
-      document.getElementById("introPage").style.background = "red";
-    }, 7500);
-
-    setTimeout(function() {
-      document.getElementById("introGif").style.display = "none";
-      document.getElementById("introPage").style.background = "black";
-    }, 8500);
-
-    setTimeout(function() {
-      document.getElementById("introPage").style.background = "white";
-    }, 9000);
-
-    setTimeout(function() {
-      document.getElementById("introPage").style.background = "#00ff00";
-    }, 9500);
-
-    setTimeout(function() {
-      document.getElementById("introPage").style.display = "none";
-      document.getElementById("menuPrincipal").style.display = "";
-    }, 9750);
 
 
 
