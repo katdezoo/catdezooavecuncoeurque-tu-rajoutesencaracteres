@@ -4957,6 +4957,247 @@
       }
     }
 
+  
+/* GLOBAL PRODUCERS CUP : audit responsive final RULES + blobal.mp4 */
+:root {
+  --fond-video-bg: #ff00ff;
+  --rules-desktop-font: clamp(16px, 1.42vw, 21px);
+  --rules-desktop-line: 1.20;
+  --rules-desktop-bottom-anchor: clamp(128px, 20vh, 230px);
+  --rules-desktop-anchor-height: clamp(150px, 20vh, 218px);
+  --rules-mobile-top: 62dvh;
+  --rules-mobile-height: 24dvh;
+  --rules-mobile-bottom: 12dvh;
+}
+
+html,
+body {
+  background: var(--fond-video-bg) !important;
+  overflow-x: hidden !important;
+}
+
+.gif-bg,
+.intro-gif {
+  background-image: none !important;
+  background-color: var(--fond-video-bg) !important;
+  z-index: 0 !important;
+}
+
+#fondVideo.video-bg,
+#introVideo.intro-video {
+  position: fixed !important;
+  inset: 0 !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-width: 100vw !important;
+  min-height: 100vh !important;
+  object-fit: fill !important;
+  object-position: center center !important;
+  background: var(--fond-video-bg) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+  transform-origin: center center !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  will-change: transform !important;
+}
+
+#introVideo.intro-video {
+  display: none !important;
+  z-index: 1 !important;
+}
+
+.overlay {
+  position: relative !important;
+  z-index: 2 !important;
+  background: transparent !important;
+  min-height: 100vh !important;
+}
+
+/* ORDINATEUR / TABLETTE : police RULES plus petite, bas du texte ancré */
+@media screen and (min-width: 769px) {
+  #apropos {
+    position: fixed !important;
+    left: 50% !important;
+    top: auto !important;
+    bottom: var(--rules-desktop-bottom-anchor) !important;
+    transform: translateX(-50%) !important;
+    width: min(900px, calc(100vw - 48px)) !important;
+    max-width: min(900px, calc(100vw - 48px)) !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  #apropos.active {
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+  }
+
+  #apropos .card {
+    height: var(--rules-desktop-anchor-height) !important;
+    min-height: var(--rules-desktop-anchor-height) !important;
+    padding: 0 25px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    box-sizing: border-box !important;
+  }
+
+  #apropos h1 {
+    font-size: var(--rules-desktop-font) !important;
+    line-height: var(--rules-desktop-line) !important;
+    margin: 0 !important;
+    max-width: min(820px, calc(100vw - 96px)) !important;
+    text-align: center !important;
+  }
+}
+
+/* Formats ordinateur très larges : on évite que RULES soit minuscule */
+@media screen and (min-width: 1600px) {
+  :root {
+    --rules-desktop-font: clamp(18px, 1.18vw, 23px);
+    --rules-desktop-bottom-anchor: clamp(150px, 19vh, 260px);
+  }
+}
+
+/* Petits laptops / tablettes paysage : ancrage bas conservé sans écraser l'audio */
+@media screen and (min-width: 769px) and (max-height: 760px) {
+  :root {
+    --rules-desktop-font: clamp(14px, 1.45vw, 18px);
+    --rules-desktop-bottom-anchor: clamp(92px, 16vh, 150px);
+    --rules-desktop-anchor-height: clamp(126px, 18vh, 170px);
+  }
+
+  #apropos h1 {
+    line-height: 1.15 !important;
+  }
+}
+
+/* SMARTPHONE : magicbox plus basse, posée au-dessus de la bande noire de la vidéo */
+@media screen and (max-width: 768px) {
+  .overlay {
+    min-height: 100svh !important;
+    padding-bottom: env(safe-area-inset-bottom) !important;
+  }
+
+  #apropos {
+    position: fixed !important;
+    left: 50% !important;
+    top: var(--rules-mobile-top) !important;
+    bottom: auto !important;
+    height: var(--rules-mobile-height) !important;
+    min-height: 108px !important;
+    max-height: calc(100svh - var(--rules-mobile-bottom) - 128px) !important;
+    width: min(calc(100vw - 24px), 520px) !important;
+    max-width: min(calc(100vw - 24px), 520px) !important;
+    padding: clamp(12px, 2.8vw, 20px) 12px !important;
+    margin: 0 !important;
+    transform: translate3d(-50%, 0, 0) !important;
+    box-sizing: border-box !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+    z-index: 16000 !important;
+    scrollbar-width: none !important;
+  }
+
+  #apropos::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  #apropos.active {
+    display: block !important;
+    pointer-events: auto !important;
+  }
+
+  #apropos .card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  #apropos h1 {
+    font-size: clamp(12px, 3.05vw, 17px) !important;
+    line-height: 1.16 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
+  }
+
+  #fondVideo.video-bg,
+  #introVideo.intro-video {
+    width: 100vw !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    object-fit: fill !important;
+    object-position: center center !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+}
+
+@supports (height: 100dvh) {
+  @media screen and (max-width: 768px) {
+    .overlay {
+      min-height: 100dvh !important;
+    }
+
+    #fondVideo.video-bg,
+    #introVideo.intro-video {
+      height: 100dvh !important;
+      min-height: 100dvh !important;
+    }
+
+    #apropos {
+      max-height: calc(100dvh - var(--rules-mobile-bottom) - 128px) !important;
+    }
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  @media screen and (max-width: 768px) {
+    #fondVideo.video-bg,
+    #introVideo.intro-video {
+      height: -webkit-fill-available !important;
+      min-height: 100vh !important;
+      object-fit: fill !important;
+    }
+  }
+}
+
+/* Petits téléphones étroits */
+@media screen and (max-width: 390px) and (orientation: portrait) {
+  #apropos h1 {
+    font-size: clamp(11px, 3.15vw, 14px) !important;
+    line-height: 1.14 !important;
+  }
+}
+
+/* Téléphones très bas / paysage : box compacte et lisible */
+@media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+  #apropos {
+    top: var(--rules-mobile-top) !important;
+    height: var(--rules-mobile-height) !important;
+    min-height: 72px !important;
+    padding: 8px 12px !important;
+  }
+
+  #apropos h1 {
+    font-size: clamp(10px, 2.2vw, 14px) !important;
+    line-height: 1.1 !important;
+  }
+}
   </style>
 
 </head>
@@ -5845,6 +6086,48 @@
     }
   }
 
+  function reglerMagicboxTousEcrans() {
+    const racine = document.documentElement;
+    const largeur = window.visualViewport && window.visualViewport.width ? window.visualViewport.width : window.innerWidth;
+    const hauteur = window.visualViewport && window.visualViewport.height ? window.visualViewport.height : window.innerHeight;
+    const paysage = largeur > hauteur;
+    const mobile = largeur <= 768;
+
+    if (!mobile) {
+      racine.style.removeProperty("--rules-mobile-top");
+      racine.style.removeProperty("--rules-mobile-height");
+      racine.style.removeProperty("--rules-mobile-bottom");
+      return;
+    }
+
+    const clamp = function(min, val, max) {
+      return Math.max(min, Math.min(val, max));
+    };
+
+    let bottom;
+    let hauteurBox;
+
+    if (paysage || hauteur <= 520) {
+      bottom = clamp(28, hauteur * 0.08, 62);
+      hauteurBox = clamp(74, hauteur * 0.30, 142);
+    } else if (hauteur <= 700) {
+      bottom = clamp(62, hauteur * 0.115, 92);
+      hauteurBox = clamp(118, hauteur * 0.245, 172);
+    } else if (hauteur <= 860) {
+      bottom = clamp(82, hauteur * 0.125, 122);
+      hauteurBox = clamp(142, hauteur * 0.255, 218);
+    } else {
+      bottom = clamp(106, hauteur * 0.135, 158);
+      hauteurBox = clamp(172, hauteur * 0.265, 260);
+    }
+
+    const top = Math.max(104, hauteur - bottom - hauteurBox);
+
+    racine.style.setProperty("--rules-mobile-bottom", Math.round(bottom) + "px");
+    racine.style.setProperty("--rules-mobile-height", Math.round(hauteurBox) + "px");
+    racine.style.setProperty("--rules-mobile-top", Math.round(top) + "px");
+  }
+
   function installerBlobalLoopInfini() {
     const video = document.getElementById("fondVideo");
     if (!video) return;
@@ -5884,17 +6167,35 @@
     }
   }
 
-  window.addEventListener("DOMContentLoaded", installerBlobalLoopInfini);
-  window.addEventListener("load", installerBlobalLoopInfini);
-  window.addEventListener("pageshow", lancerBlobalMp4EnBoucle);
+  window.addEventListener("DOMContentLoaded", function() {
+    reglerMagicboxTousEcrans();
+    installerBlobalLoopInfini();
+  });
+  window.addEventListener("load", function() {
+    reglerMagicboxTousEcrans();
+    installerBlobalLoopInfini();
+  });
+  window.addEventListener("resize", reglerMagicboxTousEcrans, { passive: true });
+  window.addEventListener("orientationchange", function() {
+    setTimeout(reglerMagicboxTousEcrans, 250);
+  }, { passive: true });
+  window.addEventListener("pageshow", function() {
+    reglerMagicboxTousEcrans();
+    lancerBlobalMp4EnBoucle();
+  });
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", reglerMagicboxTousEcrans, { passive: true });
+  }
+
   document.addEventListener("visibilitychange", function() {
     if (!document.hidden) {
+      reglerMagicboxTousEcrans();
       lancerBlobalMp4EnBoucle();
     }
   });
   document.addEventListener("click", lancerBlobalMp4EnBoucle, { once: true });
   document.addEventListener("touchstart", lancerBlobalMp4EnBoucle, { once: true });
 </script>
-
 </body>
 </html>
