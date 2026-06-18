@@ -4206,6 +4206,157 @@
       }
     }
 
+  
+    /* MAGICBOX : flèches noires visibles avec glow blanc, intégrées dans la box */
+    @media screen and (max-width: 768px) {
+      #apropos::before,
+      #apropos::after,
+      #apropos .card::before,
+      #apropos .card::after {
+        content: none !important;
+        display: none !important;
+      }
+
+      #apropos .magicbox-arrow {
+        display: block !important;
+        position: relative !important;
+        width: 11px !important;
+        height: 11px !important;
+        border-right: 2px solid #000000 !important;
+        border-bottom: 2px solid #000000 !important;
+        filter:
+          drop-shadow(0 0 3px rgba(255, 255, 255, 1))
+          drop-shadow(0 0 7px rgba(255, 255, 255, 0.78))
+          drop-shadow(0 0 12px rgba(255, 255, 255, 0.46)) !important;
+        pointer-events: none !important;
+        z-index: 80 !important;
+        opacity: 1 !important;
+        flex: 0 0 auto !important;
+      }
+
+      #apropos .magicbox-arrow-down {
+        margin: 0 14px 13px auto !important;
+        transform: rotate(45deg) translate3d(0, 0, 0) !important;
+      }
+
+      #apropos .magicbox-arrow-up {
+        margin: 13px auto 0 auto !important;
+        transform: rotate(-135deg) translate3d(0, 0, 0) !important;
+      }
+    }
+
+    @media screen and (max-width: 430px) and (min-height: 760px) {
+      #apropos .magicbox-arrow {
+        width: 10px !important;
+        height: 10px !important;
+      }
+
+      #apropos .magicbox-arrow-down {
+        margin-right: 12px !important;
+        margin-bottom: 12px !important;
+      }
+
+      #apropos .magicbox-arrow-up {
+        margin-top: 12px !important;
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #apropos .magicbox-arrow {
+        width: 8px !important;
+        height: 8px !important;
+        border-right-width: 1.5px !important;
+        border-bottom-width: 1.5px !important;
+      }
+
+      #apropos .magicbox-arrow-down {
+        margin-right: 10px !important;
+        margin-bottom: 8px !important;
+      }
+
+      #apropos .magicbox-arrow-up {
+        margin-top: 8px !important;
+      }
+    }
+
+  
+    /* MAGICBOX : flèches forcées visibles */
+    @media screen and (max-width: 768px) {
+      #apropos::before,
+      #apropos::after,
+      #apropos .card::before,
+      #apropos .card::after {
+        content: none !important;
+        display: none !important;
+      }
+
+      #apropos .magicbox-arrow {
+        display: block !important;
+        position: relative !important;
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
+        font-family: Arial, Helvetica, sans-serif !important;
+        font-size: 18px !important;
+        font-weight: 900 !important;
+        line-height: 1 !important;
+        width: max-content !important;
+        height: auto !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: none !important;
+        z-index: 99999 !important;
+        filter:
+          drop-shadow(0 0 2px rgba(255, 255, 255, 1))
+          drop-shadow(0 0 6px rgba(255, 255, 255, 0.95))
+          drop-shadow(0 0 12px rgba(255, 255, 255, 0.72)) !important;
+        text-shadow:
+          0 0 2px #ffffff,
+          0 0 6px #ffffff,
+          0 0 12px rgba(255, 255, 255, 0.85) !important;
+        transform: translate3d(0, 0, 0) !important;
+      }
+
+      #apropos .magicbox-arrow-down {
+        margin: 0 12px 12px auto !important;
+        text-align: right !important;
+      }
+
+      #apropos .magicbox-arrow-up {
+        margin: 12px auto 0 auto !important;
+        text-align: center !important;
+      }
+    }
+
+    @media screen and (max-width: 430px) and (min-height: 760px) {
+      #apropos .magicbox-arrow {
+        font-size: 17px !important;
+      }
+
+      #apropos .magicbox-arrow-down {
+        margin-right: 10px !important;
+        margin-bottom: 11px !important;
+      }
+
+      #apropos .magicbox-arrow-up {
+        margin-top: 11px !important;
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #apropos .magicbox-arrow {
+        font-size: 15px !important;
+      }
+
+      #apropos .magicbox-arrow-down {
+        margin-right: 8px !important;
+        margin-bottom: 8px !important;
+      }
+
+      #apropos .magicbox-arrow-up {
+        margin-top: 8px !important;
+      }
+    }
+
   </style>
 
 </head>
@@ -4239,7 +4390,9 @@
 
 <section id="apropos" class="page-section">
   <div class="card">
-    <h1>
+        
+        <span class="magicbox-arrow magicbox-arrow-down" aria-hidden="true">▼</span>
+        <h1>
       -RULES/<br>
       N1-USE A 1992/2012 MUSIC/<br>
       N2-DO A REMIX/<br>
@@ -4247,6 +4400,7 @@
       N4-NO ai AT ALL/<br>
       N5-ELECTRONIC ART ONLY/
     </h1>
+        <span class="magicbox-arrow magicbox-arrow-up" aria-hidden="true">▲</span>
   </div>
 </section>
 
