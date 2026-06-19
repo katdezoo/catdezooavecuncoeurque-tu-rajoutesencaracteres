@@ -8214,35 +8214,6 @@ body {
     }
   }
 </style>
-<style id="gpc-bravo-desktop-timer-130px-final">
-  /*
-    TIMER DESKTOP +130PX
-    Ordinateur uniquement. Smartphone inchangé.
-  */
-  @media screen and (min-width: 769px) {
-    .paris-timer {
-      top: max(2px, calc(clamp(66px, 11.4dvh, 142px) - clamp(38px, 4.25vw, 70px) - 60px - 130px)) !important;
-      font-size: clamp(46px, 5.45vw, 84px) !important;
-      transform: translate3d(-50%, 0, 0) !important;
-      will-change: auto !important;
-    }
-  }
-
-  @media screen and (min-width: 1400px) and (min-height: 820px) {
-    .paris-timer {
-      top: max(2px, calc(clamp(76px, 10.8dvh, 154px) - clamp(40px, 4vw, 72px) - 60px - 130px)) !important;
-      font-size: clamp(48px, 5.1vw, 86px) !important;
-    }
-  }
-
-  @media screen and (min-width: 769px) and (max-width: 1050px),
-         screen and (min-width: 769px) and (max-height: 760px) {
-    .paris-timer {
-      top: max(2px, calc(clamp(48px, 10.8dvh, 92px) - clamp(28px, 3.25vw, 46px) - 60px - 130px)) !important;
-      font-size: clamp(36px, 4.25vw, 61px) !important;
-    }
-  }
-</style>
 <style id="gpc-mobile-turbo-speed-final">
   /*
     TURBO MOBILE
@@ -8269,32 +8240,49 @@ body {
     }
   }
 </style>
-<style id="gpc-starthere-true-rules-box-final">
+<style id="gpc-bravo-desktop-timer-180px-final">
   /*
-    STARTHERE = VRAIE BOX RULES
-    Pas de deuxième imitation : au clic starthere, on affiche #apropos lui-même
-    avec le texte starthere. La box est donc exactement la même que RULES
-    sur PC, Mac, Android, iPhone et toutes tailles.
+    TIMER DESKTOP +180PX
+    Ordinateur uniquement. Smartphone inchangé.
+  */
+  @media screen and (min-width: 769px) {
+    .paris-timer {
+      top: max(2px, calc(clamp(66px, 11.4dvh, 142px) - clamp(38px, 4.25vw, 70px) - 60px - 180px)) !important;
+      font-size: clamp(46px, 5.45vw, 84px) !important;
+      transform: translate3d(-50%, 0, 0) !important;
+      will-change: auto !important;
+    }
+  }
+
+  @media screen and (min-width: 1400px) and (min-height: 820px) {
+    .paris-timer {
+      top: max(2px, calc(clamp(76px, 10.8dvh, 154px) - clamp(40px, 4vw, 72px) - 60px - 180px)) !important;
+      font-size: clamp(48px, 5.1vw, 86px) !important;
+    }
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1050px),
+         screen and (min-width: 769px) and (max-height: 760px) {
+    .paris-timer {
+      top: max(2px, calc(clamp(48px, 10.8dvh, 92px) - clamp(28px, 3.25vw, 46px) - 60px - 180px)) !important;
+      font-size: clamp(36px, 4.25vw, 61px) !important;
+    }
+  }
+</style>
+<style id="gpc-starthere-no-audio-font-lock-final">
+  /*
+    STARTHERE = VRAIE BOX RULES, SANS AUDIO
+    Même élément #apropos, donc même box exacte.
+    La taille de police starthere est verrouillée sur la taille calculée de RULES.
   */
   #apropos.gpc-starthere-mode h1 {
     text-align: center !important;
     white-space: normal !important;
     word-break: normal !important;
     overflow-wrap: anywhere !important;
-  }
-
-  @media screen and (min-width: 769px) {
-    #apropos.gpc-starthere-mode h1 {
-      font-size: inherit !important;
-      line-height: inherit !important;
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    #apropos.gpc-starthere-mode h1 {
-      font-size: inherit !important;
-      line-height: inherit !important;
-    }
+    font-size: var(--gpc-rules-font-size-lock, inherit) !important;
+    line-height: var(--gpc-rules-line-height-lock, inherit) !important;
+    letter-spacing: var(--gpc-rules-letter-spacing-lock, inherit) !important;
   }
 </style>
 </head>
@@ -10074,7 +10062,7 @@ body {
     }, { passive: true });
   })();
 </script>
-<script id="gpc-starthere-true-rules-box-script-final">
+<script id="gpc-starthere-no-audio-font-lock-script-final">
   (function() {
     "use strict";
 
@@ -10082,45 +10070,70 @@ body {
     const TEXTE_RULES = "-RULES/<br>\n      N1-USE A 1992/2012 MUSIC/<br>\n      N2-DO A REMIX/<br>\n      N3-LESS THAN 1MIN30/&lt;3<br>\n      N4-NO ai AT ALL/<br>\n      N5-ELECTRONIC ART ONLY/";
 
     const oldAfficherSection = window.afficherSection;
-    const oldLancerMusique = window.lancerMusique;
 
     function el(id) {
       return document.getElementById(id);
     }
 
-    function rulesBox() {
+    function box() {
       return el("apropos");
     }
 
-    function rulesTitle() {
-      const b = rulesBox();
+    function title() {
+      const b = box();
       return b ? b.querySelector("h1") : null;
     }
 
-    function setRulesText(mode) {
-      const b = rulesBox();
-      const h = rulesTitle();
+    function verrouillerPoliceRules() {
+      const b = box();
+      const h = title();
       if (!b || !h) return;
 
-      if (mode === "start") {
-        b.classList.add("gpc-starthere-mode");
-        h.innerHTML = TEXTE_STARTHERE;
-      } else {
-        b.classList.remove("gpc-starthere-mode");
-        h.innerHTML = TEXTE_RULES;
-      }
+      const hadStartClass = b.classList.contains("gpc-starthere-mode");
+      if (hadStartClass) b.classList.remove("gpc-starthere-mode");
 
-      b.scrollTop = 0;
+      const cs = getComputedStyle(h);
+      b.style.setProperty("--gpc-rules-font-size-lock", cs.fontSize);
+      b.style.setProperty("--gpc-rules-line-height-lock", cs.lineHeight);
+      b.style.setProperty("--gpc-rules-letter-spacing-lock", cs.letterSpacing);
+
+      if (hadStartClass) b.classList.add("gpc-starthere-mode");
+    }
+
+    function rafScrollRefresh(b) {
+      if (!b) return;
       requestAnimationFrame(function() {
         b.dispatchEvent(new Event("scroll"));
       });
       setTimeout(function() {
         b.dispatchEvent(new Event("scroll"));
       }, 160);
+      setTimeout(function() {
+        b.dispatchEvent(new Event("scroll"));
+      }, 420);
     }
 
-    function showRulesBoxWith(mode) {
-      setRulesText(mode);
+    function mettreTexte(mode) {
+      const b = box();
+      const h = title();
+      if (!b || !h) return;
+
+      if (mode === "start") {
+        verrouillerPoliceRules();
+        b.classList.add("gpc-starthere-mode");
+        h.innerHTML = TEXTE_STARTHERE;
+      } else {
+        b.classList.remove("gpc-starthere-mode");
+        h.innerHTML = TEXTE_RULES;
+        verrouillerPoliceRules();
+      }
+
+      b.scrollTop = 0;
+      rafScrollRefresh(b);
+    }
+
+    function afficherBox(mode) {
+      mettreTexte(mode);
 
       if (typeof oldAfficherSection === "function") {
         oldAfficherSection("apropos");
@@ -10128,16 +10141,16 @@ body {
         document.querySelectorAll(".page-section").forEach(function(section) {
           section.classList.remove("active");
         });
-        const b = rulesBox();
+        const b = box();
         if (b) b.classList.add("active");
       }
 
-      setRulesText(mode);
+      mettreTexte(mode);
     }
 
     window.afficherSection = function(id) {
       if (id === "apropos") {
-        showRulesBoxWith("rules");
+        afficherBox("rules");
         return;
       }
 
@@ -10146,40 +10159,50 @@ body {
       }
 
       if (id !== "apropos") {
-        setRulesText("rules");
+        mettreTexte("rules");
       }
     };
 
     window.lancerMusique = function() {
-      showRulesBoxWith("start");
-
-      const lecteur = el("lecteurAudio");
-      if (lecteur) {
-        const playPromise = lecteur.play();
-        if (playPromise && playPromise.catch) playPromise.catch(function() {});
-      }
+      /*
+        Important : starthere affiche la vraie box RULES avec le texte multilingue,
+        mais ne lance plus le lecteur média sur aucun appareil.
+      */
+      afficherBox("start");
     };
 
     document.addEventListener("click", function(event) {
       const texte = event.target && event.target.textContent ? event.target.textContent.trim() : "";
       if (texte === "starthere") {
-        setTimeout(function() { showRulesBoxWith("start"); }, 0);
-        setTimeout(function() { showRulesBoxWith("start"); }, 80);
+        setTimeout(function() { afficherBox("start"); }, 0);
+        setTimeout(function() { afficherBox("start"); }, 80);
       }
       if (texte === "RULES") {
-        setTimeout(function() { showRulesBoxWith("rules"); }, 0);
-        setTimeout(function() { showRulesBoxWith("rules"); }, 80);
+        setTimeout(function() { afficherBox("rules"); }, 0);
+        setTimeout(function() { afficherBox("rules"); }, 80);
       }
+    }, { passive: true });
+
+    window.addEventListener("resize", function() {
+      verrouillerPoliceRules();
+    }, { passive: true });
+
+    window.addEventListener("orientationchange", function() {
+      setTimeout(verrouillerPoliceRules, 120);
+      setTimeout(verrouillerPoliceRules, 420);
     }, { passive: true });
 
     window.addEventListener("pageshow", function() {
       setTimeout(function() {
-        const b = rulesBox();
+        verrouillerPoliceRules();
+        const b = box();
         if (b && b.classList.contains("gpc-starthere-mode") && b.classList.contains("active")) {
-          setRulesText("start");
+          mettreTexte("start");
         }
       }, 120);
     }, { passive: true });
+
+    setTimeout(verrouillerPoliceRules, 400);
   })();
 </script>
 </body>
