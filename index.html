@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <!-- BEGIN COPYRIGHT NOTICE: © 2026 catdezoo<3. all rights reserved. -->
-<!-- THIS WEBSITE IS ENTIRELY PROTECTED. -->
+
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -8243,183 +8243,6 @@ body {
     }
   }
 </style>
-<style id="gpc-start-twin-box-final">
-  /*
-    STARTHERE = JUMEAU DE RULES
-    On ne copie plus 240k de CSS : on applique les mêmes dimensions et la même logique finale.
-  */
-  #accueil.gpc-start-twin-box {
-    box-sizing: border-box !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    -webkit-overflow-scrolling: touch !important;
-    overscroll-behavior: contain !important;
-    touch-action: pan-y pinch-zoom !important;
-    scroll-behavior: smooth !important;
-    scrollbar-width: thin !important;
-    isolation: isolate !important;
-  }
-
-  #accueil.gpc-start-twin-box .card {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: auto !important;
-    height: auto !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-    display: block !important;
-    overflow: visible !important;
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    transform: translateZ(0) !important;
-  }
-
-  #accueil.gpc-start-twin-box h1 {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    min-height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-    white-space: normal !important;
-    word-break: normal !important;
-    overflow-wrap: anywhere !important;
-    overflow: visible !important;
-    text-align: center !important;
-  }
-
-  #accueil.gpc-start-twin-box::before,
-  #accueil.gpc-start-twin-box::after,
-  #accueil.gpc-start-twin-box .card::before,
-  #accueil.gpc-start-twin-box .card::after,
-  #accueil.gpc-start-twin-box .card > .magicbox-arrow,
-  #accueil.gpc-start-twin-box .card .magicbox-arrow {
-    content: "" !important;
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    width: 0 !important;
-    height: 0 !important;
-    border: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    filter: none !important;
-    pointer-events: none !important;
-  }
-
-  #accueil.gpc-start-twin-box > .magicbox-arrow {
-    position: absolute !important;
-    display: block !important;
-    pointer-events: none !important;
-    z-index: 999 !important;
-    width: var(--rules-arrow-size, clamp(8px, 0.78vw, 13px)) !important;
-    height: var(--rules-arrow-size, clamp(8px, 0.78vw, 13px)) !important;
-    border: 0 solid transparent !important;
-    border-left: 0 solid transparent !important;
-    border-top: 0 solid transparent !important;
-    border-right: var(--rules-arrow-stroke, clamp(1.5px, 0.15vw, 2.2px)) solid #000000 !important;
-    border-bottom: var(--rules-arrow-stroke, clamp(1.5px, 0.15vw, 2.2px)) solid #000000 !important;
-    background: transparent !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-    filter:
-      drop-shadow(0 0 3px rgba(255,255,255,1))
-      drop-shadow(0 0 7px rgba(255,255,255,.78))
-      drop-shadow(0 0 12px rgba(255,255,255,.46)) !important;
-    transform-origin: 50% 50% !important;
-    backface-visibility: hidden !important;
-    -webkit-backface-visibility: hidden !important;
-    transition:
-      opacity 460ms cubic-bezier(.22, 1, .36, 1),
-      transform 580ms cubic-bezier(.22, 1, .36, 1),
-      filter 580ms cubic-bezier(.22, 1, .36, 1) !important;
-  }
-
-  #accueil.gpc-start-twin-box > .magicbox-arrow-down {
-    top: var(--rules-arrow-gap, clamp(10px, 1.1vw, 16px)) !important;
-    right: var(--rules-arrow-gap-x, clamp(16px, 2.1vw, 28px)) !important;
-    opacity: 1 !important;
-    transform: rotate(45deg) translate3d(0,0,0) scale(1) !important;
-  }
-
-  #accueil.gpc-start-twin-box > .magicbox-arrow-up {
-    right: var(--rules-arrow-gap-x, clamp(16px, 2.1vw, 28px)) !important;
-    bottom: var(--rules-arrow-gap, clamp(10px, 1.1vw, 16px)) !important;
-    opacity: 0 !important;
-    transform: rotate(-135deg) translate3d(0, 7px, 0) scale(.86) !important;
-  }
-
-  #accueil.gpc-start-twin-box.rules-at-end > .magicbox-arrow-up,
-  #accueil.gpc-start-twin-box.rules-no-scroll > .magicbox-arrow-up {
-    opacity: 1 !important;
-    transform: rotate(-135deg) translate3d(0,0,0) scale(1) !important;
-  }
-
-  @media screen and (min-width: 769px) {
-    #accueil.gpc-start-twin-box {
-      position: fixed !important;
-      left: 50% !important;
-      top: var(--start-twin-top, var(--ordi-rules-top, 58dvh)) !important;
-      width: var(--start-twin-width, var(--ordi-rules-fixed-width, min(760px, calc(100vw - 42px)))) !important;
-      max-width: var(--start-twin-max-width, min(var(--ordi-rules-fixed-width, 760px), calc(100vw - 42px))) !important;
-      height: var(--start-twin-height, var(--ordi-rules-fixed-height, clamp(78px, 13dvh, 132px))) !important;
-      min-height: var(--start-twin-height, var(--ordi-rules-fixed-height, clamp(78px, 13dvh, 132px))) !important;
-      max-height: var(--start-twin-max-height, min(var(--ordi-rules-fixed-height, 132px), calc(100dvh - 220px))) !important;
-      padding: var(--start-twin-padding, 0px) !important;
-      transform: translate3d(-50%, 0, 0) !important;
-      z-index: 16000 !important;
-      scroll-padding-top: clamp(30px, 3vw, 44px) !important;
-      scroll-padding-bottom: clamp(36px, 3.5vw, 54px) !important;
-      --rules-arrow-gap: clamp(10px, 1.1vw, 16px);
-      --rules-arrow-gap-x: clamp(16px, 2.1vw, 28px);
-      --rules-arrow-size: clamp(8px, .78vw, 13px);
-      --rules-arrow-stroke: clamp(1.5px, .15vw, 2.2px);
-    }
-
-    #accueil.gpc-start-twin-box h1 {
-      font-size: var(--start-twin-font-size, clamp(18px, 1.78vw, 28px)) !important;
-      line-height: var(--start-twin-line-height, 1.16) !important;
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    html.gpc-start-twin-active #accueil.gpc-start-twin-box.active {
-      position: fixed !important;
-      left: 50% !important;
-      top: var(--start-twin-mobile-top, 56vh) !important;
-      width: var(--start-twin-mobile-width, calc(100vw - 24px)) !important;
-      max-width: var(--start-twin-mobile-max-width, calc(100vw - 24px)) !important;
-      height: var(--start-twin-mobile-height, calc(100dvh - 56vh - 190px)) !important;
-      min-height: var(--start-twin-mobile-min-height, 112px) !important;
-      max-height: var(--start-twin-mobile-max-height, none) !important;
-      padding: var(--start-twin-mobile-padding, 22px 13px) !important;
-      transform: translate3d(-50%, var(--start-twin-mobile-float, 0px), 0) !important;
-      will-change: transform, top, height !important;
-      contain: layout paint style !important;
-      backface-visibility: hidden !important;
-      -webkit-backface-visibility: hidden !important;
-      transform-style: preserve-3d !important;
-      z-index: 16000 !important;
-      scroll-padding-top: clamp(28px, 8vw, 42px) !important;
-      scroll-padding-bottom: clamp(42px, 12vw, 68px) !important;
-      --rules-arrow-size: clamp(8px, 2.6vw, 11px);
-      --rules-arrow-stroke: clamp(1.5px, .55vw, 2px);
-      --rules-arrow-gap: clamp(9px, 3vw, 15px);
-      --rules-arrow-gap-x: clamp(13px, 5vw, 22px);
-    }
-
-    html.gpc-start-twin-active #accueil.gpc-start-twin-box.active h1 {
-      font-size: var(--start-twin-mobile-font-size, clamp(15px, 4.6vw, 21px)) !important;
-      line-height: var(--start-twin-mobile-line-height, 1.22) !important;
-    }
-  }
-</style>
 <style id="gpc-mobile-turbo-speed-final">
   /*
     TURBO MOBILE
@@ -8443,6 +8266,34 @@ body {
 
     .volume-white-glow-layer {
       display: none !important;
+    }
+  }
+</style>
+<style id="gpc-starthere-true-rules-box-final">
+  /*
+    STARTHERE = VRAIE BOX RULES
+    Pas de deuxième imitation : au clic starthere, on affiche #apropos lui-même
+    avec le texte starthere. La box est donc exactement la même que RULES
+    sur PC, Mac, Android, iPhone et toutes tailles.
+  */
+  #apropos.gpc-starthere-mode h1 {
+    text-align: center !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  @media screen and (min-width: 769px) {
+    #apropos.gpc-starthere-mode h1 {
+      font-size: inherit !important;
+      line-height: inherit !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #apropos.gpc-starthere-mode h1 {
+      font-size: inherit !important;
+      line-height: inherit !important;
     }
   }
 </style>
@@ -8480,33 +8331,7 @@ body {
 
 <div id="parisTimer" class="paris-timer"><span id="timerTime">00:00:01</span> <span id="timerPeriod" class="timer-period">AM</span></div>
 
-<section id="accueil" class="page-section active gpc-start-twin-box">
-  <div class="card">
-    <h1>
-      US: -ready for a big competition?/<br>
-CN: -准备好参加大型比赛了吗?/<br>
-IN: -क्या तुम एक बड़ी प्रतियोगिता के लिए तैयार हो?/<br>
-ES: -¿listo para una gran competición?/<br>
-SA: -هل أنت مستعد لمنافسة كبيرة؟/<br>
-FR: -prêt pour une grosse compétition?/<br>
-BD: -একটি বড় প্রতিযোগিতার জন্য প্রস্তুত?/<br>
-BR: -pronto para uma grande competição?/<br>
-RU: -готов к большому соревнованию?/<br>
-PK: -کیا تم ایک بڑے مقابلے کے لیے تیار ہو؟/<br>
-ID: -siap untuk kompetisi besar?/<br>
-DE: -bereit für einen großen Wettbewerb?/<br>
-JP: -大きな大会の準備はできた？/<br>
-KR: -큰 대회를 준비됐어?/<br>
-TR: -büyük bir yarışmaya hazır mısın?/<br>
-VN: -sẵn sàng cho một cuộc thi lớn chưa?/<br>
-IT: -pronto per una grande competizione?/<br>
-PL: -gotowy na duże zawody?/<br>
-NL: -klaar voor een grote competitie?/<br>
-TH: -พร้อมสำหรับการแข่งขันใหญ่หรือยัง?/<br>
-SE: -redo för en stor tävling?/<br>
-PT: -pronto para uma grande competição?/<br>
-    </h1>
-  </div>
+<section id="accueil" class="page-section active">
 </section>
 
 <section id="apropos" class="page-section">
@@ -10219,263 +10044,6 @@ PT: -pronto para uma grande competição?/<br>
     setTimeout(function() { calculer(true); }, 500);
   })();
 </script>
-<script id="gpc-start-twin-box-script-final">
-  (function() {
-    "use strict";
-
-    const root = document.documentElement;
-    const oldAfficherSection = window.afficherSection;
-
-    let topA = null, topT = null, heightA = null, heightT = null;
-    let floatA = 0, floatT = 0;
-    let lastPageY = window.scrollY || 0;
-    let lastBoxY = 0;
-    let raf = null;
-    let retourTimer = null;
-
-    function el(id) { return document.getElementById(id); }
-    function startBox() { return el("accueil"); }
-    function rulesBox() { return el("apropos"); }
-    function mobile() { return (window.innerWidth || document.documentElement.clientWidth || 390) <= 768; }
-    function activeStart() { const b = startBox(); return !!(b && b.classList.contains("active")); }
-    function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
-
-    function normaliserFleches(box) {
-      if (!box) return null;
-      box.querySelectorAll(".card .magicbox-arrow").forEach(function(node) {
-        if (node && node.parentNode) node.parentNode.removeChild(node);
-      });
-      function prendre(classe) {
-        const all = Array.from(box.querySelectorAll("." + classe));
-        const direct = all.find(function(node) { return node.parentNode === box; });
-        const first = direct || all[0] || document.createElement("span");
-        first.className = "magicbox-arrow " + classe;
-        first.setAttribute("aria-hidden", "true");
-        all.forEach(function(node) {
-          if (node !== first && node.parentNode) node.parentNode.removeChild(node);
-        });
-        return first;
-      }
-      const down = prendre("magicbox-arrow-down");
-      const up = prendre("magicbox-arrow-up");
-      if (down.parentNode !== box || box.firstElementChild !== down) box.insertBefore(down, box.firstChild);
-      if (up.parentNode !== box || box.lastElementChild !== up) box.appendChild(up);
-      return box;
-    }
-
-    function verifierFleches(box) {
-      box = normaliserFleches(box || startBox());
-      if (!box) return;
-      const visible = box.clientHeight || 0;
-      const total = box.scrollHeight || 0;
-      const marge = Math.max(4, Math.round(visible * 0.045));
-      const maxScroll = Math.max(0, total - visible);
-      const noScroll = maxScroll <= marge;
-      const atEnd = noScroll || (box.scrollTop || 0) >= maxScroll - marge;
-      box.classList.toggle("rules-no-scroll", noScroll);
-      box.classList.toggle("rules-at-end", atEnd);
-    }
-
-    function copierDesktopDepuisRules() {
-      if (mobile()) return;
-      const s = startBox();
-      const r = rulesBox();
-      if (!s || !r) return;
-
-      const cs = getComputedStyle(r);
-      s.style.setProperty("--start-twin-top", cs.top);
-      s.style.setProperty("--start-twin-width", cs.width);
-      s.style.setProperty("--start-twin-max-width", cs.maxWidth);
-      s.style.setProperty("--start-twin-height", cs.height);
-      s.style.setProperty("--start-twin-max-height", cs.maxHeight);
-      s.style.setProperty("--start-twin-padding", cs.padding);
-      const rh = r.querySelector("h1");
-      if (rh) {
-        const hs = getComputedStyle(rh);
-        s.style.setProperty("--start-twin-font-size", hs.fontSize);
-        s.style.setProperty("--start-twin-line-height", hs.lineHeight);
-      }
-      verifierFleches(s);
-    }
-
-    function dimensions() {
-      const w = Math.round(window.innerWidth || document.documentElement.clientWidth || 390);
-      const h = Math.round(window.innerHeight || document.documentElement.clientHeight || screen.height || 760);
-      return {
-        w: w,
-        h: h,
-        paysage: w <= 900 && h <= 500 && window.matchMedia("(orientation: landscape)").matches
-      };
-    }
-
-    function topLecteurMedia(d) {
-      const audio = document.querySelector(".audio-box");
-      if (audio) {
-        const rect = audio.getBoundingClientRect();
-        if (rect && rect.top > 0 && rect.top < d.h) return rect.top;
-      }
-      return d.h - 170;
-    }
-
-    function calculerMobile(force) {
-      const s = startBox();
-      if (!mobile() || !s || !activeStart()) {
-        root.classList.remove("gpc-start-twin-active");
-        if (s) {
-          s.style.removeProperty("--start-twin-mobile-top");
-          s.style.removeProperty("--start-twin-mobile-height");
-          s.style.removeProperty("--start-twin-mobile-float");
-        }
-        topA = null; topT = null; heightA = null; heightT = null; floatA = 0; floatT = 0; raf = null;
-        return;
-      }
-
-      root.classList.add("gpc-start-twin-active");
-
-      const d = dimensions();
-      const descente = d.paysage ? 8 : clamp(Math.round(d.h * 0.018), 10, 18);
-      const topAncre = Math.round(d.h * (d.paysage ? 0.42 : 0.545) + descente);
-      const margeLecteur = d.paysage ? 5 : 6;
-      const basFinal = Math.round(topLecteurMedia(d) - margeLecteur);
-      const hauteurGrande = Math.max(d.paysage ? 82 : 112, basFinal - topAncre);
-
-      topT = topAncre;
-      heightT = hauteurGrande;
-
-      if (topA === null || force) topA = topT;
-      if (heightA === null || force) heightA = heightT;
-
-      appliquerMobile();
-      lancer();
-    }
-
-    function appliquerMobile() {
-      const s = startBox();
-      if (!s) return;
-      s.style.setProperty("--start-twin-mobile-top", topA.toFixed(2) + "px");
-      s.style.setProperty("--start-twin-mobile-height", heightA.toFixed(2) + "px");
-      s.style.setProperty("--start-twin-mobile-float", floatA.toFixed(2) + "px");
-
-      const r = rulesBox();
-      const rh = r && r.querySelector("h1");
-      if (rh) {
-        const hs = getComputedStyle(rh);
-        s.style.setProperty("--start-twin-mobile-font-size", hs.fontSize);
-        s.style.setProperty("--start-twin-mobile-line-height", hs.lineHeight);
-      }
-      verifierFleches(s);
-    }
-
-    function retourSouple() {
-      clearTimeout(retourTimer);
-      retourTimer = setTimeout(function() { floatT = 0; lancer(); }, 140);
-    }
-
-    function impulsionPage() {
-      if (!mobile() || !activeStart()) return;
-      const y = window.scrollY || document.documentElement.scrollTop || 0;
-      const dy = y - lastPageY;
-      lastPageY = y;
-      if (Math.abs(dy) > 0.2) {
-        floatT = clamp(floatT + dy * 0.065, -18, 18);
-        retourSouple();
-        lancer();
-      }
-    }
-
-    function impulsionBox() {
-      const s = startBox();
-      if (!s || !mobile() || !activeStart()) return;
-      const y = s.scrollTop || 0;
-      const dy = y - lastBoxY;
-      lastBoxY = y;
-      if (Math.abs(dy) > 0.25) {
-        floatT = clamp(floatT + dy * 0.035, -14, 14);
-        retourSouple();
-        lancer();
-      }
-      verifierFleches(s);
-    }
-
-    function lancer() { if (!raf) raf = requestAnimationFrame(animer); }
-
-    function animer() {
-      const s = startBox();
-      if (!mobile() || !s || !activeStart() || topT === null || heightT === null) {
-        raf = null;
-        return;
-      }
-      const douceurPosition = 0.024;
-      const douceurFloat = 0.040;
-      const stop = 0.035;
-
-      const dt = topT - topA;
-      const dh = heightT - heightA;
-      const df = floatT - floatA;
-
-      topA = Math.abs(dt) < stop ? topT : topA + dt * douceurPosition;
-      heightA = Math.abs(dh) < stop ? heightT : heightA + dh * douceurPosition;
-      floatA = Math.abs(df) < stop ? floatT : floatA + df * douceurFloat;
-
-      appliquerMobile();
-
-      if (Math.abs(dt) > stop || Math.abs(dh) > stop || Math.abs(df) > stop) {
-        raf = requestAnimationFrame(animer);
-      } else {
-        raf = null;
-      }
-    }
-
-    function brancher() {
-      const s = normaliserFleches(startBox());
-      if (!s) return;
-      if (!s.dataset.startTwinBoxOk) {
-        s.dataset.startTwinBoxOk = "1";
-        s.addEventListener("scroll", impulsionBox, { passive: true });
-        s.addEventListener("touchmove", impulsionBox, { passive: true });
-        s.addEventListener("wheel", impulsionBox, { passive: true });
-      }
-      verifierFleches(s);
-      copierDesktopDepuisRules();
-    }
-
-    window.afficherSection = function(id) {
-      if (typeof oldAfficherSection === "function") oldAfficherSection(id);
-      if (id === "accueil") {
-        topA = null; heightA = null; floatA = 0; floatT = 0; lastBoxY = 0;
-        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-        setTimeout(function() { brancher(); copierDesktopDepuisRules(); calculerMobile(true); }, 45);
-        setTimeout(function() { floatT = 10; retourSouple(); lancer(); }, 100);
-        setTimeout(function() { calculerMobile(false); copierDesktopDepuisRules(); verifierFleches(); }, 240);
-      } else {
-        root.classList.remove("gpc-start-twin-active");
-        setTimeout(function() { calculerMobile(false); }, 60);
-      }
-    };
-
-    window.addEventListener("scroll", function() { calculerMobile(false); impulsionPage(); }, { passive: true });
-    window.addEventListener("resize", function() { copierDesktopDepuisRules(); calculerMobile(false); verifierFleches(); }, { passive: true });
-    window.addEventListener("orientationchange", function() {
-      setTimeout(function() { copierDesktopDepuisRules(); calculerMobile(true); verifierFleches(); }, 120);
-      setTimeout(function() { copierDesktopDepuisRules(); calculerMobile(true); verifierFleches(); }, 420);
-    }, { passive: true });
-    window.addEventListener("pageshow", function() {
-      setTimeout(function() { brancher(); copierDesktopDepuisRules(); calculerMobile(true); verifierFleches(); }, 120);
-    }, { passive: true });
-
-    document.addEventListener("click", function(event) {
-      const texte = event.target && event.target.textContent ? event.target.textContent.trim() : "";
-      if (texte === "starthere") {
-        setTimeout(function() { brancher(); copierDesktopDepuisRules(); calculerMobile(true); }, 45);
-        setTimeout(function() { floatT = 10; retourSouple(); lancer(); }, 100);
-        setTimeout(function() { calculerMobile(false); verifierFleches(); }, 240);
-      }
-    }, { passive: true });
-
-    brancher();
-    setTimeout(function() { copierDesktopDepuisRules(); calculerMobile(true); verifierFleches(); }, 500);
-  })();
-</script>
 <script id="gpc-mobile-turbo-speed-script-final">
   (function() {
     "use strict";
@@ -10503,6 +10071,114 @@ PT: -pronto para uma grande competição?/<br>
     window.addEventListener("pageshow", turboMobile, { passive: true });
     document.addEventListener("visibilitychange", function() {
       if (!document.hidden) turboMobile();
+    }, { passive: true });
+  })();
+</script>
+<script id="gpc-starthere-true-rules-box-script-final">
+  (function() {
+    "use strict";
+
+    const TEXTE_STARTHERE = "US: -ready for a big competition?/<br>\nCN: -准备好参加大型比赛了吗?/<br>\nIN: -क्या तुम एक बड़ी प्रतियोगिता के लिए तैयार हो?/<br>\nES: -¿listo para una gran competición?/<br>\nSA: -هل أنت مستعد لمنافسة كبيرة؟/<br>\nFR: -prêt pour une grosse compétition?/<br>\nBD: -একটি বড় প্রতিযোগিতার জন্য প্রস্তুত?/<br>\nBR: -pronto para uma grande competição?/<br>\nRU: -готов к большому соревнованию?/<br>\nPK: -کیا تم ایک بڑے مقابلے کے لیے تیار ہو؟/<br>\nID: -siap untuk kompetisi besar?/<br>\nDE: -bereit für einen großen Wettbewerb?/<br>\nJP: -大きな大会の準備はできた？/<br>\nKR: -큰 대회를 준비됐어?/<br>\nTR: -büyük bir yarışmaya hazır mısın?/<br>\nVN: -sẵn sàng cho một cuộc thi lớn chưa?/<br>\nIT: -pronto per una grande competizione?/<br>\nPL: -gotowy na duże zawody?/<br>\nNL: -klaar voor een grote competitie?/<br>\nTH: -พร้อมสำหรับการแข่งขันใหญ่หรือยัง?/<br>\nSE: -redo för en stor tävling?/<br>\nPT: -pronto para uma grande competição?/<br>";
+    const TEXTE_RULES = "-RULES/<br>\n      N1-USE A 1992/2012 MUSIC/<br>\n      N2-DO A REMIX/<br>\n      N3-LESS THAN 1MIN30/&lt;3<br>\n      N4-NO ai AT ALL/<br>\n      N5-ELECTRONIC ART ONLY/";
+
+    const oldAfficherSection = window.afficherSection;
+    const oldLancerMusique = window.lancerMusique;
+
+    function el(id) {
+      return document.getElementById(id);
+    }
+
+    function rulesBox() {
+      return el("apropos");
+    }
+
+    function rulesTitle() {
+      const b = rulesBox();
+      return b ? b.querySelector("h1") : null;
+    }
+
+    function setRulesText(mode) {
+      const b = rulesBox();
+      const h = rulesTitle();
+      if (!b || !h) return;
+
+      if (mode === "start") {
+        b.classList.add("gpc-starthere-mode");
+        h.innerHTML = TEXTE_STARTHERE;
+      } else {
+        b.classList.remove("gpc-starthere-mode");
+        h.innerHTML = TEXTE_RULES;
+      }
+
+      b.scrollTop = 0;
+      requestAnimationFrame(function() {
+        b.dispatchEvent(new Event("scroll"));
+      });
+      setTimeout(function() {
+        b.dispatchEvent(new Event("scroll"));
+      }, 160);
+    }
+
+    function showRulesBoxWith(mode) {
+      setRulesText(mode);
+
+      if (typeof oldAfficherSection === "function") {
+        oldAfficherSection("apropos");
+      } else {
+        document.querySelectorAll(".page-section").forEach(function(section) {
+          section.classList.remove("active");
+        });
+        const b = rulesBox();
+        if (b) b.classList.add("active");
+      }
+
+      setRulesText(mode);
+    }
+
+    window.afficherSection = function(id) {
+      if (id === "apropos") {
+        showRulesBoxWith("rules");
+        return;
+      }
+
+      if (typeof oldAfficherSection === "function") {
+        oldAfficherSection(id);
+      }
+
+      if (id !== "apropos") {
+        setRulesText("rules");
+      }
+    };
+
+    window.lancerMusique = function() {
+      showRulesBoxWith("start");
+
+      const lecteur = el("lecteurAudio");
+      if (lecteur) {
+        const playPromise = lecteur.play();
+        if (playPromise && playPromise.catch) playPromise.catch(function() {});
+      }
+    };
+
+    document.addEventListener("click", function(event) {
+      const texte = event.target && event.target.textContent ? event.target.textContent.trim() : "";
+      if (texte === "starthere") {
+        setTimeout(function() { showRulesBoxWith("start"); }, 0);
+        setTimeout(function() { showRulesBoxWith("start"); }, 80);
+      }
+      if (texte === "RULES") {
+        setTimeout(function() { showRulesBoxWith("rules"); }, 0);
+        setTimeout(function() { showRulesBoxWith("rules"); }, 80);
+      }
+    }, { passive: true });
+
+    window.addEventListener("pageshow", function() {
+      setTimeout(function() {
+        const b = rulesBox();
+        if (b && b.classList.contains("gpc-starthere-mode") && b.classList.contains("active")) {
+          setRulesText("start");
+        }
+      }, 120);
     }, { passive: true });
   })();
 </script>
