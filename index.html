@@ -7999,6 +7999,195 @@ body {
     }
   }
 </style>
+<style id="gpc-mobile-liquid-restore-gmail-chef-final">
+  /*
+    MOBILE LIQUID RESTORE + GMAIL CHEF
+    - Restaure le mouvement doux/liquide de la box RULES mobile.
+    - Garde @gmail à sa place d'origine, avec une animation douce adaptée au texte.
+    - Ne touche pas au desktop, sauf conservation de la cascade existante.
+  */
+
+  @media screen and (max-width: 768px) {
+    html.gpc-mobile-liquid-active #apropos.active {
+      position: fixed !important;
+      left: 50% !important;
+      top: var(--rules-liquid-top, 56vh) !important;
+      bottom: auto !important;
+      margin: 0 !important;
+      width: calc(100vw - 24px) !important;
+      max-width: calc(100vw - 24px) !important;
+      min-height: 96px !important;
+      height: var(--rules-liquid-height, 168px) !important;
+      max-height: var(--rules-liquid-height, 168px) !important;
+      padding: clamp(22px, 6vw, 30px) clamp(12px, 3.4vw, 16px) clamp(28px, 7vw, 42px) clamp(12px, 3.4vw, 16px) !important;
+      box-sizing: border-box !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      -webkit-overflow-scrolling: touch !important;
+      overscroll-behavior: contain !important;
+      touch-action: pan-y pinch-zoom !important;
+      pointer-events: auto !important;
+      scrollbar-width: none !important;
+      z-index: 16000 !important;
+      transform: translate3d(-50%, var(--rules-liquid-float, 0px), 0) !important;
+      will-change: transform, top, height !important;
+      contain: layout paint style !important;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
+    }
+
+    html.gpc-mobile-liquid-active #apropos.active::-webkit-scrollbar {
+      width: 0 !important;
+      height: 0 !important;
+      display: none !important;
+    }
+
+    html.gpc-mobile-liquid-active #apropos.active .card {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+      transform: translateZ(0) !important;
+      pointer-events: auto !important;
+    }
+
+    html.gpc-mobile-liquid-active #apropos.active h1 {
+      max-width: 100% !important;
+      font-size: clamp(15px, 4.6vw, 21px) !important;
+      line-height: 1.22 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      text-align: center !important;
+      pointer-events: auto !important;
+    }
+
+    /*
+      @gmail : la position de #contact reste celle du site.
+      On anime seulement le texte à l'intérieur, en petite amplitude.
+    */
+    #contact h1 {
+      transform: translate3d(0, var(--gmail-chef-float, 0px), 0) !important;
+      transition: none !important;
+      will-change: transform, filter !important;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
+      transform-origin: 50% 50% !important;
+    }
+
+    #contact.active h1 {
+      filter:
+        drop-shadow(0 0 2px rgba(255,255,255,.62))
+        drop-shadow(0 0 7px rgba(255,255,255,.30)) !important;
+    }
+  }
+
+  @media screen and (max-width: 430px) and (min-height: 760px) {
+    html.gpc-mobile-liquid-active #apropos.active {
+      width: calc(100vw - 18px) !important;
+      max-width: calc(100vw - 18px) !important;
+      padding-top: clamp(22px, 6vw, 28px) !important;
+      padding-bottom: clamp(30px, 8vw, 46px) !important;
+    }
+  }
+
+  @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+    html.gpc-mobile-liquid-active #apropos.active {
+      width: min(92vw, 680px) !important;
+      max-width: min(92vw, 680px) !important;
+      padding: 18px 10px 26px 10px !important;
+    }
+
+    html.gpc-mobile-liquid-active #apropos.active h1 {
+      font-size: clamp(10px, 3.35vw, 13px) !important;
+      line-height: 1.12 !important;
+    }
+  }
+</style>
+<style id="gpc-gmail-anchor-high-final">
+  /*
+    GMAIL ANCRE HAUTE FINAL
+    Remet @gmail sur son ancien point d'ancrage mobile, plus haut,
+    tout en gardant l'effet doux appliqué au texte.
+  */
+
+  @media screen and (max-width: 768px) {
+    #contact {
+      position: fixed !important;
+      left: 50% !important;
+      top: 0 !important;
+      bottom: auto !important;
+      margin: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 0 12px !important;
+      box-sizing: border-box !important;
+      pointer-events: none !important;
+      z-index: 16500 !important;
+      overflow: visible !important;
+      transform: translate3d(
+        -50%,
+        calc(var(--gmail-chef-anchor-y, var(--gmail-origin-y, 58vh)) - 50%),
+        0
+      ) !important;
+      will-change: transform !important;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
+      contain: none !important;
+    }
+
+    #contact.active {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    #contact .card {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+      pointer-events: none !important;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+    }
+
+    #contact h1 {
+      margin: 0 !important;
+      max-width: 96vw !important;
+      overflow-wrap: anywhere !important;
+      transform: translate3d(0, var(--gmail-chef-float, 0px), 0) !important;
+      transition: none !important;
+      will-change: transform, filter !important;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
+      transform-origin: 50% 50% !important;
+      pointer-events: none !important;
+    }
+  }
+
+  @media screen and (max-width: 430px) and (min-height: 760px) {
+    #contact {
+      transform: translate3d(
+        -50%,
+        calc(var(--gmail-chef-anchor-y, var(--gmail-origin-y, 56vh)) - 50%),
+        0
+      ) !important;
+    }
+  }
+
+  @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+    #contact {
+      transform: translate3d(
+        -50%,
+        calc(var(--gmail-chef-anchor-y, var(--gmail-origin-y, 54vh)) - 50%),
+        0
+      ) !important;
+    }
+  }
+</style>
 </head>
 
 <body>
@@ -9293,6 +9482,310 @@ body {
 
     majViewportReel();
     brancher();
+  })();
+</script>
+<script id="gpc-mobile-liquid-restore-gmail-chef-script-final">
+  (function() {
+    "use strict";
+
+    const racine = document.documentElement;
+    const ancienAfficherSectionChef = window.afficherSection;
+
+    let largeurStable = 0;
+    let hauteurStable = 0;
+    let orientationStable = "";
+
+    let topActuel = null;
+    let hauteurActuelle = null;
+    let topCible = null;
+    let hauteurCible = null;
+
+    let rulesFloatActuel = 0;
+    let rulesFloatCible = 0;
+    let gmailFloatActuel = 0;
+    let gmailFloatCible = 0;
+    let dernierScrollY = window.scrollY || 0;
+    let dernierRulesScroll = 0;
+    let rafRules = null;
+    let rafGmail = null;
+
+    function el(id) {
+      return document.getElementById(id);
+    }
+
+    function mobile() {
+      return window.innerWidth <= 768;
+    }
+
+    function box() {
+      return el("apropos");
+    }
+
+    function activeRules() {
+      const b = box();
+      return !!(b && b.classList.contains("active"));
+    }
+
+    function activeContact() {
+      const c = el("contact");
+      return !!(c && c.classList.contains("active"));
+    }
+
+    function clamp(v, min, max) {
+      return Math.max(min, Math.min(max, v));
+    }
+
+    function dims(force) {
+      const w = Math.round(window.innerWidth || document.documentElement.clientWidth || 390);
+      const h = Math.round(window.innerHeight || document.documentElement.clientHeight || screen.height || 760);
+      const orientation = w > h ? "landscape" : "portrait";
+      const largeurChange = Math.abs(w - largeurStable) > 24;
+      const orientationChange = orientation !== orientationStable;
+
+      if (force || !largeurStable || largeurChange || orientationChange) {
+        largeurStable = w;
+        hauteurStable = h;
+        orientationStable = orientation;
+      }
+
+      const ws = largeurStable || w;
+      const hs = hauteurStable || h;
+
+      return {
+        w: ws,
+        h: hs,
+        paysage: ws <= 900 && hs <= 500 && window.matchMedia("(orientation: landscape)").matches
+      };
+    }
+
+    function topLecteurMedia(d) {
+      const lecteur = document.querySelector(".audio-box");
+      if (lecteur) {
+        const rect = lecteur.getBoundingClientRect();
+        if (rect && rect.top > 0 && rect.top < d.h) return rect.top;
+      }
+      return d.h - (d.paysage ? 92 : 170);
+    }
+
+    function calculer(force) {
+      const b = box();
+      if (!mobile() || !b || !activeRules()) {
+        racine.classList.remove("gpc-mobile-liquid-active");
+        return;
+      }
+
+      const d = dims(force);
+      const margeBas = d.paysage ? 18 : 24;
+      const topBase = d.paysage ? Math.round(d.h * 0.42) : Math.round(d.h * 0.555);
+      const limiteBas = topLecteurMedia(d) - margeBas;
+
+      const minH = d.paysage ? 72 : 104;
+      const idealH = d.paysage ? Math.round(d.h * 0.33) : Math.round(d.h * 0.255);
+      const maxH = d.paysage ? Math.round(d.h * 0.48) : Math.round(d.h * 0.34);
+
+      topCible = clamp(topBase, d.paysage ? 132 : 250, d.h - minH - margeBas);
+      hauteurCible = clamp(Math.min(idealH, limiteBas - topCible), minH, maxH);
+
+      if (!Number.isFinite(hauteurCible) || hauteurCible < minH) {
+        hauteurCible = clamp(idealH, minH, maxH);
+      }
+
+      if (topActuel === null || force) topActuel = topCible;
+      if (hauteurActuelle === null || force) hauteurActuelle = hauteurCible;
+
+      racine.classList.add("gpc-mobile-liquid-active");
+      lancerRules();
+    }
+
+    function appliquerRules() {
+      const b = box();
+      if (!b) return;
+
+      b.style.setProperty("--rules-liquid-top", topActuel.toFixed(2) + "px");
+      b.style.setProperty("--rules-liquid-height", hauteurActuelle.toFixed(2) + "px");
+      b.style.setProperty("--rules-liquid-float", rulesFloatActuel.toFixed(3) + "px");
+    }
+
+    function boucleRules() {
+      rafRules = null;
+
+      const b = box();
+      if (!mobile() || !b || !activeRules()) {
+        rulesFloatActuel += (0 - rulesFloatActuel) * 0.06;
+        if (Math.abs(rulesFloatActuel) < 0.04) rulesFloatActuel = 0;
+        appliquerRules();
+        return;
+      }
+
+      calculer(false);
+
+      topActuel += (topCible - topActuel) * 0.032;
+      hauteurActuelle += (hauteurCible - hauteurActuelle) * 0.032;
+      rulesFloatActuel += (rulesFloatCible - rulesFloatActuel) * 0.040;
+      rulesFloatCible *= 0.900;
+
+      appliquerRules();
+
+      const encore =
+        Math.abs(topCible - topActuel) > 0.08 ||
+        Math.abs(hauteurCible - hauteurActuelle) > 0.08 ||
+        Math.abs(rulesFloatActuel) > 0.035 ||
+        Math.abs(rulesFloatCible) > 0.035;
+
+      if (encore) rafRules = requestAnimationFrame(boucleRules);
+    }
+
+    function lancerRules() {
+      if (!rafRules) rafRules = requestAnimationFrame(boucleRules);
+    }
+
+    function impulsionRules(v) {
+      if (!mobile() || !activeRules()) return;
+      rulesFloatCible += v;
+      rulesFloatCible = clamp(rulesFloatCible, -18, 26);
+      lancerRules();
+    }
+
+    function appliquerGmail() {
+      const contact = el("contact");
+      if (contact) contact.style.setProperty("--gmail-chef-float", gmailFloatActuel.toFixed(3) + "px");
+    }
+
+    function boucleGmail() {
+      rafGmail = null;
+
+      gmailFloatActuel += (gmailFloatCible - gmailFloatActuel) * 0.035;
+      gmailFloatCible *= 0.918;
+
+      if (Math.abs(gmailFloatActuel) < 0.03 && Math.abs(gmailFloatCible) < 0.03) {
+        gmailFloatActuel = 0;
+        gmailFloatCible = 0;
+        appliquerGmail();
+        return;
+      }
+
+      appliquerGmail();
+      rafGmail = requestAnimationFrame(boucleGmail);
+    }
+
+    function impulsionGmail(v) {
+      if (!mobile() || !activeContact()) return;
+      gmailFloatCible += v;
+      gmailFloatCible = clamp(gmailFloatCible, -8, 13);
+      if (!rafGmail) rafGmail = requestAnimationFrame(boucleGmail);
+    }
+
+    function brancherRulesScroll() {
+      const b = box();
+      if (!b || b.dataset.mobileLiquidChefOk) return;
+
+      b.dataset.mobileLiquidChefOk = "1";
+      b.addEventListener("scroll", function() {
+        const y = b.scrollTop || 0;
+        const dy = y - dernierRulesScroll;
+        dernierRulesScroll = y;
+        impulsionRules(clamp(dy * 0.035, -8, 8));
+      }, { passive: true });
+    }
+
+    window.afficherSection = function(id) {
+      if (typeof ancienAfficherSectionChef === "function") {
+        ancienAfficherSectionChef(id);
+      }
+
+      if (id === "apropos") {
+        topActuel = null;
+        hauteurActuelle = null;
+        rulesFloatActuel = 0;
+        rulesFloatCible = 16;
+        dernierRulesScroll = 0;
+        setTimeout(function() { calculer(true); brancherRulesScroll(); }, 35);
+        setTimeout(function() { calculer(false); }, 220);
+      }
+
+      if (id === "contact") {
+        gmailFloatActuel = 0;
+        gmailFloatCible = 8;
+        setTimeout(function() { impulsionGmail(6); }, 60);
+        setTimeout(function() { impulsionGmail(-2); }, 420);
+      }
+    };
+
+    window.addEventListener("resize", function() {
+      calculer(false);
+    }, { passive: true });
+
+    window.addEventListener("orientationchange", function() {
+      setTimeout(function() { calculer(true); }, 120);
+      setTimeout(function() { calculer(true); }, 420);
+    }, { passive: true });
+
+    window.addEventListener("pageshow", function() {
+      setTimeout(function() { calculer(true); brancherRulesScroll(); }, 120);
+    }, { passive: true });
+
+    window.addEventListener("scroll", function() {
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      const dy = y - dernierScrollY;
+      dernierScrollY = y;
+
+      impulsionRules(clamp(dy * 0.030, -7, 7));
+      impulsionGmail(clamp(dy * 0.018, -4, 4));
+    }, { passive: true });
+
+    document.addEventListener("click", function(event) {
+      const texte = event.target && event.target.textContent ? event.target.textContent.trim() : "";
+      if (texte === "RULES") {
+        setTimeout(function() { calculer(true); brancherRulesScroll(); impulsionRules(16); }, 50);
+        setTimeout(function() { impulsionRules(-3); }, 360);
+      }
+      if (texte === "SEND A WAV / MP3" || texte === "@gmail" || texte === "@gmail.com") {
+        setTimeout(function() { impulsionGmail(8); }, 60);
+        setTimeout(function() { impulsionGmail(-2); }, 420);
+      }
+    }, { passive: true });
+
+    brancherRulesScroll();
+    setTimeout(function() { calculer(true); }, 650);
+  })();
+</script>
+<script id="gpc-gmail-anchor-high-script-final">
+  (function() {
+    "use strict";
+
+    function majAncreGmailHaute() {
+      const w = Math.round(window.innerWidth || document.documentElement.clientWidth || 390);
+      const h = Math.round(window.innerHeight || document.documentElement.clientHeight || screen.height || 760);
+      const paysage = w <= 900 && h <= 500 && window.matchMedia("(orientation: landscape)").matches;
+
+      let y;
+      if (paysage) {
+        y = Math.round(h * 0.54);
+      } else if (w <= 430 && h >= 760) {
+        y = Math.round(h * 0.56);
+      } else {
+        y = Math.round(h * 0.58);
+      }
+
+      document.documentElement.style.setProperty("--gmail-chef-anchor-y", y + "px");
+    }
+
+    ["DOMContentLoaded", "load", "pageshow", "resize", "orientationchange"].forEach(function(evt) {
+      window.addEventListener(evt, function() {
+        majAncreGmailHaute();
+        setTimeout(majAncreGmailHaute, 180);
+        setTimeout(majAncreGmailHaute, 460);
+      }, { passive: true });
+    });
+
+    document.addEventListener("click", function(event) {
+      const texte = event.target && event.target.textContent ? event.target.textContent.trim() : "";
+      if (texte === "SEND A WAV / MP3" || texte === "@gmail" || texte === "@gmail.com") {
+        majAncreGmailHaute();
+      }
+    }, { passive: true });
+
+    majAncreGmailHaute();
   })();
 </script>
 </body>
