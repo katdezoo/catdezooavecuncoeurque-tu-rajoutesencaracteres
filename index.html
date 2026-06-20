@@ -23,6 +23,10 @@ PLAN CHEF, SIMPLE MAIS MODIFIABLE
 RÈGLE DE LECTURE
     ORDINATEUR = desktop
     TÉLÉPHONE = smartphone
+PATCH LOUPE SÛR
+    intro finale branchée sur le registre
+    téléphone paysage CSS/JS aligné
+    aucune modification volontaire du visuel
 -->
 <!DOCTYPE html><!-- BEGIN COPYRIGHT NOTICE: © 2026 catdezoo<3. all rights reserved. --><html lang="fr"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><title>Global Producers Cup</title>
 
@@ -7837,7 +7841,7 @@ html.gpc-site-ready #fondVideo.gpc-video-bg {
 
 <!-- 01 / INTRO -->
 <template id="gpcTextIntroCopyright">© 2026 catdezoo&lt;3. all rights reserved.</template>
-<template id="gpcTextIntroWarning">WARNING THIS WEBSITE MAY CONTAIN FLASHING IMAGES</template>
+<template id="gpcTextIntroWarning">⚠. -no epilepsy please,<br>and headphones please/</template>
 <template id="gpcTextIntroHeart">&lt;3</template>
 
 
@@ -9462,7 +9466,10 @@ html,body {
     return boxEl;
   }
   function mobile() {
-    return (window.innerWidth || document.documentElement.clientWidth || 390) <= 768;
+    const w = Math.round(window.innerWidth || document.documentElement.clientWidth || 390);
+    const h = Math.round(window.innerHeight || document.documentElement.clientHeight || screen.height || 760);
+    const paysageCompact = w <= 900 && h <= 500 && window.matchMedia("(orientation: landscape)").matches;
+    return w <= 768 || paysageCompact;
   }
   function active() {
     const b = box();
@@ -9471,6 +9478,14 @@ html,body {
   function tpl(id) {
     const node = el(id);
     return node ? node.innerHTML : "";
+  }
+  function texteDepuisTemplate(id, fallback) {
+    const html = tpl(id);
+    if (!html) return fallback;
+    const div = document.createElement("div");
+    div.innerHTML = html.replace(/<br\s*\/?>/gi, "\n");
+    const texte = (div.textContent || "").trim();
+    return texte || fallback;
   }
   function clamp(v, min, max) {
     return Math.max(min, Math.min(max, v));
@@ -9589,13 +9604,13 @@ html,body {
     introStarted = true;
     root.classList.remove("gpc-site-ready");
     viewport();
-    introText("© 2026 catdezoo<3. all rights reserved.");
+    introText(texteDepuisTemplate("gpcTextIntroCopyright", "© 2026 catdezoo<3. all rights reserved."));
     setTimeout(function() {
-      introText("⚠. -no epilepsy please,\nand headphones please/");
+      introText(texteDepuisTemplate("gpcTextIntroWarning", "⚠. -no epilepsy please,\nand headphones please/"));
     },
     2200);
     setTimeout(function() {
-      introText("<3");
+      introText(texteDepuisTemplate("gpcTextIntroHeart", "<3"));
     },
     4600);
     setTimeout(function() {
